@@ -18,22 +18,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppUtility.init(this);
-
-        Credential credential = AppUtility.getCredential();
-
-        Log.d(TAG, "onCreate: "+credential.toString());
-
-        Credential newCred = new Credential();
-        newCred.setUsername("rohit123");
-        newCred.setPassword("pass123");
-
-        AppUtility.saveCredential(newCred);
-
-        Credential c = AppUtility.getCredential();
-
-        Log.d(TAG, "onCreate: "+c.toString());
-
-
     }
 
 }
