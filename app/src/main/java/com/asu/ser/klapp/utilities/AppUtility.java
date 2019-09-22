@@ -2,6 +2,8 @@ package com.asu.ser.klapp.utilities;
 
 import android.content.Context;
 
+import com.asu.ser.klapp.models.Credential;
+
 public class AppUtility {
 
     public static Context context;
@@ -11,7 +13,20 @@ public class AppUtility {
         context = _context;
     }
 
+    private static void init_sharedpref(){
+
+    }
+
+    public void saveCredential(Credential credential){
+
+    }
+
+    public Credential getCredential(){
+
+        Credential credential = null;
 
 
+        return credential;
+    }
 
 }
