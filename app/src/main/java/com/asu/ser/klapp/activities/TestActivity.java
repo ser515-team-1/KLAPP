@@ -1,6 +1,7 @@
 package com.asu.ser.klapp.activities;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.asu.ser.klapp.R;
 
