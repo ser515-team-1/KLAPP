@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -19,24 +20,29 @@ public class DashboardActivity extends AppCompatActivity {
         Admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startintent=new Intent(getApplicationContext(),Admin_login.class);
-                startActivity(startintent);
+                Toast.makeText(DashboardActivity.this, "You clicked admin", Toast.LENGTH_SHORT).show();
+
+
             }
         });
         Student1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startintent=new Intent(getApplicationContext(),Student1.class);
-                startActivity(startintent);
+                Toast.makeText(DashboardActivity.this, "You clicked Student1", Toast.LENGTH_SHORT).show();
+
+
             }
         });
         Student2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startintent=new Intent(getApplicationContext(),Student2.class);
-                startActivity(startintent);
+                Toast.makeText(DashboardActivity.this, "You clicked Student2", Toast.LENGTH_SHORT).show();
+
+
             }
         });
+
+
 
     }
 }
