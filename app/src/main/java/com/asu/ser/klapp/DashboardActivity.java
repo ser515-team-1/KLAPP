@@ -1,8 +1,7 @@
-package com.example.dashboard;
+package com.asu.ser.klapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,7 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dashboard);
+        setContentView(R.layout.activity_dashboard);
         Button Admin=(Button)findViewById(R.id.Admin);
         Button Student1=(Button)findViewById(R.id.Student1);
         Button Student2=(Button)findViewById(R.id.Student2);
