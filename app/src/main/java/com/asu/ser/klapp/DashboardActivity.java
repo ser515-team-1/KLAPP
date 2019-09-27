@@ -19,8 +19,7 @@ public class DashboardActivity extends AppCompatActivity {
         Admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(DashboardActivity.this, "You clicked admin", Toast.LENGTH_SHORT).show();
-
+               opendialog();
 
             }
         });
@@ -43,5 +42,11 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    public void opendialog() {
+        ExampleDialog exampleDialog=new ExampleDialog();
+        exampleDialog.show(getSupportFragmentManager(),"example dialog");
     }
 }
