@@ -1063,6 +1063,7 @@ id barrier
 id beginning
 id blocking
 id bottom
+id btn
 id buttonPanel
 id center
 id center_horizontal

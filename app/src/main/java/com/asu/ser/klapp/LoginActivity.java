@@ -20,20 +20,22 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginpage);
+        System.out.println("coming here ");
+        Username = (EditText) findViewById(R.id.UsernameET);
+        Password = (EditText) findViewById(R.id.PasswordET);
+        NewUser = (TextView) findViewById(R.id.NewUserTV);
+        Login = (Button) findViewById(R.id.LoginBtn);
 
-        Username=(EditText) findViewById(R.id.UsernameET);
-        Password=(EditText) findViewById(R.id.PasswordET);
-        NewUser=(TextView) findViewById(R.id.NewUserTV);
-        Login=(Button) findViewById(R.id.LoginBtn);
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 validate(Username.getText().toString(),Password.getText().toString());
-                Toast toast=Toast.makeText(getApplicationContext(),"Wrong Credentials! Please try again",Toast.LENGTH_SHORT);
-                toast.show();
+
             }
         });
+
 
         NewUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,8 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-
     public void validate(String username,String password){
         if(username.equals("admin") && password.equals("admin")){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
@@ -56,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
         else {
             Toast toast=Toast.makeText(getApplicationContext(),"Wrong Credentials! Please try again",Toast.LENGTH_SHORT);
             toast.show();
+            Username.setText("");
+            Password.setText("");
         }
     }
 
