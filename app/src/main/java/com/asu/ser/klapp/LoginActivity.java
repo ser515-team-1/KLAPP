@@ -30,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 validate(Username.getText().toString(),Password.getText().toString());
+                Toast toast=Toast.makeText(getApplicationContext(),"Wrong Credentials! Please try again",Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
