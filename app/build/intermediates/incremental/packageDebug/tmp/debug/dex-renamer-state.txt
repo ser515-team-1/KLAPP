@@ -1,0 +1,4 @@
+#Sun Sep 29 13:08:50 MST 2019
+base.0=/home/khushboo/KLAPP/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
