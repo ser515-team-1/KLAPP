@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.Credential;
+import com.asu.ser.klapp.utilities.AppUtility;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,24 +44,23 @@ public class LoginActivity extends AppCompatActivity {
         NewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent=new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
-                //change Mainactivity with SignUpActivity
             }
         });
     }
 
     public void validate(String username,String password){
-        if(username.equals("admin") && password.equals("admin")){
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+
+        Credential credential = AppUtility.getCredential();
+
+        if(username.equals(credential.username) && password.equals(credential.password)){
+            Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
             startActivity(intent);
-            //change MainActivity with DashBoardActivity
         }
         else {
             Toast toast=Toast.makeText(getApplicationContext(),"Wrong Credentials! Please try again", Toast.LENGTH_SHORT);
             toast.show();
-            Username.setText("");
-            Password.setText("");
         }
     }
 
