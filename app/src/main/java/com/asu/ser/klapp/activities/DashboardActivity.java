@@ -1,4 +1,4 @@
-package com.asu.ser.klapp;
+package com.asu.ser.klapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.asu.ser.klapp.ExampleDialog;
+import com.asu.ser.klapp.R;
 
 public class DashboardActivity extends AppCompatActivity {
 

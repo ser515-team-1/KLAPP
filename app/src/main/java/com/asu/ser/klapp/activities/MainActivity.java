@@ -1,6 +1,8 @@
-package com.asu.ser.klapp;
+package com.asu.ser.klapp.activities;
 
 import android.os.Bundle;
+
+import com.asu.ser.klapp.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 

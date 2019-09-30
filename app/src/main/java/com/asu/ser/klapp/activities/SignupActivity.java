@@ -1,4 +1,4 @@
-package com.asu.ser.klapp;
+package com.asu.ser.klapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.asu.ser.klapp.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 
