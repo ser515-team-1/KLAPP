@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.Credential;
+import com.asu.ser.klapp.utilities.AppUtility;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,13 +55,12 @@ public class SignupActivity extends AppCompatActivity {
 
     private void saveCredential(){
 
-        /*
         Credential credential = new Credential();
         credential.setUsername(username.getText().toString());
         credential.setPassword(password.getText().toString());
         credential.setStayLoggedIn(staySignedIn.isChecked());
         AppUtility.saveCredential(credential);
-         */
+
     }
 
     private boolean validate(){
@@ -81,8 +82,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void openDashBord(){
-        //startActivity(new Intent(this, DashBoardActivity.class));
-        Toast.makeText(this, "Opening Dashboard", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, DashboardActivity.class));
     }
 
     private void showErrorMessage(){
