@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#29B6F6</color>
-    <color name="colorPrimaryDark">#FFCA28</color>
-    <color name="colorAccent">#FFCA28</color>
+    <color name="colorPrimaryDark">#29B6F6</color>
+    <color name="colorAccent">#29B6F6</color>
     <color name="purple_klapp">#512DA8</color>
     <color name="orange_klapp">#FF8F00</color>
     <color name="green_klapp">#43A047</color>
