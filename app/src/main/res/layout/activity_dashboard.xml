@@ -6,30 +6,75 @@
     android:orientation="vertical"
     android:gravity="center"
     >
-    <Button
-        android:id="@+id/Student1"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Student 1"
-        style="@style/dashboardButton"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
         android:background="@color/purple_klapp"
-        />
-    <Button
-        android:id="@+id/Student2"
+        android:orientation="horizontal"
+        android:id="@+id/Student1"
+        >
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/ic_launcher"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student 1"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:textSize="25dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Student 2"
-        style="@style/dashboardButton"
-        android:background="@color/orange_klapp"
-        />
-    <Button
-        android:id="@+id/Admin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Admin"
-        style="@style/dashboardButton"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
         android:background="@color/green_klapp"
-        />
+        android:orientation="horizontal"
+        android:id="@+id/Student2"
+        >
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/ic_launcher"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student 2"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:textSize="25dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:background="@color/orange_klapp"
+        android:orientation="horizontal"
+        android:id="@+id/Admin"
+        >
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/ic_launcher"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:textSize="25dp"
+            />
+    </RelativeLayout>
+
 </LinearLayout>
