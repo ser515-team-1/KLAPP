@@ -5,34 +5,90 @@
     android:layout_height="match_parent"
     android:gravity="center"
     >
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        />
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/green_klapp"
+        >
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        />
-    <EditText
-        android:id="@+id/retypePassword"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/green_klapp"
+        >
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Retype password"
-        />
-    <CheckBox
-        android:id="@+id/stayLoggedIn"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/green_klapp"
+        >
+        <EditText
+            android:id="@+id/retypePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Retype password"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Stay logged in"
-        />
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        />
+        android:orientation="horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        >
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:background="@color/green_klapp"
+            android:textColor="#ffffff"
+            />
+        <CheckBox
+            android:id="@+id/stayLoggedIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stay logged in"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/green_klapp"
+            />
+    </LinearLayout>
 </LinearLayout>

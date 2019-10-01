@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:gravity="center"
     >
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -57,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:background="@color/orange_klapp"
+        android:background="@color/blue_light_klapp"
         android:orientation="horizontal"
         android:id="@+id/Admin"
         >

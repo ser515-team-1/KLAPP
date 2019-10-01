@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#29B6F6</color>
-    <color name="colorPrimaryDark">#29B6F6</color>
-    <color name="colorAccent">#29B6F6</color>
+    <color name="colorPrimary">#FF8F00</color>
+    <color name="colorPrimaryDark">#FF8F00</color>
+    <color name="colorAccent">#FF8F00</color>
     <color name="purple_klapp">#512DA8</color>
-    <color name="orange_klapp">#FF8F00</color>
+    <color name="blue_light_klapp">#29B6F6</color>
     <color name="green_klapp">#43A047</color>
+    29B6F6
 </resources>
