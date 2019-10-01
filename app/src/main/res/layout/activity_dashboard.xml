@@ -6,16 +6,6 @@
     android:orientation="vertical"
     android:gravity="center"
     >
-
-    <Button
-        android:id="@+id/Admin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Admin"
-        style="@style/dashboardButton"
-        />
-
     <Button
         android:id="@+id/Student1"
         android:layout_width="match_parent"
@@ -23,13 +13,23 @@
         android:gravity="center"
         android:text="Student 1"
         style="@style/dashboardButton"
+        android:background="@color/purple_klapp"
         />
-
     <Button
         android:id="@+id/Student2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Student 2"
         style="@style/dashboardButton"
+        android:background="@color/orange_klapp"
+        />
+    <Button
+        android:id="@+id/Admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Admin"
+        style="@style/dashboardButton"
+        android:background="@color/green_klapp"
         />
 </LinearLayout>
