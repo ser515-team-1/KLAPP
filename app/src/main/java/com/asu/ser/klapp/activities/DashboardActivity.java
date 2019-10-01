@@ -10,46 +10,59 @@ import android.widget.Toast;
 import com.asu.ser.klapp.ExampleDialog;
 import com.asu.ser.klapp.R;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private Button admin, student1, student2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        Button Admin=(Button)findViewById(R.id.Admin);
-        Button Student1=(Button)findViewById(R.id.Student1);
-        Button Student2=(Button)findViewById(R.id.Student2);
-        Admin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               opendialog();
+        initView();
+    }
 
-            }
-        });
-        Student1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(DashboardActivity.this, "You clicked Student1", Toast.LENGTH_SHORT).show();
+    private void initView(){
 
+        admin=findViewById(R.id.Admin);
+        student1=findViewById(R.id.Student1);
+        student2=findViewById(R.id.Student2);
 
-            }
-        });
-        Student2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(DashboardActivity.this, "You clicked Student2", Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-
-
-
+        admin.setOnClickListener(this);
+        student1.setOnClickListener(this);
+        student2.setOnClickListener(this);
 
     }
 
-    public void opendialog() {
+    private void opendialog() {
         ExampleDialog exampleDialog=new ExampleDialog();
         exampleDialog.show(getSupportFragmentManager(),"example dialog");
+    }
+
+
+    private void showMessage(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.Admin:
+                opendialog();
+                break;
+
+            case R.id.Student1:
+                showMessage("You clicked Student1");
+                break;
+
+            case R.id.Student2:
+                showMessage("You clicked Student2");
+                break;
+
+            default:
+                break;
+        }
+
     }
 }

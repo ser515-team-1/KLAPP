@@ -31,6 +31,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void initView(){
+
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         retypePass = findViewById(R.id.retypePassword);
