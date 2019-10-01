@@ -34,4 +34,5 @@ public class Credential {
     public String toString(){
         return username+" : "+password+" "+stayLoggedIn;
     }
+
 }
