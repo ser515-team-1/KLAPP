@@ -30,10 +30,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void initView(){
 
-        username = findViewById(R.id.UsernameET);
-        password = findViewById(R.id.PasswordET);
-        newUser  = findViewById(R.id.NewUserTV);
-        login = findViewById(R.id.LoginBtn);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        newUser  = findViewById(R.id.newUser);
+        login = findViewById(R.id.login);
         login.setOnClickListener(this);
         newUser.setOnClickListener(this);
     }
@@ -63,11 +63,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         switch (v.getId()){
 
-            case R.id.LoginBtn:
+            case R.id.login:
                 validate(username.getText().toString(),password.getText().toString());
                 break;
 
-            case R.id.NewUserTV:
+            case R.id.newUser:
                 openSignUp();
                 break;
 

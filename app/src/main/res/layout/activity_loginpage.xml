@@ -6,7 +6,7 @@
     android:gravity="center"
     >
     <EditText
-        android:id="@+id/UsernameET"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -15,7 +15,7 @@
         android:textSize="20dp"
         />
     <EditText
-        android:id="@+id/PasswordET"
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -24,7 +24,7 @@
         android:textSize="20dp"
         />
     <Button
-        android:id="@+id/LoginBtn"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LOGIN"
@@ -32,7 +32,7 @@
         />
 
     <TextView
-        android:id="@+id/NewUserTV"
+        android:id="@+id/newUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New User? Sign Up!"
