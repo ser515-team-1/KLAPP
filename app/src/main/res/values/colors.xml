@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#673AB7</color>
-    <color name="colorPrimaryDark">#673AB7</color>
-    <color name="colorAccent">#673AB7</color>
+    <color name="colorPrimary">#43A047</color>
+    <color name="colorPrimaryDark">#43A047</color>
+    <color name="colorAccent">#43A047</color>
+    <color name="purple_klapp">#5E35B1</color>
 </resources>

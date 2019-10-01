@@ -1,45 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0E4775"
-    android:clipToPadding="false">
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
 
     <Button
         android:id="@+id/Admin"
-        android:layout_width="290dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="#BE7537"
-        android:gravity="center"
         android:text="Admin"
-        android:textSize="25sp" />
+        style="@style/dashboardButton"
+        />
 
     <Button
         android:id="@+id/Student1"
-        android:layout_width="290dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/Admin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="#839AAA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Student1"
-        android:textSize="25sp" />
+        android:text="Student 1"
+        style="@style/dashboardButton"
+        />
 
     <Button
         android:id="@+id/Student2"
-        android:layout_width="290dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/Student1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@android:color/holo_blue_dark"
-        android:gravity="center"
-        android:text="Student2"
-        android:textSize="25sp" />
-</RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Student 2"
+        style="@style/dashboardButton"
+        />
+</LinearLayout>
