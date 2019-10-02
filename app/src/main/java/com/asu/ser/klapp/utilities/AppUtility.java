@@ -46,6 +46,7 @@ public class AppUtility {
         credential.setPassword(pref_user_credentials.getString(PASSWORD_KEY, "default"));
         credential.setStayLoggedIn(pref_user_credentials.getBoolean(STAY_LOOGED_IN, false));
         return credential;
+
     }
 
 }
