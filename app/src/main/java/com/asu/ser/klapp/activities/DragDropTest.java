@@ -15,18 +15,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.CompareNumber;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class DragDropTest extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener {
 
     private TextView less, greater, equals;
-    private TextView dragArea;
+    private TextView dragArea, leftNum, rightnum;
+    private TextView questionNum;
+
+    private List<CompareNumber> assignment;
+
+    private int currentQuestionNum=0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dragdrop);
+
+        assignment = getPracticeAssignment();
 
         dragArea = findViewById(R.id.dragaableArea);
         dragArea.setOnDragListener(this);
@@ -46,6 +59,13 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
         equals.setOnLongClickListener(this);
         equals.setOnDragListener(this);
         equals.setTag("=");
+
+        leftNum = findViewById(R.id.leftNum);
+        rightnum = findViewById(R.id.rightNum);
+        questionNum = findViewById(R.id.questionNum);
+
+
+        createQuestions(currentQuestionNum);
 
     }
 
@@ -143,6 +163,8 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
 
         dragArea.setText(dragData);
 
+        createQuestions(currentQuestionNum);
+
 
 
         //clone.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -159,5 +181,43 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
     }
 
 
+    private List<CompareNumber> getPracticeAssignment(){
+
+        List<CompareNumber> assignment = new ArrayList<>();
+        assignment.add(getNumbers());
+        assignment.add(getNumbers());
+        assignment.add(getNumbers());
+        assignment.add(getNumbers());
+        assignment.add(getNumbers());
+        return assignment;
+    }
+
+    public CompareNumber getNumbers(){
+        int num1 = new Random().nextInt(20);
+        int num2 = new Random().nextInt(20);
+        return new CompareNumber(num1, num2);
+    }
+
+    private void createQuestions(int index){
+        if(index<assignment.size()){
+            CompareNumber compareNumber = assignment.get(index);
+            leftNum.setText(compareNumber.getNum1()+"");
+            rightnum.setText(compareNumber.getNum2()+"");
+            dragArea.setText("?");
+            questionNum.setText("Question "+(index+1)+"/"+assignment.size());
+            currentQuestionNum++;
+        }else {
+            Toast.makeText(this, "Assignment over", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void loadStartAssignmentScreen(){
+
+    }
+
+    private void loadEndAssignmentScreen(){
+
+
+    }
 
 }

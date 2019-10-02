@@ -16,6 +16,7 @@
         android:layout_centerInParent="true"
         >
         <TextView
+            android:id="@+id/leftNum"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="1"
@@ -48,8 +49,8 @@
                 />
 
         </com.github.florent37.shapeofview.shapes.ArcView>
-
         <TextView
+            android:id="@+id/rightNum"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="5"
