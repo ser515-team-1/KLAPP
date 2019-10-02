@@ -3,14 +3,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
-        android:id="@+id/dragaableArea"
+        android:id="@+id/questionArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_centerInParent="true"
-        android:background="#ffffff"
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         >
         <TextView
             android:layout_width="100dp"
@@ -24,14 +27,15 @@
             android:textColor="#ffffff"
             />
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/dragaableArea"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:text="What?"
             android:layout_margin="20dp"
             android:gravity="center"
             android:textSize="30dp"
             android:textStyle="bold"
-            android:background="@android:color/darker_gray"
+            android:background="#C7EFCF"
             android:textColor="#ffffff"
             />
         <TextView
@@ -46,6 +50,19 @@
             android:textColor="#ffffff"
             />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/questionNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question 1/10"
+        android:background="@color/green_klapp"
+        android:textColor="#ffffff"
+        android:layout_margin="10dp"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:layout_above="@id/questionArea"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -21,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DragDropTest extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener {
 
     private TextView less, greater, equals;
-    private LinearLayout dragArea;
+    private TextView dragArea;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -37,15 +37,15 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
 
         less.setOnLongClickListener(this);
         less.setOnDragListener(this);
-        less.setTag("Less");
+        less.setTag( "<");
 
         greater.setOnLongClickListener(this);
         greater.setOnDragListener(this);
-        greater.setTag("Great");
+        greater.setTag(">");
 
         equals.setOnLongClickListener(this);
         equals.setOnDragListener(this);
-        equals.setTag("Equals");
+        equals.setTag("=");
 
     }
 
@@ -138,12 +138,17 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
         ViewGroup owner = (ViewGroup) vw.getParent();
 
         TextView clone = new TextView(this);
-        clone.setText("+");
         clone.setOnDragListener(this);
-        clone.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        LinearLayout container = (LinearLayout) v;
-        container.addView(clone);
-        clone.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+
+        dragArea.setText(dragData);
+
+
+
+        //clone.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        //TextView container = (LinearLayout) v;
+        //container.addView(clone);
+        //clone.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         /*owner.removeView(plus);
         plus.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -152,5 +157,7 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
         vw.setVisibility(View.VISIBLE);
 
     }
+
+
 
 }
