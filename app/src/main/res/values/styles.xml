@@ -17,13 +17,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="dashboardButton">
-    <item name="android:textSize">20sp</item>
-    <item name="android:layout_marginLeft">20dp</item>
-    <item name="android:layout_marginRight">20dp</item>
-    <item name="android:layout_marginTop">10dp</item>
-    <item name="android:layout_marginBottom">10dp</item>
-    <item name="android:textColor">#ffffff</item>
-</style>
+
+    <style name="InputBoxContainer">
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@color/green_klapp</item>
+    </style>
+
+    <style name="InputBoxStyle">
+        <item name="android:textColorHint">#ffffff</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
 
 </resources>
