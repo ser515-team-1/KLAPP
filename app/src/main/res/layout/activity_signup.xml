@@ -8,61 +8,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/green_klapp"
+        style="@style/InputBoxContainer"
         >
         <EditText
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Username"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
-            android:background="@android:color/transparent"
-            android:padding="10dp"
+            style="@style/InputBoxStyle"
             />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/green_klapp"
+        style="@style/InputBoxContainer"
         >
         <EditText
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
-            android:background="@android:color/transparent"
-            android:padding="10dp"
+            style="@style/InputBoxStyle"
             />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/green_klapp"
+        style="@style/InputBoxContainer"
         >
         <EditText
             android:id="@+id/retypePassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Retype password"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
-            android:background="@android:color/transparent"
-            android:padding="10dp"
+            style="@style/InputBoxStyle"
             />
     </LinearLayout>
     <LinearLayout
