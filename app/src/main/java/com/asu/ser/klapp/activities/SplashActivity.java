@@ -1,10 +1,13 @@
 package com.asu.ser.klapp.activities;
 
+import android.animation.Animator;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.utilities.AppUtility;
 
@@ -13,13 +16,15 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashActivity";
+    private LottieAnimationView splashanim;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        splashanim = findViewById(R.id.klapp_splash);
         AppUtility.init(this);
-        openActivity();
+        transition();
     }
 
     private void openActivity(){
@@ -46,6 +51,31 @@ public class SplashActivity extends AppCompatActivity {
 
     private boolean isStayLoggedIn(){
         return AppUtility.getCredential().stayLoggedIn;
+    }
+
+    private void transition(){
+
+        splashanim.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                openActivity();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
     }
 
 }
