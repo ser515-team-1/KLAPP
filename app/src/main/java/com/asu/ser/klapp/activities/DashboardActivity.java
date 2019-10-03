@@ -2,6 +2,7 @@ package com.asu.ser.klapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +55,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 break;
 
             case R.id.Student1:
-                showMessage("You clicked Student1");
+                //showMessage("You clicked Student1");
+                startActivity(new Intent(this, DragDropTest.class));
                 break;
 
             case R.id.Student2:

@@ -18,6 +18,7 @@
         <activity android:name=".activities.SignupActivity" android:label="Sign Up"/>
         <activity android:name=".activities.LoginActivity" android:label="Login"/>
         <activity android:name=".activities.DashboardActivity" android:label="Dashboard"></activity>
+        <activity android:name=".activities.DragDropTest"/>
     </application>
 
 </manifest>

@@ -5,46 +5,60 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/colorPrimary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:src="@drawable/kids_login"
-        app:civ_border_width="2dp"
-        app:civ_border_color="@color/green_klapp"/>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/InputBoxContainer"
-        >
-        <EditText
-            android:id="@+id/username"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="textPersonName"
-            style="@style/InputBoxStyle"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/InputBoxContainer"
-        >
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textSize="20dp"
-            style="@style/InputBoxStyle"
-            />
-    </LinearLayout>
+            android:orientation="vertical"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/kids_login"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/green_klapp"
+                android:visibility="gone"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/InputBoxContainer"
+                >
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:hint="Username"
+                    android:inputType="textPersonName"
+                    style="@style/InputBoxStyle"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/InputBoxContainer"
+                >
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textSize="20dp"
+                    style="@style/InputBoxStyle"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
