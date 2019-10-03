@@ -19,6 +19,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         app:lottie_fileName="submit.json"
+        android:visibility="gone"
         />
     <LinearLayout
         android:id="@+id/questionArea"

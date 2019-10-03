@@ -203,6 +203,8 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
         if(v.getId()==R.id.dragaableArea) {
             dragArea.setText(dragData);
 
+            submitanim.setVisibility(View.VISIBLE);
+            submitanim.setProgress((float) 0.2);
             submitanim.playAnimation();
 
             submitanim.addAnimatorListener(new Animator.AnimatorListener() {
@@ -214,7 +216,8 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     createQuestions(currentQuestionNum);
-                    submitanim.setProgress(0);
+                    //submitanim.setProgress(0);
+                    submitanim.setVisibility(View.GONE);
                 }
 
                 @Override
