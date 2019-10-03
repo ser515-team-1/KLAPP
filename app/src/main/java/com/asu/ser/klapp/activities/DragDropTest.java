@@ -10,11 +10,8 @@ import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.CompareNumber;
@@ -25,7 +22,7 @@ import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DragDropTest extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener {
+public class DragDropTest extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener, View.OnClickListener {
 
     private TextView less, greater, equals;
     private TextView dragArea, leftNum, rightnum;
@@ -48,42 +45,49 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
 
         assignment = getPracticeAssignment();
 
-        dragArea = findViewById(R.id.dragaableArea);
-        dragArea.setOnDragListener(this);
-
-        less = findViewById(R.id.lesser);
-        greater = findViewById(R.id.greater);
-        equals = findViewById(R.id.equals);
-
-        less.setOnLongClickListener(this);
-        less.setOnDragListener(this);
-        less.setTag( "<");
-
-        greater.setOnLongClickListener(this);
-        greater.setOnDragListener(this);
-        greater.setTag(">");
-
-        equals.setOnLongClickListener(this);
-        equals.setOnDragListener(this);
-        equals.setTag("=");
-
-        leftNum = findViewById(R.id.leftNum);
-        rightnum = findViewById(R.id.rightNum);
-        questionNum = findViewById(R.id.questionNum);
-
-        overlay = findViewById(R.id.overlay);
-        overlayText = findViewById(R.id.overlayText);
-        overlayButton = findViewById(R.id.overlayButton);
-
-        overlayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                overlay.setVisibility(View.GONE);
-            }
-        });
+        initView();
+        addListeners();
+        addTags();
 
         createQuestions(currentQuestionNum);
 
+    }
+
+
+    private void initView(){
+        dragArea = findViewById(R.id.dragaableArea);
+        leftNum = findViewById(R.id.leftNum);
+        rightnum = findViewById(R.id.rightNum);
+        questionNum = findViewById(R.id.questionNum);
+        less = findViewById(R.id.lesser);
+        greater = findViewById(R.id.greater);
+        equals = findViewById(R.id.equals);
+        overlay = findViewById(R.id.overlay);
+        overlayText = findViewById(R.id.overlayText);
+        overlayButton = findViewById(R.id.overlayButton);
+    }
+
+    private void addListeners(){
+
+        dragArea.setOnDragListener(this);
+
+        less.setOnLongClickListener(this);
+        less.setOnDragListener(this);
+
+        greater.setOnLongClickListener(this);
+        greater.setOnDragListener(this);
+
+        equals.setOnLongClickListener(this);
+        equals.setOnDragListener(this);
+
+        overlayButton.setOnClickListener(this);
+
+    }
+
+    private void addTags(){
+        less.setTag( "<");
+        greater.setTag(">");
+        equals.setTag("=");
     }
 
     @Override
@@ -168,11 +172,18 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
 
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.overlayButton){
+            overlay.setVisibility(View.GONE);
+        }
+    }
+
     private void dropItem(View v, DragEvent event){
 
         ClipData.Item item = event.getClipData().getItemAt(0);
         String dragData = item.getText().toString();
-        //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+
         Log.d(TAG, "dropItem: Dragged data is " + dragData);
         v.getBackground().clearColorFilter();
         v.invalidate();
@@ -183,24 +194,13 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
         TextView clone = new TextView(this);
         clone.setOnDragListener(this);
 
-
-        //dragArea.setText(dragData);
-
         currentQuestionNum++;
-        if(v.getId()==R.id.dragaableArea)
-        createQuestions(currentQuestionNum);
 
+        if(v.getId()==R.id.dragaableArea) {
+            dragArea.setText(dragData);
+            createQuestions(currentQuestionNum);
+        }
 
-
-        //clone.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        //TextView container = (LinearLayout) v;
-        //container.addView(clone);
-        //clone.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
-        /*owner.removeView(plus);
-        plus.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        RelativeLayout container = (RelativeLayout) v;
-        container.addView(plus);*/
         vw.setVisibility(View.VISIBLE);
 
     }
@@ -217,7 +217,7 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
         return assignment;
     }
 
-    public CompareNumber getNumbers(){
+    private CompareNumber getNumbers(){
         int num1 = new Random().nextInt(20);
         int num2 = new Random().nextInt(20);
         return new CompareNumber(num1, num2);

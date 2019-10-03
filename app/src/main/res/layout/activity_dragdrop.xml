@@ -34,8 +34,8 @@
             android:textColor="#ffffff"
             />
         <com.github.florent37.shapeofview.shapes.ArcView
-            android:layout_width="80dp"
-            android:layout_height="60dp"
+            android:layout_width="56dp"
+            android:layout_height="42dp"
             android:elevation="4dp"
             app:shape_arc_cropDirection="outside"
             app:shape_arc_height="20dp"
@@ -156,5 +156,6 @@
         </com.github.florent37.shapeofview.shapes.ArcView>
     </LinearLayout>
 </RelativeLayout>
-<include layout="@layout/overlay_assignment"/>
+<include layout="@layout/overlay_assignment"
+    />
 </FrameLayout>
