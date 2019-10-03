@@ -82,7 +82,6 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
             }
         });
 
-
         createQuestions(currentQuestionNum);
 
     }
@@ -187,6 +186,7 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
 
         //dragArea.setText(dragData);
 
+        currentQuestionNum++;
         if(v.getId()==R.id.dragaableArea)
         createQuestions(currentQuestionNum);
 
@@ -230,10 +230,8 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
             rightnum.setText(compareNumber.getNum2()+"");
             dragArea.setText("?");
             questionNum.setText("Question "+(index+1)+"/"+assignment.size());
-            currentQuestionNum++;
         }
-
-        if(currentQuestionNum==assignment.size()){
+        else {
             loadEndAssignmentScreen();
         }
     }
