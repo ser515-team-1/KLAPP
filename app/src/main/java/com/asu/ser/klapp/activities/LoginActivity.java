@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.Credential;
 import com.asu.ser.klapp.utilities.AppUtility;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +21,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText username,password;
     private TextView newUser;
     private Button login;
+
+    View parentLayout;
 
     private  static final int REQ_CODE=1009;
     public static final int RES_CODE = 1010;
@@ -34,6 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void initView(){
 
+        parentLayout = findViewById(android.R.id.content);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         newUser  = findViewById(R.id.newUser);
@@ -48,6 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(username.equals(credential.username) && password.equals(credential.password)){
             openDashboard();
+            finish();
         }
         else {
             Toast toast=Toast.makeText(getApplicationContext(),"Wrong Credentials! Please try again", Toast.LENGTH_SHORT);
@@ -92,8 +97,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(reqCode == REQ_CODE){
             if(resCode == Activity.RESULT_OK){
                 Toast.makeText(this, "Password saved", Toast.LENGTH_SHORT).show();
+                showSnackBar("Enter your credentials again");
             }
         }
 
+    }
+
+    private void showSnackBar(String msg){
+
+        Snackbar.make(parentLayout, msg, Snackbar.LENGTH_LONG)
+                .setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                         fillCredential();
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.white ))
+                .show();
+    }
+
+    private void fillCredential(){
+
+        Credential credential = AppUtility.getCredential();
+        username.setText(credential.username);
+        password.setText(credential.password);
     }
 }
