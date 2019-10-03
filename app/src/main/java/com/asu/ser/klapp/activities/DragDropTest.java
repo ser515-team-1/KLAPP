@@ -120,12 +120,14 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
 
             case DragEvent.ACTION_DROP:
 
+                Log.d("Hi", "onDrag: ACTION_DROP");
                 dropItem(v, event);
 
                 return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
 
+                Log.d("Hi", "onDrag: ACTION_ENDED");
                 v.getBackground().clearColorFilter();
 
                 v.invalidate();
@@ -183,8 +185,9 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
         clone.setOnDragListener(this);
 
 
-        dragArea.setText(dragData);
+        //dragArea.setText(dragData);
 
+        if(v.getId()==R.id.dragaableArea)
         createQuestions(currentQuestionNum);
 
 
