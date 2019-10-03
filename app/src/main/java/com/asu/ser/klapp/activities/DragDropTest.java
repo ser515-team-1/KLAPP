@@ -1,5 +1,6 @@
 package com.asu.ser.klapp.activities;
 
+import android.animation.Animator;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.graphics.Color;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.CompareNumber;
 
@@ -31,6 +33,7 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
     private LinearLayout overlay;
     private TextView overlayText;
     private Button overlayButton;
+    private LottieAnimationView submitanim;
 
     private List<CompareNumber> assignment;
 
@@ -65,6 +68,7 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
         overlay = findViewById(R.id.overlay);
         overlayText = findViewById(R.id.overlayText);
         overlayButton = findViewById(R.id.overlayButton);
+        submitanim = findViewById(R.id.submitanim);
     }
 
     private void addListeners(){
@@ -198,7 +202,33 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
 
         if(v.getId()==R.id.dragaableArea) {
             dragArea.setText(dragData);
-            createQuestions(currentQuestionNum);
+
+            submitanim.playAnimation();
+
+            submitanim.addAnimatorListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    createQuestions(currentQuestionNum);
+                    submitanim.setProgress(0);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+
+
         }
 
         vw.setVisibility(View.VISIBLE);

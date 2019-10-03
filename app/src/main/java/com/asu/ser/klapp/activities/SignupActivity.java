@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.Credential;
 import com.asu.ser.klapp.utilities.AppUtility;
@@ -37,6 +38,7 @@ public class SignupActivity extends AppCompatActivity {
         retypePass = findViewById(R.id.retypePassword);
         staySignedIn = findViewById(R.id.stayLoggedIn);
         submit = findViewById(R.id.submit);
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

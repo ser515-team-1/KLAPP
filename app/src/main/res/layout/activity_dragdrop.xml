@@ -12,6 +12,14 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     >
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/submitanim"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:lottie_fileName="submit.json"
+        />
     <LinearLayout
         android:id="@+id/questionArea"
         android:layout_width="match_parent"
