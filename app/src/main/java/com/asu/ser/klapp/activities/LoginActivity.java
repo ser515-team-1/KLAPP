@@ -1,5 +1,6 @@
 package com.asu.ser.klapp.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText username,password;
     private TextView newUser;
     private Button login;
+
+    private  static final int REQ_CODE=1009;
+    public static final int RES_CODE = 1010;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void openSignUp(){
         Intent intent=new Intent(this, SignupActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQ_CODE);
+
     }
 
     private void openDashboard(){
@@ -77,6 +82,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             default:
                 break;
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int reqCode, int resCode, Intent data){
+
+        if(reqCode == REQ_CODE){
+            if(resCode == Activity.RESULT_OK){
+                Toast.makeText(this, "Password saved", Toast.LENGTH_SHORT).show();
+            }
         }
 
     }

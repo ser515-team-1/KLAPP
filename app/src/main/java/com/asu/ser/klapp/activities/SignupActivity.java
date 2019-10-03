@@ -1,5 +1,6 @@
 package com.asu.ser.klapp.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -94,6 +95,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private void finishSignup(){
         //startActivity(new Intent(this, DashboardActivity.class));
+        setResult(Activity.RESULT_OK);
         finish();
     }
 
