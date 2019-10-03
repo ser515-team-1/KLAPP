@@ -46,8 +46,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 if(validate()) {
                     saveCredential();
-                    openDashBord();
-                    finish();
+                    finishSignup();
                 }else {
                     showErrorMessage();
                 }
@@ -74,18 +73,28 @@ public class SignupActivity extends AppCompatActivity {
         String pass = password.getText().toString();
         String retype = retypePass.getText().toString();
 
-        if(pass.equals(retype)){
-            validated = true;
+        if(uname.equals("")){
+            errpr_message = "Username is empty";
+        }else if(pass.equals("")){
+            errpr_message = "Password is empty";
+        }else if(retype.equals("")){
+            errpr_message = "Retype password is empty";
         }else {
-            errpr_message = "Password does not match";
+
+            if (pass.equals(retype)) {
+                validated = true;
+            } else {
+                errpr_message = "Password does not match";
+            }
         }
 
         return validated;
 
     }
 
-    private void openDashBord(){
-        startActivity(new Intent(this, DashboardActivity.class));
+    private void finishSignup(){
+        //startActivity(new Intent(this, DashboardActivity.class));
+        finish();
     }
 
     private void showErrorMessage(){

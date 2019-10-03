@@ -43,8 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Credential credential = AppUtility.getCredential();
 
         if(username.equals(credential.username) && password.equals(credential.password)){
-            Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
-            startActivity(intent);
+            openDashboard();
         }
         else {
             Toast toast=Toast.makeText(getApplicationContext(),"Wrong Credentials! Please try again", Toast.LENGTH_SHORT);
@@ -54,6 +53,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void openSignUp(){
         Intent intent=new Intent(this, SignupActivity.class);
+        startActivity(intent);
+    }
+
+    private void openDashboard(){
+        Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
         startActivity(intent);
     }
 
