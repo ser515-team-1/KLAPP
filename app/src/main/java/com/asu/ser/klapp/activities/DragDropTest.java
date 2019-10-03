@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,10 +31,15 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
     private TextView dragArea, leftNum, rightnum;
     private TextView questionNum;
 
+    private LinearLayout overlay;
+    private TextView overlayText;
+    private Button overlayButton;
+
     private List<CompareNumber> assignment;
 
     private int currentQuestionNum=0;
 
+    private static final String TAG = "DragDropTest";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -63,6 +70,17 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
         leftNum = findViewById(R.id.leftNum);
         rightnum = findViewById(R.id.rightNum);
         questionNum = findViewById(R.id.questionNum);
+
+        overlay = findViewById(R.id.overlay);
+        overlayText = findViewById(R.id.overlayText);
+        overlayButton = findViewById(R.id.overlayButton);
+
+        overlayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overlay.setVisibility(View.GONE);
+            }
+        });
 
 
         createQuestions(currentQuestionNum);
@@ -112,10 +130,13 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
 
                 v.invalidate();
 
-                if (event.getResult())
-                    Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                if (event.getResult()) {
+                    Log.d(TAG, "onDrag: The drop was handled.");
+                }
+                    //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onDrag: The drop didn't work.");
+                    //Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
 
                 return true;
 
@@ -150,7 +171,8 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
 
         ClipData.Item item = event.getClipData().getItemAt(0);
         String dragData = item.getText().toString();
-        Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "dropItem: Dragged data is " + dragData);
         v.getBackground().clearColorFilter();
         v.invalidate();
 
@@ -206,8 +228,10 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
             dragArea.setText("?");
             questionNum.setText("Question "+(index+1)+"/"+assignment.size());
             currentQuestionNum++;
-        }else {
-            Toast.makeText(this, "Assignment over", Toast.LENGTH_SHORT).show();
+        }
+
+        if(currentQuestionNum==assignment.size()){
+            loadEndAssignmentScreen();
         }
     }
 
@@ -216,8 +240,9 @@ public class DragDropTest extends AppCompatActivity implements View.OnLongClickL
     }
 
     private void loadEndAssignmentScreen(){
-
-
+        overlay.setVisibility(View.VISIBLE);
+        overlayText.setText("Assignment Completed Successfully");
+        overlayButton.setVisibility(View.GONE);
     }
 
 }
