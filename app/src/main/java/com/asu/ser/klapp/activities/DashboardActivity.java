@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.asu.ser.klapp.ExampleDialog;
 import com.asu.ser.klapp.R;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RelativeLayout admin, student1, student2;
@@ -60,7 +63,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 break;
 
             case R.id.Student2:
-                showMessage("You clicked Student2");
+                //addition to check exp4j
+                String expr = "(2+3)*6";
+                Expression expression = new ExpressionBuilder(expr).build();
+                double res = expression.evaluate();
+                //showMessage("You clicked Student2");
+                showMessage(expr+ ":"+ String.valueOf(res));
                 break;
 
             default:
