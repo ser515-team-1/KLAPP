@@ -17,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BodmasActivity {
+public class BodmasActivity extends AppCompatActivity{
     String expr = "2+3";
     Expression expression = new ExpressionBuilder(expr).build();
     double res = expression.evaluate();
