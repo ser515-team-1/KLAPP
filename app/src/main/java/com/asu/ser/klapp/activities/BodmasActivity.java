@@ -21,4 +21,8 @@ public class BodmasActivity extends AppCompatActivity{
     String expr = "2+3";
     Expression expression = new ExpressionBuilder(expr).build();
     double res = expression.evaluate();
+
+    String StringValidation(String s){
+        return s;
+    }
 }
