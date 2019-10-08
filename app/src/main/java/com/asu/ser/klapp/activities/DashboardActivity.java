@@ -56,7 +56,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.Student1:
                 //showMessage("You clicked Student1");
-                startActivity(new Intent(this, DragDropTest.class));
+                startActivity(new Intent(this, CountingActivity.class));
                 break;
 
             case R.id.Student2:
