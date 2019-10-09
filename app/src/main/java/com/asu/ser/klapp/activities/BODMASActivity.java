@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.asu.ser.klapp.R;
 
-public class BodmasActivity extends AppCompatActivity {
+public class BODMASActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
