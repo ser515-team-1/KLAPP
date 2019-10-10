@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.callbacks.CountingListItemListener;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,10 +15,14 @@ public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapte
 
 
     private Context context;
+    private int itemNum;
+    private CountingListItemListener listItemListener;
 
 
-    public CountingListAdapter(Context context){
+    public CountingListAdapter(Context context, int itemNum){
         this.context = context;
+        this.itemNum = itemNum;
+        listItemListener = (CountingListItemListener)context;
     }
 
     @NonNull
@@ -25,6 +30,7 @@ public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapte
     public CountingItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_counting, parent, false);
+        listItemListener.setupcallback(view);
         return new CountingItemViewHolder(view);
     }
 
@@ -34,7 +40,7 @@ public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapte
 
     @Override
     public int getItemCount() {
-        return 10;
+        return itemNum;
     }
 
     public class CountingItemViewHolder extends RecyclerView.ViewHolder{
