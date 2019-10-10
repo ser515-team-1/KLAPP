@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.BODMASActivity"></activity>
+        <!--activity android:name=".activities.BODMASActivity"></activity-->
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".activities.BODMASActivity"
             android:label="KLAPP">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +29,7 @@
             android:name=".activities.DashboardActivity"
             android:label="Dashboard" />
         <activity android:name=".activities.DragDropTest" />
+
     </application>
 
 </manifest>
