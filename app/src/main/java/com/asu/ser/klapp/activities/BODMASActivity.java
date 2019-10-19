@@ -15,7 +15,7 @@ public class BODMASActivity extends AppCompatActivity {
     }
     public static boolean isOperator(char a )
     {
-        return (a == '*' || a == '/' || a == '+' || a == '-');
+        return (a =='*'|| a == '/' || a == '+'|| a == '-');
     }
 
     public static boolean isValidExpression(String str)
@@ -69,7 +69,7 @@ public class BODMASActivity extends AppCompatActivity {
             }
             i++;
         }
-        if (count== 0)
+        if (count==0)
             return true;
         else
             return false;
