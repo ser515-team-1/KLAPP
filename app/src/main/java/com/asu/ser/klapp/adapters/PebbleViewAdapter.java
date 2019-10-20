@@ -1,7 +1,10 @@
 package com.asu.ser.klapp.adapters;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,10 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 public class PebbleViewAdapter extends RecyclerView.Adapter {
 
 
+    private Context context;
+    List<String> names;
+
+    private PebbleViewAdapter(Context context, List<String> names){
+        this.context = context;
+        this.names = names;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        return names.size();
     }
 
     @Override
