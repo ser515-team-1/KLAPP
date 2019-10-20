@@ -3,13 +3,14 @@ package com.asu.ser.klapp.adapters;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PebbleViewAdapter extends RecyclerView.Adapter {
+public class PebbleViewAdapter extends RecyclerView.Adapter<PebbleViewAdapter.PebbleViewHolder> {
 
 
     private Context context;
@@ -20,14 +21,15 @@ public class PebbleViewAdapter extends RecyclerView.Adapter {
         this.names = names;
     }
 
+
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return names.size();
+    public PebbleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PebbleViewHolder holder, int position) {
 
     }
 
@@ -37,6 +39,8 @@ public class PebbleViewAdapter extends RecyclerView.Adapter {
     }
 
     public class PebbleViewHolder extends RecyclerView.ViewHolder{
+
+        private TextView textView;
 
         public PebbleViewHolder(@NonNull View itemView) {
             super(itemView);
