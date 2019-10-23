@@ -23,6 +23,14 @@ public class BodmasActivity extends AppCompatActivity{
     double res = expression.evaluate();
 
     String StringValidation(String s){
+        //s is the string which is coming from the EditText
+        if(s.length()>8)
+        {
+            Toast toast=Toast.makeText(getApplicationContext(), "Please enter a string less than 6 digits", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+
         return s;
     }
 }
