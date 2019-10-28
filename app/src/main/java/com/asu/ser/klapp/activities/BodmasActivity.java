@@ -26,7 +26,12 @@ public class BodmasActivity extends AppCompatActivity{
         //s is the string which is coming from the EditText
         if(s.length()>8)
         {
-            Toast toast=Toast.makeText(getApplicationContext(), "Please enter a string less than 6 digits", Toast.LENGTH_SHORT);
+            Toast toast=Toast.makeText(getApplicationContext(), "Please enter an expression less than 6 digits", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if (s.length()==0)
+        {
+            Toast toast=Toast.makeText(getApplicationContext(), "Please enter an expression", Toast.LENGTH_SHORT);
             toast.show();
         }
 
