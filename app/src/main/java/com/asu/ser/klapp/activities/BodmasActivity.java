@@ -29,13 +29,14 @@ public class BodmasActivity extends AppCompatActivity{
             Toast toast=Toast.makeText(getApplicationContext(), "Please enter an expression less than 6 digits", Toast.LENGTH_SHORT);
             toast.show();
         }
-        else if (s.length()==0)
-        {
-            Toast toast=Toast.makeText(getApplicationContext(), "Please enter an expression", Toast.LENGTH_SHORT);
+        else if (s.length()==0) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Please enter an expression", Toast.LENGTH_SHORT);
             toast.show();
         }
-
-
         return s;
+    }
+
+    void DisplayExpression(String s){
+        //java code to display the sting inside the TEXTBOX
     }
 }
