@@ -20,7 +20,7 @@ public class PebbleViewAdapter extends RecyclerView.Adapter<PebbleViewAdapter.Pe
     private Context context;
     List<String> names;
 
-    private PebbleViewAdapter(Context context, List<String> names){
+    public PebbleViewAdapter(Context context, List<String> names){
         this.context = context;
         this.names = names;
     }
