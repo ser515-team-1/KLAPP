@@ -24,7 +24,7 @@ public class BodmasActivity {
     double res = expression.evaluate();
      */
     public static void main(String[] args) {
-        String exprs = "(2+3)*4+9-45";
+        String exprs = "(2+3)*4+9+45";
         String[] hold_expr = exprs.split("");
         //PriorityQueue<String> pQueue = new PriorityQueue<String>();
 
