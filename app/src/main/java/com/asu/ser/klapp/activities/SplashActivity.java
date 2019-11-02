@@ -12,7 +12,11 @@ import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.utilities.AppUtility;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/**
+ * @author Divya Polineni(dpolinen)
+ * @version 1.0
+ *
+ */
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashActivity";

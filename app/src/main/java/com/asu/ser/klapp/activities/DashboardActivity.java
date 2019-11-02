@@ -12,6 +12,11 @@ import android.widget.Toast;
 import com.asu.ser.klapp.ExampleDialog;
 import com.asu.ser.klapp.R;
 
+/**
+ * @author Ashwath Koppala(akoppala)
+ * @version 1.0
+ *
+ */
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RelativeLayout admin, student1, student2;

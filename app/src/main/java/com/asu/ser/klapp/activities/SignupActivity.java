@@ -17,6 +17,11 @@ import com.asu.ser.klapp.utilities.AppUtility;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * @author Suryadeep(schatt37)
+ * @version 1.0
+ *
+ */
 public class SignupActivity extends AppCompatActivity {
 
     private EditText username, password, retypePass;

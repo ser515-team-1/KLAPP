@@ -1,5 +1,9 @@
 package com.asu.ser.klapp.models;
-
+/**
+ * @author Divya Polineni(dpolinen)
+ * @version 1.0
+ *
+ */
 public class Credential {
 
     public String username;

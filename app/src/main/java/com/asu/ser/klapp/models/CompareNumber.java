@@ -1,5 +1,9 @@
 package com.asu.ser.klapp.models;
-
+/**
+ * @author Khushboo Gupta(kgupta51)
+ * @version 1.0
+ *
+ */
 public class CompareNumber {
 
     private int num1, num2;

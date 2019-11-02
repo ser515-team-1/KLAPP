@@ -13,7 +13,11 @@ import android.widget.Toast;
 import com.asu.ser.klapp.utilities.AppUtility;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
-
+/**
+ * @author Rohit Singh(rsingh92)
+ * @version 1.0
+ *
+ */
 public class ExampleDialog extends AppCompatDialogFragment {
 
     AlertDialog.Builder builder;
