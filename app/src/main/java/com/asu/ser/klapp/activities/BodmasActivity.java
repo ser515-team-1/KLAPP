@@ -9,9 +9,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.utilities.BodmasUtility;
+import com.asu.ser.klapp.utilities.StringValidation;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -26,7 +28,7 @@ public class BodmasActivity extends AppCompatActivity{
     private EditText inputField;
     private Button submitButton;
     private TextView output;
-    private static final String TAG = "BodmasActivityIntegrati";
+    private static final String TAG = "BodmasActivityIntegration";
     static int siz_array = 0;
 
     @Override
@@ -43,7 +45,8 @@ public class BodmasActivity extends AppCompatActivity{
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     /* Write your logic here that will be executed when user taps next button */
-                    submit(inputField.getText().toString());
+//                    submit(inputField.getText().toString());
+                    isValidated(inputField.getText().toString());
                     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                     handled = true;
@@ -58,9 +61,7 @@ public class BodmasActivity extends AppCompatActivity{
 
     private void submit(String input) {
 
-
         BodmasUtility bodmasUtility = new BodmasUtility();
-
 //        String exprs = "(2+3)*4+9-4";
         String exprs = input;
         String[] hold_expr = exprs.split("");
@@ -72,6 +73,17 @@ public class BodmasActivity extends AppCompatActivity{
 
     private void showOutput(String expr){
          output.setText(expr);
+    }
+
+
+    private void isValidated(String expr){
+        boolean isValidated = StringValidation.isValidExpression(expr);
+        if(isValidated)
+        {
+            submit(expr);
+        }else{
+            Toast.makeText(BodmasActivity.this, "String is invalid", Toast.LENGTH_LONG).show();
+        }
     }
 
 
