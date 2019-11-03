@@ -25,14 +25,14 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
 
     private TextView less, greater, equals;
     private TextView dragArea, leftNum, rightnum;
-    private TextView questionNum;
-    private LinearLayout overlay;
-    private TextView overlayText;
     private Button overlayButton;
     private LottieAnimationView submitanim;
     private List<CompareNumber> assignment;
     private int currentQuestionNum=0;
     private static final String TAG = "DragDropTest";
+    private TextView questionNum;
+    private LinearLayout overlay;
+    private TextView overlayText;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -175,7 +175,39 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
             overlay.setVisibility(View.GONE);
         }
     }
+    private List<CompareNumber> getPracticeAssignment(){
 
+        List<CompareNumber> assignment = new ArrayList<>();
+        assignment.add(getNumbers());
+        assignment.add(getNumbers());
+        assignment.add(getNumbers());
+        assignment.add(getNumbers());
+        assignment.add(getNumbers());
+        return assignment;
+    }
+
+    private CompareNumber getNumbers(){
+        int num1 = new Random().nextInt(20);
+        int num2 = new Random().nextInt(20);
+        return new CompareNumber(num1, num2);
+    }
+
+    private void createQuestions(int index){
+        if(index<assignment.size()){
+            CompareNumber compareNumber = assignment.get(index);
+            leftNum.setText(compareNumber.getNum1()+"");
+            rightnum.setText(compareNumber.getNum2()+"");
+            dragArea.setText("?");
+            questionNum.setText("Question "+(index+1)+"/"+assignment.size());
+        }
+        else {
+            loadEndAssignmentScreen();
+        }
+    }
+
+    private void loadStartAssignmentScreen(){
+
+    }
     private void dropItem(View v, DragEvent event){
 
         ClipData.Item item = event.getClipData().getItemAt(0);
@@ -232,39 +264,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     }
 
 
-    private List<CompareNumber> getPracticeAssignment(){
 
-        List<CompareNumber> assignment = new ArrayList<>();
-        assignment.add(getNumbers());
-        assignment.add(getNumbers());
-        assignment.add(getNumbers());
-        assignment.add(getNumbers());
-        assignment.add(getNumbers());
-        return assignment;
-    }
-
-    private CompareNumber getNumbers(){
-        int num1 = new Random().nextInt(20);
-        int num2 = new Random().nextInt(20);
-        return new CompareNumber(num1, num2);
-    }
-
-    private void createQuestions(int index){
-        if(index<assignment.size()){
-            CompareNumber compareNumber = assignment.get(index);
-            leftNum.setText(compareNumber.getNum1()+"");
-            rightnum.setText(compareNumber.getNum2()+"");
-            dragArea.setText("?");
-            questionNum.setText("Question "+(index+1)+"/"+assignment.size());
-        }
-        else {
-            loadEndAssignmentScreen();
-        }
-    }
-
-    private void loadStartAssignmentScreen(){
-
-    }
 
     private void loadEndAssignmentScreen(){
         overlay.setVisibility(View.VISIBLE);

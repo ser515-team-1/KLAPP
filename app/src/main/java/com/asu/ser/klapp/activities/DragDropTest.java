@@ -26,12 +26,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class DragDropTest extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener, View.OnClickListener {
 
+
+
+    private TextView overlayText;
+    private LinearLayout overlay;
     private TextView less, greater, equals;
     private TextView dragArea, leftNum, rightnum;
     private TextView questionNum;
-
-    private LinearLayout overlay;
-    private TextView overlayText;
     private Button overlayButton;
     private LottieAnimationView submitanim;
 
