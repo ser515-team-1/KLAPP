@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:foreground="#3C620085"
     android:padding="16dp">
-
     <EditText
         android:id="@+id/editText"
         android:layout_width="283dp"
