@@ -52,5 +52,9 @@ public class BodmasActivityIntegration extends AppCompatActivity implements View
 
     }
 
+    @Override
+    public boolean equals(Object obj) {
 
+
+    }
 }
