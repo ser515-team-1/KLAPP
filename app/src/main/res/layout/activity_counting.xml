@@ -5,6 +5,18 @@
     android:gravity="center"
     android:background="@color/colorPrimary"
     >
+    <TextView
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/counter"
+        android:text="0"
+        android:textSize="60dp"
+        android:textColor="@color/green_klapp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        />
     <ImageView
         android:id="@+id/dragaableArea"
         android:layout_width="120dp"
