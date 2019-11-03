@@ -50,16 +50,16 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()){
 
             case R.id.Admin:
-                startActivity(new Intent(this, CountingActivity.class));
+                startActivity(new Intent(this, BodmasActivity.class));
                 break;
 
             case R.id.Student1:
                 //showMessage("You clicked Student1");
-                startActivity(new Intent(this, CompareNumberActivity.class));
+                startActivity(new Intent(this, CountingActivity.class));
                 break;
 
             case R.id.Student2:
-                startActivity(new Intent(this, BodmasActivity.class));
+                startActivity(new Intent(this, CompareNumberActivity.class));
                 break;
 
             default:
