@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:foreground="#3C620085"
     android:padding="16dp">
 
     <EditText
@@ -18,28 +18,20 @@
         android:layout_marginBottom="50dp"
         android:background="#577027B0"
         android:ems="10"
-
-
+        android:foreground="#4A620085"
         android:gravity="center"
-        android:hint="Enter an arithematic expression"
-        android:inputType="phone|textImeMultiLine|number"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#ffffff"
-        android:textColorHighlight="@android:color/highlighted_text_material"
-        android:textColorHint="#fffffff"
-        android:textColorLink="#FF8F00"
-        android:textCursorDrawable="@android:drawable/text_cursor_material" />
+        android:hint="Enter an arithematic expression" />
 
-   <Button
+    <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
-        android:background="#4CAF50"
+        android:background="#7A7D1EE9"
         android:gravity="center"
         android:text="Submit"
-        android:textColor="#ffffff" />
+        android:textColorLink="#FFFFFF" />
 
     <EditText
         android:id="@+id/editText3"
@@ -47,18 +39,15 @@
         android:layout_height="117dp"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="350dp"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginBottom="50dp"
-        android:background="#4CAF50"
+        android:background="#00FFFFFF"
         android:ems="10"
+        android:foreground="@color/colorAccent"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:text="OUTPUT:"
-        android:textColor="#ffffff"
-        android:textColorHighlight="#ffffff"
-        android:textColorHint="#ffffff"
-        android:textColorLink="#ff8f00" />
+        android:text="OUTPUT:" />
 
 </RelativeLayout>
