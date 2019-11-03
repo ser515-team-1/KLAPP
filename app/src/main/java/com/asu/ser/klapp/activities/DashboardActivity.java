@@ -50,7 +50,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()){
 
             case R.id.Admin:
-                opendialog();
+                startActivity(new Intent(this, CountingActivity.class));
                 break;
 
             case R.id.Student1:
