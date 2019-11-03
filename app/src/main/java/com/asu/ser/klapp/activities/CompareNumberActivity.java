@@ -24,7 +24,7 @@ import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DragDropTest extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener, View.OnClickListener {
+public class CompareNumberActivity extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener, View.OnClickListener {
 
     private TextView less, greater, equals;
     private TextView dragArea, leftNum, rightnum;
