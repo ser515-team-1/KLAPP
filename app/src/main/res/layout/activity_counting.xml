@@ -3,26 +3,27 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/colorPrimary"
+    android:background="@color/green_klapp"
     >
+
+    <ImageView
+        android:id="@+id/dragaableArea"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/post1"
+        />
     <TextView
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/counter"
         android:text="0"
         android:textSize="60dp"
-        android:textColor="@color/green_klapp"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         android:layout_margin="10dp"
-        />
-    <ImageView
-        android:id="@+id/dragaableArea"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/kids_login"
+        android:layout_above="@id/dragaableArea"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
