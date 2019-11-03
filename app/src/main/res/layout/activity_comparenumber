@@ -85,12 +85,12 @@
             android:layout_above="@id/questionArea"
             android:background="@color/green_klapp"
             android:padding="10dp"
-            android:layout_margin="50dp"
+            android:layout_margin="10dp"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/questionArea"
