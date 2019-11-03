@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -22,7 +21,7 @@ import java.util.Arrays;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BodmasActivityIntegration extends AppCompatActivity{
+public class BodmasActivity extends AppCompatActivity{
 
     private EditText inputField;
     private Button submitButton;
@@ -33,7 +32,7 @@ public class BodmasActivityIntegration extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bodmas_dpolen);
+        setContentView(R.layout.activity_bodmas);
 
         inputField = findViewById(R.id.inputField);
         output = findViewById(R.id.output);
