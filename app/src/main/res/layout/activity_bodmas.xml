@@ -17,7 +17,9 @@
         android:ems="10"
         android:gravity="center"
         android:hint="Enter an arithematic expression"
-        android:inputType="number|textImeMultiLine|phone" />
+        android:inputType="number|textImeMultiLine|phone"
+        android:imeOptions="actionDone"
+        />
 
     <Button
         android:id="@+id/button"

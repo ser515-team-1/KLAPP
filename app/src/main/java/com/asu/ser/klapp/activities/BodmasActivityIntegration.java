@@ -1,8 +1,12 @@
 package com.asu.ser.klapp.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +22,7 @@ import java.util.Arrays;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BodmasActivityIntegration extends AppCompatActivity implements View.OnClickListener{
+public class BodmasActivityIntegration extends AppCompatActivity{
 
     private EditText inputField;
     private Button submitButton;
@@ -32,38 +36,34 @@ public class BodmasActivityIntegration extends AppCompatActivity implements View
         setContentView(R.layout.activity_bodmas_dpolen);
 
         inputField = findViewById(R.id.inputField);
-        submitButton = findViewById(R.id.submitButtton);
         output = findViewById(R.id.output);
 
-        submitButton.setOnClickListener(this);
-
+        inputField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    /* Write your logic here that will be executed when user taps next button */
+                    submit(inputField.getText().toString());
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    handled = true;
+                }
+                return handled;
+            }
+        });
 
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-
-            case R.id.submitButtton:
-                submit(inputField.getText().toString());
-                break;
-
-            default:
-                break;
-        }
-
-    }
 
     private void submit(String input) {
 
 
-
-
         BodmasUtility bodmasUtility = new BodmasUtility();
 
-        String exprs = "(2+3)*4+9-4";
+//        String exprs = "(2+3)*4+9-4";
+        String exprs = input;
         String[] hold_expr = exprs.split("");
         String[] operator_array = formOperator_arr(hold_expr);
         ArrayList<String> solution_pair = solutionPair(operator_array, hold_expr, siz_array * 2);
@@ -76,11 +76,13 @@ public class BodmasActivityIntegration extends AppCompatActivity implements View
     }
 
 
-    private String formatOutput(ArrayList arr){
+    private String formatOutput(ArrayList<String> arr){
 
-        String output = "";
+        String output = inputField.getText().toString();
 
         for(int i=0;i<arr.size();i++) {
+
+            String value = arr.get(i);
             output = output+"\n"+arr.get(i);
         }
 
