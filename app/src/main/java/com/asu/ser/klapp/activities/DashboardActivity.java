@@ -63,12 +63,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 break;
 
             case R.id.Student2:
-                //addition to check exp4j
-                String expr = "(2+3)*6";
-                Expression expression = new ExpressionBuilder(expr).build();
-                double res = expression.evaluate();
-                //showMessage("You clicked Student2");
-                showMessage(expr+ ":"+ String.valueOf(res));
+                showMessage("You clicked Student2");
                 break;
 
             default:

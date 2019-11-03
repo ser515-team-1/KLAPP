@@ -18,10 +18,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BodmasActivity {
-    //String expr = "(2+3)*4+9";
-    //Expression expression = new ExpressionBuilder(expr).build();
-    //double res = expression.evaluate();
+public class BodmasActivitySurya {
+
     static int siz_array = 0;
 
     public static void main(String[] args) {
