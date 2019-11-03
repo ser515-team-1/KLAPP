@@ -12,7 +12,7 @@
         android:layout_margin="10dp"
         android:background="@color/purple_klapp"
         android:orientation="horizontal"
-        android:id="@+id/Student1"
+        android:id="@+id/Student"
         android:elevation="20dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Student 1"
+            android:text="5-8 Years"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
             android:textSize="25dp"
@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Student 2"
+            android:text="8-11 Years"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
             android:textSize="25dp"
@@ -81,7 +81,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Student 3"
+            android:text="12-16 Years"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
             android:textSize="25dp"
