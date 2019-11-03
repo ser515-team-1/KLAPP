@@ -1,50 +1,15 @@
-package com.asu.ser.klapp.activities;
-import java.util.*;
+package com.asu.ser.klapp.utilities;
+
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.asu.ser.klapp.R;
-import com.asu.ser.klapp.models.Credential;
-import com.asu.ser.klapp.utilities.AppUtility;
-import com.google.android.material.snackbar.Snackbar;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class BodmasActivitySurya {
+public class BodmasUtility {
 
     static int siz_array = 0;
 
-    public static void main(String[] args) {
-        String exprs = "(2+3)*4+9-4";
-        String[] hold_expr = exprs.split("");
-        // PriorityQueue<String> pQueue = new PriorityQueue<String>();
-
-        // operator array
-        String[] operator_array = formOperator_arr(hold_expr);
-
-        // get each equation-solution pair
-        ArrayList<String> solution_pair = solutionPair(operator_array, hold_expr, siz_array * 2);
-
-
-
-    }
-
-    /*
-     * This function stores the array of operators.
-     *
-     * Limitation- 1. Order the operators stored based on priority. (Might add
-     * another function to sort the array- Sorting inside array should be local). 2.
-     * Add counter for multiple occurrences.
-     */
     public static String[] formOperator_arr(String[] hold) {
         int idx = 0;
         String[] op_arr = new String[20];
@@ -229,4 +194,6 @@ public class BodmasActivitySurya {
         // pair_arr = equation.split("");
         return key_value_vector;
     }
+
 }
+
