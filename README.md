@@ -1,5 +1,7 @@
-# KLAPP
-Kids' learning app
+# KLAPP (Kids' Learning App)
+An e-learning application
+An android application which makes learning fun for kids.
+An interactive UI with drag and drop features.
 
 Downloadable link: [KLAPP APK][1]
 
