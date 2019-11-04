@@ -14,6 +14,14 @@ import com.asu.ser.klapp.utilities.AppUtility;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+/**
+ * @author          ashwath
+ * @version         1.0 Validation rules
+ * date created     11/02/2019
+ *
+ * @author          rsingh92
+ * @version         2.0 YES/NO dialog creation
+ */
 public class ExampleDialog extends AppCompatDialogFragment {
 
     AlertDialog.Builder builder;

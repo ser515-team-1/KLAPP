@@ -5,6 +5,11 @@ import android.content.SharedPreferences;
 
 import com.asu.ser.klapp.models.Credential;
 
+/**
+ * @author          rsingh92
+ * @version         1.0
+ * date created     11/02/2019
+ */
 public class AppUtility {
 
     public static Context context;

@@ -13,6 +13,11 @@ import com.asu.ser.klapp.utilities.AppUtility;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * @author          divya
+ * @version         1.0
+ * date created     09/21/2019
+ */
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashActivity";

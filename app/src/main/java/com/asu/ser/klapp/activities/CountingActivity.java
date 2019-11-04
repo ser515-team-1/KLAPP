@@ -23,6 +23,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * @author      rsingh92
+ * @version     1.0
+ * date created 10/23/2019
+ */
 public class CountingActivity extends AppCompatActivity implements View.OnDragListener, View.OnLongClickListener, CountingListItemListener {
 
     private RecyclerView recyclerView;

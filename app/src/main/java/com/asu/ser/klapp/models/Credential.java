@@ -1,5 +1,10 @@
 package com.asu.ser.klapp.models;
 
+/**
+ * @author          khusboo
+ * @version         1.0
+ * date created     09/24/2019
+ */
 public class Credential {
 
     public String username;

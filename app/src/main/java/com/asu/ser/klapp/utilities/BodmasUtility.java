@@ -6,6 +6,14 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author          schatt37
+ * @version         1.0
+ * date created     15/10/2019
+ *
+ * @author          rsingh
+ * @version         2.0
+ */
 public class BodmasUtility {
 
     static int siz_array = 0;
@@ -95,7 +103,7 @@ public class BodmasUtility {
                 // add code to evaluate equation
                 //String eval = "5";
                 Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
+                ev = (int) expression.evaluate();
                 eval = Integer.toString(ev);
                 full_equation = full_equation.replace(equation, eval);
 
@@ -118,7 +126,7 @@ public class BodmasUtility {
                 // add code to evaluate equation
                 //String eval = "20";
                 Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
+                ev = (int) expression.evaluate();
                 eval = Integer.toString(ev);
                 full_equation = full_equation.replace(equation, eval);
                 //key_value_vector.add(global_ctr);
@@ -137,7 +145,7 @@ public class BodmasUtility {
                 // add code to evaluate equation
                 //String eval = "20";
                 Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
+                ev = (int) expression.evaluate();
                 eval = Integer.toString(ev);
                 full_equation = full_equation.replace(equation, eval);
 
@@ -157,7 +165,7 @@ public class BodmasUtility {
                 // add code to evaluate equation
                 //String eval = "29";
                 Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
+                ev = (int) expression.evaluate();
                 eval = Integer.toString(ev);
                 full_equation = full_equation.replace(equation, eval);
 
@@ -178,7 +186,7 @@ public class BodmasUtility {
                 // add code to evaluate equation
                 //String eval = "25";
                 Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
+                ev = (int) expression.evaluate();
                 eval = Integer.toString(ev);
                 full_equation = full_equation.replace(equation, eval);
 

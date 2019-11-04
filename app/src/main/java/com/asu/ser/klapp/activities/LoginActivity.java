@@ -16,6 +16,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * @author      khusboo
+ * @version     1.0
+ * date created 09/19/2019
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText username,password;
