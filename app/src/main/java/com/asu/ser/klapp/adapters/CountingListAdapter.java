@@ -11,6 +11,11 @@ import com.asu.ser.klapp.callbacks.CountingListItemListener;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * @author          rsingh92
+ * @version         1.0
+ * date created     10/24/2019
+ */
 public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapter.CountingItemViewHolder> {
 
 

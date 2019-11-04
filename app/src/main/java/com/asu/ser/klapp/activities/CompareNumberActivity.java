@@ -24,6 +24,19 @@ import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+/**
+ * @author      ashwath
+ * @version     1.0
+ * date created 10/08/2019 Integration with UI
+ *
+ * @author      divya
+ * @version     2.0 modified drag events
+ *
+ * @author      rsingh92
+ * @version     3.0 Integartion and private color bug fixed
+ *
+ */
 public class CompareNumberActivity extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener, View.OnClickListener {
 
     private TextView less, greater, equals;

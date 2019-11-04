@@ -23,12 +23,13 @@ import java.util.Arrays;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class BodmasActivity extends AppCompatActivity{
 
     private EditText inputField;
     private Button submitButton;
     private TextView output;
-    private static final String TAG = "BodmasActivityIntegration";
+    private static final String TAG = "BodmasActivity";
     static int siz_array = 0;
 
     @Override
