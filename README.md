@@ -4,8 +4,10 @@ An android application which makes learning fun for kids.
 An interactive UI with drag and drop features.</h3>
 
 <p align="left">
-  <a href="https://stackoverflow.com/users/4700156/rohit-singh?tab=profile"><img width="100" height="100" src="https://user-images.githubusercontent.com/11274840/68197998-78d69d00-ff78-11e9-9c14-03f1992acc86.png">
-Downloadable link: [KLAPP APK][1]
+  <a href="https://stackoverflow.com/users/4700156/rohit-singh?tab=profile"><img width="50" height="50" src="https://user-images.githubusercontent.com/11274840/68197998-78d69d00-ff78-11e9-9c14-03f1992acc86.png">
+
+
+ [Download the App][1]
 
 
   [1]: https://drive.google.com/drive/u/1/folders/1Sg16fWGOHnJwWOww6tua58tcOMwbTiGN
