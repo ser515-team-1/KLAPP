@@ -24,4 +24,11 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.asu.ser.klapp", appContext.getPackageName());
     }
+
+
+
+    @Test
+    public void testBodmas(){
+         assertTrue(true);
+    }
 }
