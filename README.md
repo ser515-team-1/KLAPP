@@ -3,6 +3,7 @@
 An android application which makes learning fun for kids.
 An interactive UI with drag and drop features.</h3>
 
+---
 <p align="left">
   <img width="50" height="50" src="https://user-images.githubusercontent.com/11274840/68197998-78d69d00-ff78-11e9-9c14-03f1992acc86.png">
 </p>
