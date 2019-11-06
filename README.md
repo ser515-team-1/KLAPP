@@ -32,7 +32,7 @@ Running on Emulator:
 </p>
 Add a virtual device
 <p align="center">
-   <img src="(https://user-images.githubusercontent.com/54782472/68268221-96f0db80-0012-11ea-85c1-14ba8c0aa159.png">
+   <img src="https://user-images.githubusercontent.com/54782472/68268221-96f0db80-0012-11ea-85c1-14ba8c0aa159.png">
 </p>
 Running on a Real phone:
   Enable developer option by tapping 10 times
