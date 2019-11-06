@@ -20,7 +20,7 @@ How to run the app in Android Studio?
 Clone the project:
 (git clone https://github.com/ser515-team-1/KLAPP.git)
 
-## Ruunning the app in Android Studio
+## Running the app in Android Studio
 ### Import in Android Studio:
 <p align="center">
    <img src="https://user-images.githubusercontent.com/54782472/68267886-390fc400-0011-11ea-8f60-eff051a6c165.png">
