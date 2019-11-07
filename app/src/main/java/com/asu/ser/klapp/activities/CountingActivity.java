@@ -62,7 +62,14 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
 
 
     private int getRandomNumber(){
-        return new Random().nextInt(10);
+
+        int num =0;
+
+        while(num==0){
+            num = new Random().nextInt(10);
+        }
+
+        return num;
     }
 
 
@@ -181,7 +188,6 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private void updateCounter(){
         counter.setText(++counterValue+"");
     }
-
 
 
     @Override
