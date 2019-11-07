@@ -1,6 +1,5 @@
 <h1 align="center">KLAPP (Kids' Learning App)</h1> 
- <h3 align="center">An e-learning application
-An android application which makes learning fun for kids.
+ <h3 align="center">An e-learning Android application which makes learning fun for kids.
 An interactive UI with drag and drop features.</h3>
 
 ---
