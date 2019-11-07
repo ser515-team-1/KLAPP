@@ -45,7 +45,6 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counting);
-        AppUtility.init(this);
         initView();
     }
 
