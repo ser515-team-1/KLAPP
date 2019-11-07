@@ -34,7 +34,9 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private CountingListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ImageView dragableArea;
+    private TextView counter;
     private static final String TAG = "CountingActivity";
+    private int counterValue =0;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -46,10 +48,12 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private void initView(){
         dragableArea = findViewById(R.id.dragaableArea);
         recyclerView = findViewById(R.id.list);
+        counter = findViewById(R.id.counter);
         layoutManager = new GridLayoutManager(this, 5);
         adapter = new CountingListAdapter(this, getRandomNumber());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+        addListeners();
     }
 
     private void addListeners(){
@@ -77,6 +81,8 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
         clone.setOnDragListener(this);
 
         vw.setVisibility(View.VISIBLE);
+
+        updateCounter();
 
     }
 
@@ -143,14 +149,17 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
                 Log.d("Hi", "onDrag: ACTION_ENDED");
                 v.getBackground().clearColorFilter();
 
+
+
                 v.invalidate();
 
                 if (event.getResult()) {
-                    Log.d(TAG, "onDrag: The drop was handled.");
+                    Log.d("Hi", "onDrag: The drop was handled.");
+
                 }
                 //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                 else
-                    Log.d(TAG, "onDrag: The drop didn't work.");
+                    Log.d("Hi", "onDrag: The drop didn't work.");
                 //Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
 
                 return true;
@@ -168,6 +177,11 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
         view.setTag("Value");
         view.setOnLongClickListener(this);
     }
+
+    private void updateCounter(){
+        counter.setText(++counterValue+"");
+    }
+
 
 
     @Override
