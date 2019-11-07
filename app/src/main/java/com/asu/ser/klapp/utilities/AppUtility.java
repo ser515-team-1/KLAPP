@@ -2,8 +2,17 @@ package com.asu.ser.klapp.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.widget.ImageView;
 
+import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.Credential;
+import com.asu.ser.klapp.models.ImagePair;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * @author          rsingh92
@@ -20,12 +29,14 @@ public class AppUtility {
     private static String USERNAME_KEY ="USER_CRED_PREF.USERNAME_KEY";
     private static String PASSWORD_KEY ="USER_CRED_PREF.PASSWORD_KEY";
     private static String STAY_LOOGED_IN ="USER_CRED_PREF.STAY_LOOGED_IN";
+    private static List<ImagePair> imagePairList;
 
 
     /** This method should be called in the Splash Activity**/
     public static void init(Context _context){
         context = _context;
         init_sharedpref();
+        init_image_pairs();
     }
 
     private static void init_sharedpref(){
@@ -54,4 +65,24 @@ public class AppUtility {
 
     }
 
+    private static void init_image_pairs(){
+
+        imagePairList = new ArrayList<ImagePair>();
+        imagePairList.add(new ImagePair(R.drawable.pair1_basket,R.drawable.pair1_goal_post));
+        imagePairList.add(new ImagePair(R.drawable.pair2_pokeball,R.drawable.pair2_pikachu));
+//        imagePairList.add(new ImagePair(R.drawable.pair1_basket,R.drawable.pair1_goal_post));
+//        imagePairList.add(new ImagePair(R.drawable.pair1_basket,R.drawable.pair1_goal_post));
+//        imagePairList.add(new ImagePair(R.drawable.pair1_basket,R.drawable.pair1_goal_post));
+        Log.d("init", "init_image_pairs: ");
+    }
+
+    public static ImagePair getRandomImagePair(){
+        int bound = imagePairList.size();
+        int randomIndex = new Random().nextInt(bound);
+        return imagePairList.get(randomIndex);
+    }
+
+    public static Drawable getDrawable(int resId){
+        return context.getResources().getDrawable(resId);
+    }
 }

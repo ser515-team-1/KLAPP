@@ -1,10 +1,10 @@
 package com.asu.ser.klapp.activities;
 
-import android.animation.Animator;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.CountingListAdapter;
 import com.asu.ser.klapp.callbacks.CountingListItemListener;
+import com.asu.ser.klapp.models.ImagePair;
+import com.asu.ser.klapp.utilities.AppUtility;
 
 import java.util.Random;
 
@@ -43,6 +45,7 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counting);
+        AppUtility.init(this);
         initView();
     }
 
@@ -51,7 +54,7 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
         recyclerView = findViewById(R.id.list);
         counter = findViewById(R.id.counter);
         layoutManager = new GridLayoutManager(this, 5);
-        adapter = new CountingListAdapter(this, getRandomNumber());
+        setUpPuzzleImages();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         addListeners();
@@ -75,7 +78,6 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
 
 
     public void dropItem(View v, DragEvent event) {
-
 
         ClipData.Item item = event.getClipData().getItemAt(0);
         String dragData = item.getText().toString();
@@ -196,4 +198,12 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     public void setupcallback(View view) {
         addDragAbility(view);
     }
+
+
+    private void setUpPuzzleImages(){
+        ImagePair imagePair = AppUtility.getRandomImagePair();
+        dragableArea.setImageDrawable(AppUtility.getDrawable(imagePair.getTarget()));
+        adapter = new CountingListAdapter(this, getRandomNumber(), imagePair.getThing());
+    }
+
 }

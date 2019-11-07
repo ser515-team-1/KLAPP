@@ -1,12 +1,15 @@
 package com.asu.ser.klapp.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.callbacks.CountingListItemListener;
+import com.asu.ser.klapp.utilities.AppUtility;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,11 +25,14 @@ public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapte
     private Context context;
     private int itemNum;
     private CountingListItemListener listItemListener;
+    private int drawableId;
 
 
-    public CountingListAdapter(Context context, int itemNum){
+
+    public CountingListAdapter(Context context, int itemNum, int drawableId){
         this.context = context;
         this.itemNum = itemNum;
+        this.drawableId = drawableId;
         listItemListener = (CountingListItemListener)context;
     }
 
@@ -41,6 +47,8 @@ public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CountingItemViewHolder holder, int position) {
+
+        holder.imageView.setImageDrawable(AppUtility.getDrawable(drawableId));
     }
 
     @Override
@@ -50,8 +58,11 @@ public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapte
 
     public class CountingItemViewHolder extends RecyclerView.ViewHolder{
 
+        ImageView imageView;
+
         public CountingItemViewHolder(@NonNull View itemView) {
             super(itemView);
+            imageView = itemView.findViewById(R.id.basket2);
         }
     }
 
@@ -60,5 +71,6 @@ public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapte
         itemNum = itemNum-1;
         notifyItemRangeChanged(position, itemNum);
     }
+
 
 }
