@@ -13,6 +13,8 @@ An interactive UI with drag and drop features.</h3>
 
 
   [1]: https://drive.google.com/drive/u/1/folders/1Sg16fWGOHnJwWOww6tua58tcOMwbTiGN
+  
+---  
 
 
 ## Running the app in Android Studio
@@ -30,12 +32,14 @@ An interactive UI with drag and drop features.</h3>
 <p align="center">
    <img src="https://user-images.githubusercontent.com/54782472/68268221-96f0db80-0012-11ea-85c1-14ba8c0aa159.png">
 </p>
+
 ### Press Run:
 <p align="center">
    <img src="https://user-images.githubusercontent.com/54782472/68268218-95bfae80-0012-11ea-82aa-68f11b0a40c5.png">
 </p>
 It will take a few minutes to build the Gradle if you are running it for the first time. Once the build script run sucessfully the emulator will start with the app.
   
+---
 
 ## Sceenshots     
 <p align="center">
