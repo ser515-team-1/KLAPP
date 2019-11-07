@@ -36,6 +36,7 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private ImageView dragableArea;
     private TextView counter;
     private static final String TAG = "CountingActivity";
+    private static final String TAG1 = "Events";
     private int counterValue =0;
 
     @Override
@@ -90,6 +91,7 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
         vw.setVisibility(View.VISIBLE);
 
         updateCounter();
+        adapter.removeAt(3);
 
     }
 

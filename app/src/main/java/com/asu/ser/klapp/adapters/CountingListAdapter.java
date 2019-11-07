@@ -55,4 +55,10 @@ public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapte
         }
     }
 
+    public void removeAt(int position) {
+        notifyItemRemoved(0);
+        itemNum = itemNum-1;
+        notifyItemRangeChanged(position, itemNum);
+    }
+
 }
