@@ -2,6 +2,7 @@ package com.asu.ser.klapp.activities;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.CountingListAdapter;
@@ -21,6 +23,7 @@ import com.asu.ser.klapp.utilities.AppUtility;
 
 import java.util.Random;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -205,4 +208,25 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
         adapter = new CountingListAdapter(this, getRandomNumber(), imagePair.getThing());
     }
 
+    public void showYNDialogue(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(CountingActivity.this);
+        builder.setTitle("Inside the Y/N Dialogues Box");
+        builder.setMessage("Do you want to continue?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(CountingActivity.this,"Starting the game again!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(CountingActivity.this,"See you later!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.create().show();
+    }
 }
