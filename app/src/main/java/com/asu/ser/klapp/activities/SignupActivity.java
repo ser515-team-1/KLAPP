@@ -111,5 +111,7 @@ public class SignupActivity extends AppCompatActivity {
         Toast.makeText(this, errpr_message, Toast.LENGTH_SHORT).show();
     }
 
-
+    public CheckBox getStaySignedIn() {
+        return staySignedIn;
+    }
 }

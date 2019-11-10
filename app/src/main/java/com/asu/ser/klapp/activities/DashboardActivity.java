@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.asu.ser.klapp.ExampleDialog;
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.Credential;
+import com.asu.ser.klapp.utilities.AppUtility;
 
 /**
  * @author         ashwath
@@ -21,6 +23,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     private RelativeLayout admin, student1, student2;
     Button signout;
+    SignupActivity s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,17 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         admin.setOnClickListener(this);
         student1.setOnClickListener(this);
         student2.setOnClickListener(this);
-        signout.setOnClickListener(this);
+        if(AppUtility.getCredential().stayLoggedIn)
+        {
+            signout.setVisibility(View.VISIBLE);
+            signout.setOnClickListener(this);
+        }
+        else
+        {
+            signout.setVisibility(View.GONE);
+        }
+
+
 
     }
 
@@ -71,6 +84,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.signout:
                 startActivity(new Intent(this, LoginActivity.class));
+                Credential credential=AppUtility.getCredential();
+                credential.stayLoggedIn=false;
+                AppUtility.saveCredential(credential);
                 break;
             default:
                 break;

@@ -87,7 +87,7 @@
             android:textSize="25dp"
             />
     </RelativeLayout>
-
+     if(AppUtility.getCredential()
     <Button
         android:id="@+id/signout"
         android:layout_width="80dp"
