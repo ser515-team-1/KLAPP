@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.asu.ser.klapp.R;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RelativeLayout admin, student1, student2;
+    Button signout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,11 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         admin=findViewById(R.id.Admin);
         student1=findViewById(R.id.Student1);
         student2=findViewById(R.id.Student2);
-
+        signout=findViewById(R.id.signout);
         admin.setOnClickListener(this);
         student1.setOnClickListener(this);
         student2.setOnClickListener(this);
+        signout.setOnClickListener(this);
 
     }
 
@@ -66,7 +69,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             case R.id.Student2:
                 startActivity(new Intent(this, CompareNumberActivity.class));
                 break;
-
+            case R.id.signout:
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
             default:
                 break;
         }
