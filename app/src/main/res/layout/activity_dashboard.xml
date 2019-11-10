@@ -88,4 +88,13 @@
             />
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/signout"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="SignOut"
+        android:textSize="12sp"
+        android:background="@color/green_klapp"/>
+
 </LinearLayout>
