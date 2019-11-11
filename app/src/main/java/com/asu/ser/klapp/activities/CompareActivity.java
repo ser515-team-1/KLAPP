@@ -17,11 +17,14 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.asu.ser.klapp.ProblemIterator;
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.factories.QuestionCreatorFactory;
 import com.asu.ser.klapp.interfaces.AssignmentInterface;
 import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareNumber;
 import com.asu.ser.klapp.models.CompareProblem;
 import com.asu.ser.klapp.models.Problem;
+import com.asu.ser.klapp.questioncreators.CompareExpressions;
+import com.asu.ser.klapp.questioncreators.CompareNumberL1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +60,7 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
 
         //// This part either comes from assignment or practice
         Assignment assignment = new Assignment();
-        assignment.setProblemList(getProblemList());
+        assignment.setProblemList(QuestionCreatorFactory.getQuestionCreator(QuestionCreatorFactory.COMPARE_NUM_LEVEL1).getProblemList());
         ////
         loadAssignment(assignment);
 
@@ -318,39 +321,5 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
     }
 
 
-    private List<Problem> getProblemList(){
 
-        List<Problem> problems = new ArrayList<>();
-
-        for(int i=0;i<5;i++){
-            problems.add(getProblem());
-        }
-
-        return problems;
-    }
-
-    private Problem getProblem(){
-
-        CompareProblem problem = new CompareProblem();
-
-        int a = new Random().nextInt(11);
-        int b = new Random().nextInt(11);
-
-        problem.setLeft(a+"");
-        problem.setRight(b+"");
-
-        String solution;
-
-        if(a>b){
-            solution = ">";
-        }else if(a<b){
-            solution = "<";
-        }else {
-            solution = "=";
-        }
-
-        problem.setAnswer(solution);
-
-        return problem;
-    }
 }
