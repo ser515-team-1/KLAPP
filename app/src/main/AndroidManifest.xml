@@ -18,6 +18,9 @@
         <activity android:name=".activities.BodmasActivity"/>
         <activity android:name=".activities.CountingActivity"/>
         <activity android:name=".activities.CompareActivity">
+
+        </activity>
+        <activity android:name=".activities.CreateAssignmentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
