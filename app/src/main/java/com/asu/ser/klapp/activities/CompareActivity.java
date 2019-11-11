@@ -215,8 +215,8 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
 
             Log.d("VALUE", "dropItem: "+dragData);
 
-            loadQuestion();
             validate(dragData);
+            loadQuestion();
 
 //            submitanim.setVisibility(View.VISIBLE);
 //            submitanim.setProgress((float) 0.2);
@@ -304,6 +304,9 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
     @Override
     public void validate(String answerSubmitted) {
         currentProblem.setSubmittedAnswer(answerSubmitted);
+
+        Log.d(TAG, "validate: "+problemIterator.getCurrentIndex());
+
         problemList.set(problemIterator.getCurrentIndex()-1,currentProblem);
     }
 
