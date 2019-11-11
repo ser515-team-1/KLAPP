@@ -34,4 +34,10 @@ public class Problem {
         this.submittedAnswer = submittedAnswer;
     }
 
+    @Override
+    public String toString(){
+        boolean result = answer.equals(submittedAnswer);
+        return submittedAnswer+": "+result;
+    }
+
 }

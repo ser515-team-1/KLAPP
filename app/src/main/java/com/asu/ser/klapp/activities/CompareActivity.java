@@ -43,6 +43,7 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
 
     private List<Problem> problemList;
     private ProblemIterator problemIterator;
+    private Problem currentProblem;
 
     private static final String TAG = "DragDropTest";
 
@@ -212,7 +213,10 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
         if(v.getId()==R.id.dragaableArea) {
             dragArea.setText(dragData);
 
+            Log.d("VALUE", "dropItem: "+dragData);
+
             loadQuestion();
+            validate(dragData);
 
 //            submitanim.setVisibility(View.VISIBLE);
 //            submitanim.setProgress((float) 0.2);
@@ -265,13 +269,14 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
 
         if(problemIterator.hasNext()){
             problem = (CompareProblem) problemIterator.next();
+            currentProblem = problem;
             leftNum.setText(problem.getLeft());
             rightnum.setText(problem.getRight());
             questionNum.setText("Question "+(problemIterator.getCurrentIndex())+"/"+problemList.size());
             dragArea.setText("?");
 
         }else{
-            loadEndAssignmentScreen();
+            endAssignment();
         }
 
     }
@@ -298,12 +303,15 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
 
     @Override
     public void validate(String answerSubmitted) {
-
+        currentProblem.setSubmittedAnswer(answerSubmitted);
+        problemList.set(problemIterator.getCurrentIndex()-1,currentProblem);
     }
 
     @Override
     public void endAssignment() {
+        Log.d("Answer",problemList.toString());
         loadEndAssignmentScreen();
+
     }
 
 
@@ -319,6 +327,7 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
     }
 
     private Problem getProblem(){
+
         CompareProblem problem = new CompareProblem();
 
         int a = new Random().nextInt(11);
