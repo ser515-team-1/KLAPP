@@ -15,8 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.asu.ser.klapp.ProblemIterator;
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.interfaces.AssignmentInterface;
+import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareNumber;
+import com.asu.ser.klapp.models.CompareProblem;
+import com.asu.ser.klapp.models.Problem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +29,7 @@ import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CompareActivity extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener, View.OnClickListener {
+public class CompareActivity extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener, View.OnClickListener, AssignmentInterface {
 
     private TextView less, greater, equals;
     private TextView dragArea, leftNum, rightnum;
@@ -35,9 +40,9 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
     private Button overlayButton;
     private LottieAnimationView submitanim;
 
-    private List<CompareNumber> assignment;
 
-    private int currentQuestionNum=0;
+    private List<Problem> problemList;
+    private ProblemIterator problemIterator;
 
     private static final String TAG = "DragDropTest";
 
@@ -45,14 +50,15 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dragdrop);
-
-        assignment = getPracticeAssignment();
-
         initView();
         addListeners();
         addTags();
 
-        createQuestions(currentQuestionNum);
+        //// This part either comes from assignment or practice
+        Assignment assignment = new Assignment();
+        assignment.setProblemList(getProblemList());
+        ////
+        loadAssignment(assignment);
 
     }
 
@@ -112,6 +118,7 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
 
             case DragEvent.ACTION_DRAG_ENTERED:
 
+                Log.d("NUM", "onDrag: ");
                 v.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                 v.invalidate();
                 return true;
@@ -121,20 +128,21 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
 
             case DragEvent.ACTION_DRAG_EXITED:
 
+                Log.d("NUM", "onDrag: ");
                 v.getBackground().clearColorFilter();
                 v.invalidate();
                 return true;
 
             case DragEvent.ACTION_DROP:
 
-                Log.d("Hi", "onDrag: ACTION_DROP");
+                Log.d("NUM", "onDrag: ACTION_DROP");
                 dropItem(v, event);
 
                 return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
 
-                Log.d("Hi", "onDrag: ACTION_ENDED");
+                Log.d("NUM", "onDrag: ACTION_ENDED");
                 v.getBackground().clearColorFilter();
 
                 v.invalidate();
@@ -198,38 +206,47 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
         TextView clone = new TextView(this);
         clone.setOnDragListener(this);
 
-        currentQuestionNum++;
+        Log.d("NUM", "dropItem: ");
+
 
         if(v.getId()==R.id.dragaableArea) {
             dragArea.setText(dragData);
 
-            submitanim.setVisibility(View.VISIBLE);
-            submitanim.setProgress((float) 0.2);
-            submitanim.playAnimation();
+            loadQuestion();
 
-            submitanim.addAnimatorListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    createQuestions(currentQuestionNum);
-                    //submitanim.setProgress(0);
-                    submitanim.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });
+//            submitanim.setVisibility(View.VISIBLE);
+//            submitanim.setProgress((float) 0.2);
+//            submitanim.playAnimation();
+//
+//            submitanim.addAnimatorListener(new Animator.AnimatorListener() {
+//                @Override
+//                public void onAnimationStart(Animator animation) {
+//
+//                }
+//
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//
+//                    Log.d("NUM","Animation");
+//
+////                    loadQuestion();
+//
+//                    createQuestions();
+//
+//                    //submitanim.setProgress(0);
+//                    submitanim.setVisibility(View.GONE);
+//                }
+//
+//                @Override
+//                public void onAnimationCancel(Animator animation) {
+//
+//                }
+//
+//                @Override
+//                public void onAnimationRepeat(Animator animation) {
+//
+//                }
+//            });
 
 
         }
@@ -239,39 +256,26 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
     }
 
 
-    private List<CompareNumber> getPracticeAssignment(){
+    private void createQuestions(){
 
-        List<CompareNumber> assignment = new ArrayList<>();
-        assignment.add(getNumbers());
-        assignment.add(getNumbers());
-        assignment.add(getNumbers());
-        assignment.add(getNumbers());
-        assignment.add(getNumbers());
-        return assignment;
-    }
+        CompareProblem problem;
 
-    private CompareNumber getNumbers(){
-        int num1 = new Random().nextInt(20);
-        int num2 = new Random().nextInt(20);
-        return new CompareNumber(num1, num2);
-    }
+        Log.d("NUM","CALLED");
 
-    private void createQuestions(int index){
-        if(index<assignment.size()){
-            CompareNumber compareNumber = assignment.get(index);
-            leftNum.setText(compareNumber.getNum1()+"");
-            rightnum.setText(compareNumber.getNum2()+"");
+
+        if(problemIterator.hasNext()){
+            problem = (CompareProblem) problemIterator.next();
+            leftNum.setText(problem.getLeft());
+            rightnum.setText(problem.getRight());
+            questionNum.setText("Question "+(problemIterator.getCurrentIndex())+"/"+problemList.size());
             dragArea.setText("?");
-            questionNum.setText("Question "+(index+1)+"/"+assignment.size());
-        }
-        else {
+
+        }else{
             loadEndAssignmentScreen();
         }
-    }
-
-    private void loadStartAssignmentScreen(){
 
     }
+
 
     private void loadEndAssignmentScreen(){
         overlay.setVisibility(View.VISIBLE);
@@ -279,4 +283,62 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
         overlayButton.setVisibility(View.GONE);
     }
 
+    @Override
+    public void loadAssignment(Assignment assignment) {
+        problemList = assignment.getProblemList();
+        Log.d(TAG, "loadAssignment: "+(problemList==null));
+        problemIterator = new ProblemIterator(problemList);
+        loadQuestion();
+    }
+
+    @Override
+    public void loadQuestion() {
+        createQuestions();
+    }
+
+    @Override
+    public void validate(String answerSubmitted) {
+
+    }
+
+    @Override
+    public void endAssignment() {
+        loadEndAssignmentScreen();
+    }
+
+
+    private List<Problem> getProblemList(){
+
+        List<Problem> problems = new ArrayList<>();
+
+        for(int i=0;i<5;i++){
+            problems.add(getProblem());
+        }
+
+        return problems;
+    }
+
+    private Problem getProblem(){
+        CompareProblem problem = new CompareProblem();
+
+        int a = new Random().nextInt(11);
+        int b = new Random().nextInt(11);
+
+        problem.setLeft(a+"");
+        problem.setRight(b+"");
+
+        String solution;
+
+        if(a>b){
+            solution = ">";
+        }else if(a<b){
+            solution = "<";
+        }else {
+            solution = "=";
+        }
+
+        problem.setAnswer(solution);
+
+        return problem;
+    }
 }

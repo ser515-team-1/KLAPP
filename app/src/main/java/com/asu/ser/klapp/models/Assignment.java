@@ -27,5 +27,9 @@ public class Assignment {
         return problemList;
     }
 
+    public void setProblemList(List<Problem> problemList){
+        this.problemList = problemList;
+    }
+
 
 }
