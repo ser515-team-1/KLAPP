@@ -40,7 +40,6 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private static final String TAG = "CountingActivity";
     private static final String TAG1 = "Events";
     private int counterValue =0;
-
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
