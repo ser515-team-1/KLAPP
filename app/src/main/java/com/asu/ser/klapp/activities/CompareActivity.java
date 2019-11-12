@@ -3,6 +3,7 @@ package com.asu.ser.klapp.activities;
 import android.animation.Animator;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.asu.ser.klapp.models.CompareProblem;
 import com.asu.ser.klapp.models.Problem;
 import com.asu.ser.klapp.questioncreators.CompareExpressions;
 import com.asu.ser.klapp.questioncreators.CompareNumberL1;
+import com.asu.ser.klapp.utilities.AppUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,7 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
     private LottieAnimationView submitanim;
 
 
+    private Assignment assignment;
     private List<Problem> problemList;
     private ProblemIterator problemIterator;
     private Problem currentProblem;
@@ -58,10 +61,8 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
         addListeners();
         addTags();
 
-        //// This part either comes from assignment or practice
-        Assignment assignment = new Assignment();
-        assignment.setProblemList(QuestionCreatorFactory.getQuestionCreator(QuestionCreatorFactory.COMPARE_NUM_LEVEL1).getProblemList());
-        ////
+        getAssignment();
+
         loadAssignment(assignment);
 
     }
@@ -317,6 +318,24 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
     public void endAssignment() {
         Log.d("Answer",problemList.toString());
         loadEndAssignmentScreen();
+
+    }
+
+    private void getAssignment(){
+
+        Intent intent = getIntent();
+
+        int assignment_mode = getIntent().getIntExtra(AppUtility.ASSIGNMENT_MODE,0);
+
+        if(assignment_mode==AppUtility.ATTEMPT_MODE){
+            assignment = (Assignment) intent.getSerializableExtra("ASSIGNMENT");
+
+            Log.d(TAG, "getAssignment: ");
+
+        }else {
+            assignment = new Assignment();
+            assignment.setProblemList(QuestionCreatorFactory.getQuestionCreator(QuestionCreatorFactory.COMPARE_NUM_LEVEL1).getProblemList());
+        }
 
     }
 

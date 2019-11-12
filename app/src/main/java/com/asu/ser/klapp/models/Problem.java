@@ -1,10 +1,12 @@
 package com.asu.ser.klapp.models;
 
+import java.io.Serializable;
+
 /**
  *  @version         1.0
  *  date created     11/10/2019
  */
-public class Problem {
+public class Problem implements Serializable {
 
     private String question;
     private String answer;

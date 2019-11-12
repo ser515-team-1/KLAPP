@@ -29,6 +29,11 @@ public class AppUtility {
     private static String USERNAME_KEY ="USER_CRED_PREF.USERNAME_KEY";
     private static String PASSWORD_KEY ="USER_CRED_PREF.PASSWORD_KEY";
     private static String STAY_LOOGED_IN ="USER_CRED_PREF.STAY_LOOGED_IN";
+
+    public static String ASSIGNMENT_MODE="ASSIGNMENT_MODE";
+    public static int PRACTICE_MODE = 7546;
+    public static int ATTEMPT_MODE = 6653;
+
     private static List<ImagePair> imagePairList;
 
 

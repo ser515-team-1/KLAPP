@@ -1,5 +1,6 @@
 package com.asu.ser.klapp.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  *  @version         1.0
  *  date created     11/10/2019
  */
-public class Assignment {
+public class Assignment implements Serializable {
 
     private List<Problem> problemList;
 
@@ -30,6 +31,5 @@ public class Assignment {
     public void setProblemList(List<Problem> problemList){
         this.problemList = problemList;
     }
-
 
 }
