@@ -8,7 +8,7 @@ public interface CreateProfileInterface {
 
     public List<Student> loadallprofile();
 
-    public void addProfile(Student student);
+    public void addProfile();
 
     public void updateProfile(Student student);
 
