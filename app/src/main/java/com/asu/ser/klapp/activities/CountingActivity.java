@@ -209,7 +209,7 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     }
 
     public void showYNDialogue(){
-
+//        showing Y/N dialogue box when the session ends
         AlertDialog.Builder builder = new AlertDialog.Builder(CountingActivity.this);
         builder.setTitle("Inside the Y/N Dialogues Box");
         builder.setMessage("Do you want to continue?");
