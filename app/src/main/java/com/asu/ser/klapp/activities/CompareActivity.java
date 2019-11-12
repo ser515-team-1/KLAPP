@@ -1,6 +1,5 @@
 package com.asu.ser.klapp.activities;
 
-import android.animation.Animator;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
@@ -21,16 +20,11 @@ import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.factories.QuestionCreatorFactory;
 import com.asu.ser.klapp.interfaces.AssignmentInterface;
 import com.asu.ser.klapp.models.Assignment;
-import com.asu.ser.klapp.models.CompareNumber;
 import com.asu.ser.klapp.models.CompareProblem;
 import com.asu.ser.klapp.models.Problem;
-import com.asu.ser.klapp.questioncreators.CompareExpressions;
-import com.asu.ser.klapp.questioncreators.CompareNumberL1;
 import com.asu.ser.klapp.utilities.AppUtility;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,7 +50,7 @@ public class CompareActivity extends AppCompatActivity implements View.OnLongCli
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dragdrop);
+        setContentView(R.layout.activity_compare);
         initView();
         addListeners();
         addTags();

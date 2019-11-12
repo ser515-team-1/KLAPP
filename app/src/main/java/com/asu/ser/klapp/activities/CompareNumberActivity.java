@@ -57,7 +57,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dragdrop);
+        setContentView(R.layout.activity_compare);
 
         assignment = getPracticeAssignment();
 
