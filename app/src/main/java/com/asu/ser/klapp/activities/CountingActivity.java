@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,12 +44,36 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private static final String TAG = "CountingActivity";
     private static final String TAG1 = "Events";
     private int counterValue =0;
+    private Button diagtestBtn;
+
+    public void showYNDialogue(){
+//        showing Y/N dialogue box when the session ends
+        AlertDialog.Builder builder = new AlertDialog.Builder(CountingActivity.this);
+        builder.setTitle("Inside the Y/N Dialogues Box");
+        builder.setMessage("Do you want to continue?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(CountingActivity.this,"Starting the game again!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(CountingActivity.this,"See you later!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.create().show();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counting);
         initView();
+        showYNDialogue();
     }
 
     private void initView(){
@@ -208,25 +233,5 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
         adapter = new CountingListAdapter(this, getRandomNumber(), imagePair.getThing());
     }
 
-    public void showYNDialogue(){
-//        showing Y/N dialogue box when the session ends
-        AlertDialog.Builder builder = new AlertDialog.Builder(CountingActivity.this);
-        builder.setTitle("Inside the Y/N Dialogues Box");
-        builder.setMessage("Do you want to continue?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(CountingActivity.this,"Starting the game again!",Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(CountingActivity.this,"See you later!",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        builder.create().show();
-    }
 }
