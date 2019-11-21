@@ -108,4 +108,9 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
         }
     }
+
+
+    private List<Student> getAllKidsProfileFromDB(){
+
+    }
 }
