@@ -1,5 +1,7 @@
 package com.asu.ser.klapp.mvvm.viewmodels;
 
+import android.util.Log;
+
 import com.asu.ser.klapp.interfaces.KidsProfileCallBack;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.mvvm.repositories.KidsProfileRepository;
@@ -28,11 +30,17 @@ public class KidsProfileViewModel extends ViewModel implements KidsProfileCallBa
     }
 
     public void refreshList(){
+
+        Log.d("updatelist", "refreshList: ");
+
         repository.getAllKidsProfileFromDataBase();
     }
 
     @Override
     public void kidsProfilesLoadedFromDB(List<Student> kidsProfiles) {
+
+        Log.d("updatelist", "kidsProfilesLoadedFromDB: "+kidsProfiles.size());
+
         kidsprofilelivedata.postValue(kidsProfiles);
     }
 }

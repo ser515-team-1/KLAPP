@@ -1,11 +1,14 @@
 package com.asu.ser.klapp.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.KidProfileAdapter;
@@ -15,6 +18,7 @@ import com.asu.ser.klapp.mvvm.viewmodels.KidsProfileViewModel;
 import com.asu.ser.klapp.sqlite.KidsProfileDao;
 import com.asu.ser.klapp.utilities.AppUtility;
 import com.asu.ser.klapp.utilities.DBUtilty;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CreateKidProfileActivity extends AppCompatActivity implements CreateProfileInterface, View.OnClickListener {
 
-    private Button addMoreProfile;
-    private Button cancel,submit;
-    private EditText name,age;
-    private LinearLayout kidoverlay;
 
     private RecyclerView kidsRecyclerView;
     private KidProfileAdapter adapter;
@@ -42,6 +42,12 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
     private KidsProfileViewModel kidsProfileViewModel;
 
+    private FloatingActionButton addProfile;
+
+    private final int ADD_PROFILE_REQ_CODE = 12354;
+
+    private static final String TAG = "CreateKidProfileActivit";
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -51,17 +57,9 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
         kidsProfileDao = DBUtilty.getKidsProfileDao();
 
+        addProfile = findViewById(R.id.add_profile);
+        addProfile.setOnClickListener(this);
 
-
-        addMoreProfile = findViewById(R.id.addMoreProfile);
-        cancel = findViewById(R.id.cancel);
-        submit = findViewById(R.id.submit);
-        kidoverlay = findViewById(R.id.kif_profile_overlay);
-        name = findViewById(R.id.name);
-        age = findViewById(R.id.age);
-        addMoreProfile.setOnClickListener(this);
-        cancel.setOnClickListener(this);
-        submit.setOnClickListener(this);
         kidsRecyclerView = findViewById(R.id.profileRecyclerView);
 
         kidsProfileViewModel = ViewModelProviders.of(this).get(KidsProfileViewModel.class);
@@ -91,19 +89,17 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
     @Override
     public void addProfile() {
-        final Student student = new Student();
-//        student.setAge(Integer.getInteger(age.getText().toString()));
-        student.setName(name.getText().toString());
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                kidsProfileDao.insert(student);
-                kidsProfileViewModel.refreshList();
-            }
-        }).start();
-
-        hideOverlay();
+//        final Student student = new Student();
+////        student.setAge(Integer.getInteger(age.getText().toString()));
+//        student.setName(name.getText().toString());
+//
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                kidsProfileDao.insert(student);
+//                kidsProfileViewModel.refreshList();
+//            }
+//        }).start();
 
 
     }
@@ -118,12 +114,22 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
     }
 
-    private void showOverlay(){
-        kidoverlay.setVisibility(View.VISIBLE);
+    private void addNewProfile(){
+        Intent intent = new Intent(this, KidsProfileActivity.class);
+        startActivityForResult(intent,ADD_PROFILE_REQ_CODE);
     }
 
-    private void hideOverlay(){
-        kidoverlay.setVisibility(View.GONE);
+    @Override
+    public void onActivityResult(int reqCode, int resCode, Intent data){
+
+        if(reqCode == ADD_PROFILE_REQ_CODE){
+            if(resCode== Activity.RESULT_OK){
+                kidsProfileViewModel.refreshList();
+            }
+        }else {
+            Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -131,16 +137,8 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
         switch (v.getId()){
 
-            case R.id.addMoreProfile:
-                showOverlay();
-                break;
-
-            case R.id.cancel:
-                hideOverlay();
-                break;
-
-            case R.id.submit:
-                addProfile();
+            case R.id.add_profile:
+                addNewProfile();
                 break;
 
             default:
