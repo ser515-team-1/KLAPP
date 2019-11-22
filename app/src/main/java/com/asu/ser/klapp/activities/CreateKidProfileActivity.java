@@ -76,6 +76,7 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
                 adapter.updateDataSet(studentList);
             }
         });
+        kidsProfileViewModel.refreshList();
 
 
 //        kidsRecyclerView.setAdapter(adapter);
