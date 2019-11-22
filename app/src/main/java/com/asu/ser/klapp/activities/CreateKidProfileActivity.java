@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.KidProfileAdapter;
+import com.asu.ser.klapp.callbacks.ItemClickListener;
 import com.asu.ser.klapp.interfaces.CreateProfileInterface;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.mvvm.viewmodels.KidsProfileViewModel;
@@ -29,7 +30,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CreateKidProfileActivity extends AppCompatActivity implements CreateProfileInterface, View.OnClickListener {
+public class CreateKidProfileActivity extends AppCompatActivity implements CreateProfileInterface, View.OnClickListener, ItemClickListener {
 
 
     private RecyclerView kidsRecyclerView;
@@ -47,6 +48,11 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
     private final int ADD_PROFILE_REQ_CODE = 12354;
 
     private static final String TAG = "CreateKidProfileActivit";
+    public static final String KIDS_PROFLE_MODE = "CreateKidProfileActivity.KIDS_PROFLE_MODE";
+    public static final int ADD_MODE = 1221;
+    public static final int EDIT_MODE = 1432;
+    public static final String STUDENT_PROFILE = "reateKidProfileActivity.STUDENT_PROFILE";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -116,6 +122,14 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
     private void addNewProfile(){
         Intent intent = new Intent(this, KidsProfileActivity.class);
+        intent.putExtra(KIDS_PROFLE_MODE, ADD_MODE);
+        startActivityForResult(intent,ADD_PROFILE_REQ_CODE);
+    }
+
+    private void editProfile(Student student){
+        Intent intent = new Intent(this, KidsProfileActivity.class);
+        intent.putExtra(KIDS_PROFLE_MODE, EDIT_MODE);
+        intent.putExtra(STUDENT_PROFILE,student);
         startActivityForResult(intent,ADD_PROFILE_REQ_CODE);
     }
 
@@ -154,4 +168,10 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
         kidsRecyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void itemClicked(Object object) {
+
+        Student student = (Student)object;
+        editProfile(student);
+    }
 }

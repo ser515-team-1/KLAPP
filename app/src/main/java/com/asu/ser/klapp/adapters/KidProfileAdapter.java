@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.callbacks.ItemClickListener;
 import com.asu.ser.klapp.models.Student;
 
 import java.util.ArrayList;
@@ -21,10 +22,12 @@ public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.Ki
     private static final String TAG = "KidProfileAdapter";
     private Context context;
     private List<Student> kidsProfileList;
+    private ItemClickListener itemClickListener;
 
     public KidProfileAdapter(Context context, List<Student> kidsProfileList){
         this.context = context;
         this.kidsProfileList = kidsProfileList;
+        itemClickListener = (ItemClickListener)context;
     }
 
     public void updateDataSet(List<Student> newProducts){
@@ -50,8 +53,14 @@ public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.Ki
 
     @Override
     public void onBindViewHolder(@NonNull KidViewHolder holder, int position) {
-        Student student = kidsProfileList.get(position);
+        final Student student = kidsProfileList.get(position);
         holder.name.setText(student.getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.itemClicked(student);
+            }
+        });
     }
 
     @Override

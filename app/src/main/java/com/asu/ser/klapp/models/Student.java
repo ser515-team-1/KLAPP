@@ -1,5 +1,6 @@
 package com.asu.ser.klapp.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 import androidx.room.ColumnInfo;
@@ -8,7 +9,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "kids_profile_table")
-public class Student {
+public class Student implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     public int id;

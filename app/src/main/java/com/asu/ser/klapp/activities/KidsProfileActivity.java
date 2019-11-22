@@ -1,6 +1,7 @@
 package com.asu.ser.klapp.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
     private EditText name, age;
     private Button cancel, save;
     private KidsProfileDao kidsProfileDao;
+    private int profilemode;
+    private Student kidprofile;
 
     private static final String TAG = "KidsProfileActivity";
 
@@ -38,6 +41,14 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
         cancel.setOnClickListener(this);
         kidsProfileDao = DBUtilty.getKidsProfileDao();
 
+        Intent intent = getIntent();
+        profilemode = intent.getIntExtra(CreateKidProfileActivity.KIDS_PROFLE_MODE,0);
+
+        if(profilemode==CreateKidProfileActivity.EDIT_MODE){
+            kidprofile = (Student) intent.getSerializableExtra(CreateKidProfileActivity.STUDENT_PROFILE);
+            populateFormFromInput(kidprofile);
+        }
+
     }
 
     @Override
@@ -46,7 +57,7 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()){
 
             case R.id.save:
-                saveToDatabase();
+                save();
                 break;
 
             case R.id.cancel:
@@ -61,12 +72,29 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
     public void saveToDatabase(){
 
-        final Student student = createStudentFromForm();
+        kidprofile = createStudentFromForm();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                kidsProfileDao.insert(student);
+                kidsProfileDao.insert(kidprofile);
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        }).start();
+
+    }
+
+    public void updateToDatabase(){
+
+        kidprofile.setAge(Integer.parseInt(age.getText().toString()));
+        kidprofile.setName(name.getText().toString());
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                kidsProfileDao.update(kidprofile);
                 setResult(Activity.RESULT_OK);
                 finish();
             }
@@ -85,5 +113,20 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
         student.setAge(Integer.parseInt(age.getText().toString()));
         student.setName(name.getText().toString());
         return student;
+    }
+
+    public void populateFormFromInput(Student student){
+
+        name.setText(student.getName());
+        age.setText(student.getAge()+"");
+
+    }
+
+    public void save(){
+        if(profilemode==CreateKidProfileActivity.ADD_MODE){
+            saveToDatabase();
+        }else if(profilemode == CreateKidProfileActivity.EDIT_MODE){
+            updateToDatabase();
+        }
     }
 }
