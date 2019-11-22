@@ -4,6 +4,7 @@ import java.util.List;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "kids_profile_table")
@@ -18,7 +19,10 @@ public class Student {
     @ColumnInfo(name = "name")
     private String name;
 
+    @Ignore
     private List<Assignment> upcoming;
+
+    @Ignore
     private List<Assignment> past;
 
     public int getAge() {

@@ -45,6 +45,7 @@ public class AppUtility {
         context = _context;
         init_sharedpref();
         init_image_pairs();
+        DBUtilty.initUtility(_context);
     }
 
     private static void init_sharedpref(){

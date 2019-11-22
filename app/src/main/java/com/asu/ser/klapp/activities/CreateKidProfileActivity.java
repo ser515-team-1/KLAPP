@@ -1,6 +1,7 @@
 package com.asu.ser.klapp.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,9 @@ import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.KidProfileAdapter;
 import com.asu.ser.klapp.interfaces.CreateProfileInterface;
 import com.asu.ser.klapp.models.Student;
+import com.asu.ser.klapp.sqlite.KidsProfileDao;
+import com.asu.ser.klapp.utilities.AppUtility;
+import com.asu.ser.klapp.utilities.DBUtilty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +35,19 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
     private List<Student> studentProfileList;
 
+    private KidsProfileDao kidsProfileDao;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createprofile);
+
+        AppUtility.init(this);
+
+        kidsProfileDao = DBUtilty.getKidsProfileDao();
+        loadAllKidsProfileFromDB();
+
+
         addMoreProfile = findViewById(R.id.addMoreProfile);
         cancel = findViewById(R.id.cancel);
         submit = findViewById(R.id.submit);
@@ -46,10 +59,11 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
         submit.setOnClickListener(this);
         kidsRecyclerView = findViewById(R.id.profileRecyclerView);
         llm = new LinearLayoutManager(this);
-        adapter = new KidProfileAdapter(this, studentProfileList = new ArrayList<Student>());
+        adapter = new KidProfileAdapter(this, studentProfileList = new ArrayList<>());
 
         kidsRecyclerView.setLayoutManager(llm);
         kidsRecyclerView.setAdapter(adapter);
+
 
     }
 
@@ -65,6 +79,7 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
         student.setName(name.getText().toString());
         studentProfileList.add(student);
         adapter.updateDataSet(studentProfileList);
+        kidsProfileDao.insert(student);
         hideOverlay();
     }
 
@@ -110,7 +125,16 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
     }
 
 
-    private List<Student> getAllKidsProfileFromDB(){
+    private void loadAllKidsProfileFromDB(){
 
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                studentProfileList = kidsProfileDao.getAllKidsProfile();
+                adapter.updateDataSet(studentProfileList);
+            }
+        });
+
+        t1.start();
     }
 }
