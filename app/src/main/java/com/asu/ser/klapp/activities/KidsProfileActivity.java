@@ -21,7 +21,7 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
 
     private EditText name, age;
-    private Button cancel, save;
+    private Button cancel, save, delete;
     private KidsProfileDao kidsProfileDao;
     private int profilemode;
     private Student kidprofile;
@@ -36,6 +36,8 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
         age = findViewById(R.id.age);
         cancel = findViewById(R.id.cancel);
         save = findViewById(R.id.save);
+        delete = findViewById(R.id.delete);
+        delete.setOnClickListener(this);
 
         save.setOnClickListener(this);
         cancel.setOnClickListener(this);
@@ -62,6 +64,10 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.cancel:
                 cancel();
+                break;
+
+            case R.id.delete:
+                delete();
                 break;
 
             default:
@@ -129,4 +135,18 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
             updateToDatabase();
         }
     }
+
+    public void delete(){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                kidsProfileDao.delete(kidprofile);
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        }).start();
+
+    }
+
 }
