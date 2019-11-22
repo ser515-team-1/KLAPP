@@ -11,6 +11,7 @@ import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.KidProfileAdapter;
 import com.asu.ser.klapp.interfaces.CreateProfileInterface;
 import com.asu.ser.klapp.models.Student;
+import com.asu.ser.klapp.mvvm.viewmodels.KidsProfileViewModel;
 import com.asu.ser.klapp.sqlite.KidsProfileDao;
 import com.asu.ser.klapp.utilities.AppUtility;
 import com.asu.ser.klapp.utilities.DBUtilty;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +40,8 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
     private KidsProfileDao kidsProfileDao;
 
+    private KidsProfileViewModel kidsProfileViewModel;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -45,7 +50,7 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
         AppUtility.init(this);
 
         kidsProfileDao = DBUtilty.getKidsProfileDao();
-        loadAllKidsProfileFromDB();
+
 
 
         addMoreProfile = findViewById(R.id.addMoreProfile);
@@ -58,11 +63,22 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
         cancel.setOnClickListener(this);
         submit.setOnClickListener(this);
         kidsRecyclerView = findViewById(R.id.profileRecyclerView);
-        llm = new LinearLayoutManager(this);
-        adapter = new KidProfileAdapter(this, studentProfileList = new ArrayList<>());
 
-        kidsRecyclerView.setLayoutManager(llm);
-        kidsRecyclerView.setAdapter(adapter);
+        kidsProfileViewModel = ViewModelProviders.of(this).get(KidsProfileViewModel.class);
+        kidsProfileViewModel.init();
+
+
+        initRV();
+
+        kidsProfileViewModel.getAllKidsProfileLiveData().observe(this, new Observer<List<Student>>() {
+            @Override
+            public void onChanged(List<Student> studentList) {
+                adapter.updateDataSet(studentList);
+            }
+        });
+
+
+//        kidsRecyclerView.setAdapter(adapter);
 
 
     }
@@ -74,13 +90,21 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
     @Override
     public void addProfile() {
-        Student student = new Student();
+        final Student student = new Student();
 //        student.setAge(Integer.getInteger(age.getText().toString()));
         student.setName(name.getText().toString());
-        studentProfileList.add(student);
-        adapter.updateDataSet(studentProfileList);
-        kidsProfileDao.insert(student);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                kidsProfileDao.insert(student);
+                kidsProfileViewModel.refreshList();
+            }
+        }).start();
+
         hideOverlay();
+
+
     }
 
     @Override
@@ -124,17 +148,11 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
         }
     }
 
-
-    private void loadAllKidsProfileFromDB(){
-
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                studentProfileList = kidsProfileDao.getAllKidsProfile();
-                adapter.updateDataSet(studentProfileList);
-            }
-        });
-
-        t1.start();
+    private void initRV(){
+        llm = new LinearLayoutManager(this);
+        adapter = new KidProfileAdapter(this, kidsProfileViewModel.getAllKidsProfileLiveData().getValue());
+        kidsRecyclerView.setLayoutManager(llm);
+        kidsRecyclerView.setAdapter(adapter);
     }
+
 }

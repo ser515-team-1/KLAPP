@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "kids_profile_table")
 public class Student {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     @ColumnInfo(name = "age")
