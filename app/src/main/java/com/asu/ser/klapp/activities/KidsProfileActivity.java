@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.Assignment;
+import com.asu.ser.klapp.models.CompareProblem;
+import com.asu.ser.klapp.models.Problem;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.sqlite.KidsProfileDao;
 import com.asu.ser.klapp.utilities.DBUtilty;
@@ -21,7 +24,7 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
 
     private EditText name, age;
-    private Button cancel, save, delete;
+    private Button cancel, save, delete, createAssignment;
     private KidsProfileDao kidsProfileDao;
     private int profilemode;
     private Student kidprofile;
@@ -38,6 +41,9 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
         save = findViewById(R.id.save);
         delete = findViewById(R.id.delete);
         delete.setOnClickListener(this);
+
+        createAssignment = findViewById(R.id.createAssignment);
+        createAssignment.setOnClickListener(this);
 
         save.setOnClickListener(this);
         cancel.setOnClickListener(this);
@@ -68,6 +74,10 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.delete:
                 delete();
+                break;
+
+            case R.id.createAssignment:
+                createAssignment();
                 break;
 
             default:
@@ -146,6 +156,46 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
                 finish();
             }
         }).start();
+
+    }
+
+    public void createAssignment(){
+        Intent intent = new Intent(this, CreateAssignmentActivity.class);
+        startActivity(intent);
+
+    }
+
+
+    public void createDummyAssignment(){
+
+        Assignment assignment = new Assignment();
+
+        CompareProblem problem = new CompareProblem();
+        problem.setLeft("7");
+        problem.setRight("9");
+        problem.setAnswer("<");
+
+        CompareProblem problem1 = new CompareProblem();
+        problem1.setLeft("11");
+        problem1.setRight("12");
+        problem.setAnswer("<");
+
+        CompareProblem problem2 = new CompareProblem();
+        problem2.setLeft("10");
+        problem2.setRight("10");
+        problem.setAnswer("=");
+
+        CompareProblem problem3 = new CompareProblem();
+        problem3.setLeft("7");
+        problem3.setRight("9");
+        problem.setAnswer("<");
+
+        assignment.addProbleam(problem);
+        assignment.addProbleam(problem1);
+        assignment.addProbleam(problem2);
+        assignment.addProbleam(problem3);
+
+        kidprofile.addAssignment(assignment);
 
     }
 

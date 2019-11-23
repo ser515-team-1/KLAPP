@@ -1,6 +1,7 @@
 package com.asu.ser.klapp.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.room.ColumnInfo;
@@ -25,6 +26,11 @@ public class Student implements Serializable {
 
     @Ignore
     private List<Assignment> past;
+
+    public Student(){
+        past = new ArrayList<>();
+        upcoming = new ArrayList<>();
+    }
 
     public int getAge() {
         return age;
@@ -56,5 +62,9 @@ public class Student implements Serializable {
 
     public void setPast(List<Assignment> past) {
         this.past = past;
+    }
+
+    public void addAssignment(Assignment assignment){
+        upcoming.add(assignment);
     }
 }
