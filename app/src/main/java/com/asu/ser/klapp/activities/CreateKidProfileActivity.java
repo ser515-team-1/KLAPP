@@ -10,17 +10,24 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.asu.ser.klapp.ProblemIterator;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.KidProfileAdapter;
 import com.asu.ser.klapp.callbacks.ItemClickListener;
 import com.asu.ser.klapp.interfaces.CreateProfileInterface;
+import com.asu.ser.klapp.models.Assignment;
+import com.asu.ser.klapp.models.CompareProblem;
+import com.asu.ser.klapp.models.Problem;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.mvvm.viewmodels.KidsProfileViewModel;
 import com.asu.ser.klapp.sqlite.KidsProfileDao;
 import com.asu.ser.klapp.utilities.AppUtility;
 import com.asu.ser.klapp.utilities.DBUtilty;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +65,9 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createprofile);
+
+
+        testGSON();
 
         AppUtility.init(this);
 
@@ -174,4 +184,51 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
         Student student = (Student)object;
         editProfile(student);
     }
+
+
+
+    public void testGSON(){
+
+        Assignment assignment = new Assignment();
+        CompareProblem compareProblem = new CompareProblem();
+        compareProblem.setLeft("5");
+        compareProblem.setRight("7");
+        compareProblem.setAnswer(">");
+        assignment.addProbleam(compareProblem);
+        CompareProblem compareProblem1 = new CompareProblem();
+        compareProblem1.setLeft("7");
+        compareProblem1.setRight("7");
+        compareProblem1.setAnswer("=");
+        assignment.addProbleam(compareProblem1);
+
+        Assignment assignment2 = new Assignment();
+        CompareProblem compareProblem2 = new CompareProblem();
+        compareProblem2.setLeft("5");
+        compareProblem2.setRight("7");
+        compareProblem2.setAnswer(">");
+        assignment2.addProbleam(compareProblem2);
+        CompareProblem compareProblem12 = new CompareProblem();
+        compareProblem12.setLeft("7");
+        compareProblem12.setRight("7");
+        compareProblem12.setAnswer("=");
+        assignment2.addProbleam(compareProblem12);
+
+        List<Assignment> upcoming = new ArrayList<>();
+        upcoming.add(assignment);
+        upcoming.add(assignment2);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(upcoming);
+
+        Type listType = new TypeToken<ArrayList<Assignment>>(){}.getType();
+        List<Assignment> yourClassList = new Gson().fromJson(json, listType);
+
+
+
+        Log.d("TESTGSON", "testGSON: "+json);
+
+
+    }
+
+
 }
