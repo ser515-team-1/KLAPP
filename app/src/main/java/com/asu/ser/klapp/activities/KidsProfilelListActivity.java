@@ -63,6 +63,7 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
     public static final int ADD_MODE = 1221;
     public static final int EDIT_MODE = 1432;
     public static final String STUDENT_PROFILE = "reateKidProfileActivity.STUDENT_PROFILE";
+    private boolean isTeacherModeOn = false;
 
 
     @Override
@@ -270,7 +271,9 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
 
 
     public void enableTeacherScreen(){
+        isTeacherModeOn = true;
         Toast.makeText(this, "Enable Teacher", Toast.LENGTH_LONG).show();
+        addProfile.setVisibility(View.VISIBLE);
     }
 
 }

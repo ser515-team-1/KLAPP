@@ -59,7 +59,7 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
             kidprofile = (Student) intent.getSerializableExtra(KidsProfilelListActivity.STUDENT_PROFILE);
 
-            if(kidprofile.getUpcoming()!=null){
+            if(kidprofile.getUpcoming().size()>0){
                 List<Assignment> assignmentList = AppUtility.getAssignmentFromJSON(kidprofile.getUpcomingAssignmentString());
                 kidprofile.setUpcoming(assignmentList);
 
