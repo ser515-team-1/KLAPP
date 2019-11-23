@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.callbacks.ItemClickListener;
+import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.Student;
+import com.asu.ser.klapp.utilities.AppUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +56,15 @@ public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.Ki
     @Override
     public void onBindViewHolder(@NonNull KidViewHolder holder, int position) {
         final Student student = kidsProfileList.get(position);
-        holder.name.setText(student.getName());
+
+        if(student.getUpcomingAssignmentString()!=null){
+            List<Assignment> assignmentList = AppUtility.getAssignmentFromJSON(student.getUpcomingAssignmentString());
+            holder.numAssignment.setVisibility(View.VISIBLE);
+            holder.numAssignment.setText(assignmentList.size()+"");
+        }
+
+
+        holder.name.setText(student.getName()+" ("+student.getAge()+")");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,10 +81,12 @@ public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.Ki
     public class KidViewHolder extends RecyclerView.ViewHolder{
 
         private TextView name;
+        private TextView numAssignment;
 
         public KidViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
+            numAssignment = itemView.findViewById(R.id.assignmentDue);
         }
     }
 }
