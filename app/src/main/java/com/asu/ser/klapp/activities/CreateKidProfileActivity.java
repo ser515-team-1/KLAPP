@@ -67,8 +67,6 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
         setContentView(R.layout.activity_createprofile);
 
 
-        testGSON();
-
         AppUtility.init(this);
 
         kidsProfileDao = DBUtilty.getKidsProfileDao();

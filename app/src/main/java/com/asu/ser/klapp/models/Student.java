@@ -1,5 +1,7 @@
 package com.asu.ser.klapp.models;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,12 @@ public class Student implements Serializable {
 
     @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "upcoming_assignment")
+    private String upcomingAssignmentString;
+
+    @ColumnInfo(name = "past_assignment")
+    private String pastAssignmentString;
 
     @Ignore
     private List<Assignment> upcoming;
@@ -65,6 +73,24 @@ public class Student implements Serializable {
     }
 
     public void addAssignment(Assignment assignment){
+        Log.d("EDITMODE", "addAssignment: before"+upcoming.size());
         upcoming.add(assignment);
+        Log.d("EDITMODE", "addAssignment: after"+upcoming.size());
+    }
+
+    public String getUpcomingAssignmentString() {
+        return upcomingAssignmentString;
+    }
+
+    public void setUpcomingAssignmentString(String upcomingAssignmentString) {
+        this.upcomingAssignmentString = upcomingAssignmentString;
+    }
+
+    public String getPastAssignmentString() {
+        return pastAssignmentString;
+    }
+
+    public void setPastAssignmentString(String pastAssignmentString) {
+        this.pastAssignmentString = pastAssignmentString;
     }
 }

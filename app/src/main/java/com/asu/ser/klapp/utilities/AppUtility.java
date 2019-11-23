@@ -7,10 +7,14 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.Credential;
 import com.asu.ser.klapp.models.ImagePair;
 import com.asu.ser.klapp.sqlite.AppDataBase;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -93,6 +97,21 @@ public class AppUtility {
 
     public static Drawable getDrawable(int resId){
         return context.getResources().getDrawable(resId);
+    }
+
+    public static String gsonStringFromAssignment(List<Assignment> assignments){
+
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(assignments);
+        return jsonString;
+    }
+
+    public static List<Assignment> getAssignmentFromJSON(String jsonString){
+
+        Type listType = new TypeToken<ArrayList<Assignment>>(){}.getType();
+        List<Assignment> assignmentList = new Gson().fromJson(jsonString, listType);
+        return assignmentList;
+
     }
 
 

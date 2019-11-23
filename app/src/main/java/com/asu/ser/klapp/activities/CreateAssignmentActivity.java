@@ -1,5 +1,6 @@
 package com.asu.ser.klapp.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -96,7 +97,9 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         Intent intent = new Intent(this,CompareActivity.class);
         intent.putExtra(AppUtility.ASSIGNMENT_MODE,AppUtility.ATTEMPT_MODE);
         intent.putExtra("ASSIGNMENT",assignment);
-        startActivity(intent);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+
     }
 
     private void submit(){
