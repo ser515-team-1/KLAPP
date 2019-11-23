@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void openDashboard(){
-        Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
+        Intent intent = new Intent(LoginActivity.this, KidsProfilelListActivity.class);
         startActivity(intent);
     }
 

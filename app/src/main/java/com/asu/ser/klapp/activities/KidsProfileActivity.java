@@ -10,8 +10,6 @@ import android.widget.EditText;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.Assignment;
-import com.asu.ser.klapp.models.CompareProblem;
-import com.asu.ser.klapp.models.Problem;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.sqlite.KidsProfileDao;
 import com.asu.ser.klapp.utilities.AppUtility;
@@ -20,8 +18,6 @@ import com.asu.ser.klapp.utilities.DBUtilty;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import static com.asu.ser.klapp.utilities.DBUtilty.kidsProfileDao;
 
 public class KidsProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -57,11 +53,11 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
         kidsProfileDao = DBUtilty.getKidsProfileDao();
 
         Intent intent = getIntent();
-        profilemode = intent.getIntExtra(CreateKidProfileActivity.KIDS_PROFLE_MODE,0);
+        profilemode = intent.getIntExtra(KidsProfilelListActivity.KIDS_PROFLE_MODE,0);
 
-        if(profilemode==CreateKidProfileActivity.EDIT_MODE){
+        if(profilemode== KidsProfilelListActivity.EDIT_MODE){
 
-            kidprofile = (Student) intent.getSerializableExtra(CreateKidProfileActivity.STUDENT_PROFILE);
+            kidprofile = (Student) intent.getSerializableExtra(KidsProfilelListActivity.STUDENT_PROFILE);
 
             if(kidprofile.getUpcoming()!=null){
                 List<Assignment> assignmentList = AppUtility.getAssignmentFromJSON(kidprofile.getUpcomingAssignmentString());
@@ -155,9 +151,9 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void save(){
-        if(profilemode==CreateKidProfileActivity.ADD_MODE){
+        if(profilemode== KidsProfilelListActivity.ADD_MODE){
             saveToDatabase();
-        }else if(profilemode == CreateKidProfileActivity.EDIT_MODE){
+        }else if(profilemode == KidsProfilelListActivity.EDIT_MODE){
             updateToDatabase();
         }
     }

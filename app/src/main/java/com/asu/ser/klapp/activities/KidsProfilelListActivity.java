@@ -4,17 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.asu.ser.klapp.ExampleDialog;
 import com.asu.ser.klapp.ProblemIterator;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.KidProfileAdapter;
 import com.asu.ser.klapp.callbacks.ItemClickListener;
 import com.asu.ser.klapp.interfaces.CreateProfileInterface;
+import com.asu.ser.klapp.interfaces.Dialogcallback;
 import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareProblem;
 import com.asu.ser.klapp.models.Problem;
@@ -37,7 +41,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CreateKidProfileActivity extends AppCompatActivity implements CreateProfileInterface, View.OnClickListener, ItemClickListener {
+public class KidsProfilelListActivity extends AppCompatActivity implements CreateProfileInterface, View.OnClickListener, ItemClickListener, Dialogcallback {
 
 
     private RecyclerView kidsRecyclerView;
@@ -65,10 +69,6 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createprofile);
-
-
-        AppUtility.init(this);
-
         kidsProfileDao = DBUtilty.getKidsProfileDao();
 
         addProfile = findViewById(R.id.add_profile);
@@ -95,6 +95,33 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
 
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.teacher_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        switch (item.getItemId())
+        {
+
+            case R.id.techer:
+                opendialog();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+    }
+
 
     @Override
     public List<Student> loadallprofile() {
@@ -228,5 +255,22 @@ public class CreateKidProfileActivity extends AppCompatActivity implements Creat
 
     }
 
+    private void opendialog() {
+        ExampleDialog exampleDialog=new ExampleDialog(this);
+        exampleDialog.show(getSupportFragmentManager(),"example dialog");
+    }
+
+
+    @Override
+    public void dialogResult(boolean result) {
+        if(result){
+            enableTeacherScreen();
+        }
+    }
+
+
+    public void enableTeacherScreen(){
+        Toast.makeText(this, "Enable Teacher", Toast.LENGTH_LONG).show();
+    }
 
 }
