@@ -6,16 +6,29 @@
     android:orientation="vertical"
     android:gravity="center"
     >
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="10dp"
+        android:elevation="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
         android:background="@color/purple_klapp"
         android:orientation="horizontal"
         android:id="@+id/Student1"
         android:elevation="20dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle1"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -27,22 +40,37 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5-8 Years"
+            android:text="Counting Puzzle"
             android:textColor="#ffffff"
-            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/circle1"
+            android:layout_centerVertical="true"
             android:textSize="25dp"
             />
     </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="10dp"
+        android:elevation="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
         android:background="@color/green_klapp"
         android:orientation="horizontal"
         android:id="@+id/Student2"
         android:elevation="20dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle2"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -52,24 +80,39 @@
             android:layout_margin="10dp"
             />
         <TextView
+            android:layout_toRightOf="@id/circle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8-11 Years"
+            android:text="Compare Puzzle"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
             android:textSize="25dp"
             />
     </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="10dp"
+        android:elevation="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
         android:background="@color/blue_light_klapp"
         android:orientation="horizontal"
         android:id="@+id/Admin"
         android:elevation="20dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle3"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -79,13 +122,15 @@
             android:layout_margin="10dp"
             />
         <TextView
+            android:layout_toRightOf="@id/circle3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12-16 Years"
+            android:text="BODMAS Puzzle"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
             android:textSize="25dp"
             />
     </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
