@@ -22,9 +22,10 @@
                 android:id="@+id/profile_image"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:src="@drawable/kids_login"
+                android:background="@drawable/new_circle_teacher"
                 app:civ_border_width="2dp"
                 app:civ_border_color="@color/green_klapp"
+                android:layout_gravity="center"
                 android:visibility="gone"
                 />
             <LinearLayout
@@ -56,6 +57,7 @@
                     android:inputType="number"
                     android:textSize="20dp"
                     style="@style/InputBoxStyle"
+                    android:maxLength="2"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -70,53 +72,3 @@
         style="@style/InputBoxContainer"
         />
 </LinearLayout>
-
-<!--
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/colorPrimary"
-    android:id="@+id/kif_profile_overlay"
-    >
-    <Button
-        android:id="@+id/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        />
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Name"
-        />
-    <EditText
-        android:id="@+id/age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="Age"
-        />
-    <Button
-        android:id="@+id/save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done"
-        />
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        />
-    <Button
-        android:id="@+id/createAssignment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Assignment"
-        />
-</LinearLayout>
-
--->

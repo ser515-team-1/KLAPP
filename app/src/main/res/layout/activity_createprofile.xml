@@ -21,6 +21,6 @@
         android:layout_marginRight="10dp"
         app:backgroundTint="@color/green_klapp"
         android:visibility="gone"
-        app:srcCompat="@android:drawable/ic_input_add"
+        app:srcCompat="@drawable/add_kid"
         />
 </RelativeLayout>
