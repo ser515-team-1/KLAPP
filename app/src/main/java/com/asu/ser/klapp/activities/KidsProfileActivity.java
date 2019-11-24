@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +25,7 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
 
     private EditText name, age;
-    private Button cancel, save, delete, createAssignment;
+    private Button  save;
     private KidsProfileDao kidsProfileDao;
     private int profilemode;
     private Student kidprofile;
@@ -40,16 +42,11 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_kid_profile);
         name = findViewById(R.id.name);
         age = findViewById(R.id.age);
-        cancel = findViewById(R.id.cancel);
+//        cancel = findViewById(R.id.cancel);
         save = findViewById(R.id.save);
-        delete = findViewById(R.id.delete);
-        delete.setOnClickListener(this);
-
-        createAssignment = findViewById(R.id.createAssignment);
-        createAssignment.setOnClickListener(this);
 
         save.setOnClickListener(this);
-        cancel.setOnClickListener(this);
+//        cancel.setOnClickListener(this);
         kidsProfileDao = DBUtilty.getKidsProfileDao();
 
         Intent intent = getIntent();
@@ -72,6 +69,35 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.kids_profile_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        switch (item.getItemId())
+        {
+
+            case R.id.delete:
+                delete();
+                return true;
+
+            case R.id.addAddignment:
+                createAssignment();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+    }
+
+    @Override
     public void onClick(View v) {
 
         switch (v.getId()){
@@ -82,14 +108,6 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.cancel:
                 cancel();
-                break;
-
-            case R.id.delete:
-                delete();
-                break;
-
-            case R.id.createAssignment:
-                createAssignment();
                 break;
 
             default:
