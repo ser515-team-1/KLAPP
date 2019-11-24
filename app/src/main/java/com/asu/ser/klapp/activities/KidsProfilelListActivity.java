@@ -208,7 +208,11 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
     public void itemClicked(Object object) {
 
         Student student = (Student)object;
-        editProfile(student);
+        if(!isTeacherModeOn){
+            openDashBoard();
+        }else{
+            editProfile(student);
+        }
     }
 
 
@@ -270,10 +274,17 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
     }
 
 
-    public void enableTeacherScreen(){
+    private void enableTeacherScreen(){
         isTeacherModeOn = true;
         Toast.makeText(this, "Enable Teacher", Toast.LENGTH_LONG).show();
         addProfile.setVisibility(View.VISIBLE);
     }
+
+    private void openDashBoard(){
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
+    }
+
+
 
 }
