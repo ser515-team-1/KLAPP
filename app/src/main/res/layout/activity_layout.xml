@@ -38,4 +38,26 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="horizontal"
-        >raintLayout>
+        >
+        <EditText
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Left Expression"
+            />
+        <EditText
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Right Expression"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_below="@id/exp_layout"
+        android:layout_centerHorizontal="true"
+        />
+</RelativeLayout>
