@@ -30,7 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CreateAssignmentActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private EditText left,right;
-    private TextView assignmentDetail;
+//    private TextView assignmentDetail;
     private Button submit, addMore, finish;
 
     private EditText dueDate, name;
@@ -138,7 +138,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
     }
 
     private void updateAssignmentDetail(){
-        assignmentDetail.setText("Problems: "+problemList.size());
+//        assignmentDetail.setText("Problems: "+problemList.size());
     }
 
 
