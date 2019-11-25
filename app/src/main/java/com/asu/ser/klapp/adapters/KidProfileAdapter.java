@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.callbacks.ItemClickListener;
 import com.asu.ser.klapp.models.Assignment;
+import com.asu.ser.klapp.models.Problem;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.utilities.AppUtility;
 
@@ -57,9 +58,12 @@ public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.Ki
     public void onBindViewHolder(@NonNull KidViewHolder holder, int position) {
         final Student student = kidsProfileList.get(position);
 
+        Log.d("GSON", "onBindViewHolder: "+ student.getName()+" "+(student.getUpcomingAssignmentString()) );
+
         if(student.getUpcomingAssignmentString()!=null){
             List<Assignment> assignmentList = AppUtility.getAssignmentFromJSON(student.getUpcomingAssignmentString());
             holder.numAssignment.setVisibility(View.VISIBLE);
+            Log.d("GSON", "onBindViewHolder: "+ assignmentList.size() );
             holder.numAssignment.setText(assignmentList.size()+"");
         }
 

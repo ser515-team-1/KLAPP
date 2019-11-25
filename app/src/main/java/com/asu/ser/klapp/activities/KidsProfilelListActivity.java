@@ -174,6 +174,7 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
 
         if(reqCode == ADD_PROFILE_REQ_CODE){
             if(resCode== Activity.RESULT_OK){
+                Log.d("COUNTER", "onActivityResult: ");
                 kidsProfileViewModel.refreshList();
             }
         }else {

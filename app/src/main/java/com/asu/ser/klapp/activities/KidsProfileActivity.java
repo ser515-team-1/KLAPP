@@ -208,8 +208,17 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
     private void addAssignment(Assignment assignment){
 
+        // Handl this at Model level or utility level
+        if(kidprofile.getUpcomingAssignmentString()!=null){
+            List<Assignment> upcoming = AppUtility.getAssignmentFromJSON(kidprofile.getUpcomingAssignmentString());
+            kidprofile.setUpcoming(upcoming);
+        }
+
         kidprofile.addAssignment(assignment);
         String upcomingAssignmentGSONString = AppUtility.gsonStringFromAssignment(kidprofile.getUpcoming());
+
+        Log.d("GSON", "addAssignment: "+upcomingAssignmentGSONString);
+
         kidprofile.setUpcomingAssignmentString(upcomingAssignmentGSONString);
 
         new Thread(new Runnable() {
@@ -219,7 +228,7 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
                 List<Assignment> ass = AppUtility.getAssignmentFromJSON(kidprofile.getUpcomingAssignmentString());
 
-                Log.d("AssignmentSize", "run: "+ass.size());
+                Log.d("GSON", "run: "+ass.size());
             }
         }).start();
     }

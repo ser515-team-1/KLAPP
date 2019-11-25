@@ -96,7 +96,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
         Intent intent = new Intent(this,CompareActivity.class);
         intent.putExtra(AppUtility.ASSIGNMENT_MODE,AppUtility.ATTEMPT_MODE);
-        intent.putExtra("ASSIGNMENT",assignment);
+        intent.putExtra(KidsProfileActivity.KIDS_ASSIGNMENT ,assignment);
         setResult(Activity.RESULT_OK, intent);
         finish();
 
