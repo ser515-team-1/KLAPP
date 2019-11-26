@@ -1,108 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     android:background="@color/colorPrimary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+id/content"
     >
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/InputBoxContainer"
-        >
-        <EditText
-            android:id="@+id/assignmentName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="AssignmentName"
-            style="@style/InputBoxStyle"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/InputBoxContainer"
-        >
-        <EditText
-            android:id="@+id/dueDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Due Date"
-            style="@style/InputBoxStyle"
-            />
-    </LinearLayout>
-    </LinearLayout>
-<!--    <LinearLayout-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_margin="10dp"-->
-<!--        >-->
-<!--        <Button-->
-<!--            android:id="@+id/finish"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Finish"-->
-<!--            />-->
-<!--    </LinearLayout>-->
-    <LinearLayout
-        android:id="@+id/exp_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal"
-        >
-        <EditText
-            android:id="@+id/left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Left Expression"
-            android:background="@color/green_klapp"
-            style="@style/InputBoxStyle"
-            android:layout_margin="6dp"
-            />
-        <EditText
-            android:id="@+id/right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Right Expression"
-            android:background="@color/green_klapp"
-            style="@style/InputBoxStyle"
-            android:layout_margin="6dp"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/exp_layout"
-        android:gravity="center"
-        >
-        <Button
-            android:id="@+id/addMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add More"
-            android:background="@color/green_klapp"
-            android:textColor="#ffffff"
-            android:layout_margin="6dp"
-            />
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:layout_centerHorizontal="true"
-            android:background="@color/green_klapp"
-            android:textColor="#ffffff"
-            android:layout_margin="6dp"
-            />
-    </LinearLayout>
-</RelativeLayout>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/InputBoxContainer"
+                    >
+                    <EditText
+                        android:id="@+id/assignmentName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="AssignmentName"
+                        style="@style/InputBoxStyle"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/InputBoxContainer"
+                    >
+                    <EditText
+                        android:id="@+id/dueDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Due Date"
+                        style="@style/InputBoxStyle"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <!--    <LinearLayout-->
+            <!--        android:layout_width="wrap_content"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:orientation="horizontal"-->
+            <!--        android:layout_alignParentTop="true"-->
+            <!--        android:layout_alignParentRight="true"-->
+            <!--        android:layout_margin="10dp"-->
+            <!--        >-->
+            <!--        <Button-->
+            <!--            android:id="@+id/finish"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:text="Finish"-->
+            <!--            />-->
+            <!--    </LinearLayout>-->
+            <LinearLayout
+                android:id="@+id/exp_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+                <EditText
+                    android:id="@+id/left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Left Expression"
+                    android:background="@color/green_klapp"
+                    style="@style/InputBoxStyle"
+                    android:layout_margin="6dp"
+                    />
+                <EditText
+                    android:id="@+id/right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Right Expression"
+                    android:background="@color/green_klapp"
+                    style="@style/InputBoxStyle"
+                    android:layout_margin="6dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/exp_layout"
+                android:gravity="center"
+                >
+                <Button
+                    android:id="@+id/addMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add More"
+                    android:background="@color/green_klapp"
+                    android:textColor="#ffffff"
+                    android:layout_margin="6dp"
+                    />
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/green_klapp"
+                    android:textColor="#ffffff"
+                    android:layout_margin="6dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
