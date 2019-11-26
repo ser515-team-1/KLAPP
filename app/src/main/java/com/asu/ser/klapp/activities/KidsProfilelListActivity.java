@@ -284,7 +284,7 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
     }
 
     private void disableTeacherScreen(){
-        isTeacherModeOn = true;
+        isTeacherModeOn = false;
         Toast.makeText(this, "Disabled Teacher", Toast.LENGTH_LONG).show();
         addProfile.setVisibility(View.GONE);
     }
