@@ -271,14 +271,22 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
     public void dialogResult(boolean result) {
         if(result){
             enableTeacherScreen();
+        }else {
+            disableTeacherScreen();
         }
     }
 
 
     private void enableTeacherScreen(){
         isTeacherModeOn = true;
-        Toast.makeText(this, "Enable Teacher", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Enabled Teacher", Toast.LENGTH_LONG).show();
         addProfile.setVisibility(View.VISIBLE);
+    }
+
+    private void disableTeacherScreen(){
+        isTeacherModeOn = true;
+        Toast.makeText(this, "Disabled Teacher", Toast.LENGTH_LONG).show();
+        addProfile.setVisibility(View.GONE);
     }
 
     private void openDashBoard(){

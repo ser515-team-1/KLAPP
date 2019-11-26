@@ -33,7 +33,7 @@ public class ExampleDialog extends AppCompatDialogFragment {
 
     AlertDialog.Builder builder;
     private EditText editText;
-    private Button submit;
+    private Button submit, signout;
     private Dialogcallback dialogcallback;
 
     public ExampleDialog(Dialogcallback dialogcallback){
@@ -49,6 +49,7 @@ public class ExampleDialog extends AppCompatDialogFragment {
         View view=inflater.inflate(R.layout.layout_dialog,null);
         editText = view.findViewById(R.id.editText);
         submit = view.findViewById(R.id.submit);
+        signout = view.findViewById(R.id.signout);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +65,16 @@ public class ExampleDialog extends AppCompatDialogFragment {
 
             }
         });
+
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogcallback.dialogResult(false);
+                dismiss();
+            }
+        });
+
+
 
         builder.setView(view)
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
