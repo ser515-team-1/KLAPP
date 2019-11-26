@@ -24,7 +24,7 @@
         <activity android:name=".activities.CompareActivity" android:label="Compare">
 
         </activity>
-        <activity android:name=".activities.CreateAssignmentActivity">
+        <activity android:name=".activities.CreateAssignmentActivity" android:label="Create Assignment">
 
         </activity>
         <activity android:name=".activities.KidsProfilelListActivity" android:label="Profiles">

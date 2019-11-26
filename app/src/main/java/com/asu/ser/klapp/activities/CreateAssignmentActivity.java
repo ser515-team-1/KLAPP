@@ -31,7 +31,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
     private EditText left,right;
 //    private TextView assignmentDetail;
-    private Button submit, addMore, finish;
+    private Button submit, addMore;
 
     private EditText dueDate, name;
 
@@ -51,7 +51,6 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         right = findViewById(R.id.right);
         submit = findViewById(R.id.submit);
         addMore = findViewById(R.id.addMore);
-        finish = findViewById(R.id.finish);
 
         name = findViewById(R.id.name);
         dueDate = findViewById(R.id.dueDate);
@@ -73,7 +72,6 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
         addMore.setOnClickListener(this);
         submit.setOnClickListener(this);
-        finish.setOnClickListener(this);
 
     }
 
@@ -97,11 +95,12 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
             case R.id.submit:
                 submit();
-                break;
-
-            case R.id.finish:
                 finishAssignment();
                 break;
+
+//            case R.id.finish:
+//
+//                break;
 
             case R.id.addMore:
                 addMore();

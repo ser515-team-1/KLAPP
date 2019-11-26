@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -9,43 +10,48 @@
         android:orientation="vertical"
         android:gravity="center"
         >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/InputBoxContainer"
+        >
         <EditText
             android:id="@+id/assignmentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:hint="AssignmentName"
+            style="@style/InputBoxStyle"
             />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/InputBoxContainer"
+        >
         <EditText
             android:id="@+id/dueDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:hint="Due Date"
+            style="@style/InputBoxStyle"
             />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
-        >
-        <Button
-            android:id="@+id/finish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Finish"
-            />
-        <Button
-            android:id="@+id/addMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/finish"
-            android:text="Add More"
-            />
     </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_margin="10dp"-->
+<!--        >-->
+<!--        <Button-->
+<!--            android:id="@+id/finish"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Finish"-->
+<!--            />-->
+<!--    </LinearLayout>-->
     <LinearLayout
         android:id="@+id/exp_layout"
         android:layout_width="wrap_content"
@@ -58,20 +64,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Left Expression"
+            android:background="@color/green_klapp"
+            style="@style/InputBoxStyle"
+            android:layout_margin="6dp"
             />
         <EditText
             android:id="@+id/right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Right Expression"
+            android:background="@color/green_klapp"
+            style="@style/InputBoxStyle"
+            android:layout_margin="6dp"
             />
     </LinearLayout>
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:orientation="horizontal"
         android:layout_below="@id/exp_layout"
-        android:layout_centerHorizontal="true"
-        />
+        android:gravity="center"
+        >
+        <Button
+            android:id="@+id/addMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add More"
+            android:background="@color/green_klapp"
+            android:textColor="#ffffff"
+            android:layout_margin="6dp"
+            />
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_centerHorizontal="true"
+            android:background="@color/green_klapp"
+            android:textColor="#ffffff"
+            android:layout_margin="6dp"
+            />
+    </LinearLayout>
 </RelativeLayout>
