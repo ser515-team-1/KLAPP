@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -37,6 +39,11 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
     private Assignment assignment;
     private List<Problem> problemList;
+    private int counter=0;
+    private Menu cartMenu;
+    private MenuItem menuItemCount;
+
+
     final Calendar myCalendar = Calendar.getInstance();
 
     @Override
@@ -74,6 +81,33 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         submit.setOnClickListener(this);
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.assignment_menu,menu);
+        initMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        switch (item.getItemId())
+        {
+
+            case R.id.counter:
+                updateCounter();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+    }
+
 
 
     private Problem createProblem(){
@@ -113,6 +147,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
     }
 
     private void addMore(){
+        updateCounter();
         cleanEntries();
     }
 
@@ -155,5 +190,15 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         myCalendar.set(Calendar.MONTH, month);
         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         updateLabel();
+    }
+
+    private void initMenu(Menu menu){
+        cartMenu = menu;
+        menuItemCount = cartMenu.findItem(R.id.counter);
+    }
+
+    public void updateCounter(){
+        counter++;
+        menuItemCount.setTitle(counter+"");
     }
 }
