@@ -3,10 +3,13 @@ package com.asu.ser.klapp;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,6 +17,8 @@ import android.widget.Toast;
 import com.asu.ser.klapp.interfaces.Dialogcallback;
 import com.asu.ser.klapp.utilities.AppUtility;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 /**
@@ -61,7 +66,6 @@ public class ExampleDialog extends AppCompatDialogFragment {
         });
 
         builder.setView(view)
-                .setTitle("Enter Password")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -92,4 +96,14 @@ public class ExampleDialog extends AppCompatDialogFragment {
     private void showMessage(String msg){
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
+
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+
+
 }
