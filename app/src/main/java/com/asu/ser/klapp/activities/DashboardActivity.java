@@ -39,15 +39,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void opendialog() {
-        ExampleDialog exampleDialog=new ExampleDialog();
-        exampleDialog.show(getSupportFragmentManager(),"example dialog");
-    }
-
-
-    private void showMessage(String msg){
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void onClick(View v) {

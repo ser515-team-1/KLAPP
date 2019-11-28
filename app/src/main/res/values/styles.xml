@@ -33,5 +33,8 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/green_klapp</item>
+    </style>
 
 </resources>
