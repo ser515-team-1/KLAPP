@@ -1,10 +1,10 @@
 package com.asu.ser.klapp.activities;
 
-import android.animation.Animator;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.CountingListAdapter;
 import com.asu.ser.klapp.callbacks.CountingListItemListener;
+import com.asu.ser.klapp.models.ImagePair;
+import com.asu.ser.klapp.utilities.AppUtility;
 
 import java.util.Random;
 
@@ -34,7 +36,10 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private CountingListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ImageView dragableArea;
+    private TextView counter;
     private static final String TAG = "CountingActivity";
+    private static final String TAG1 = "Events";
+    private int counterValue =0;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -46,10 +51,12 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private void initView(){
         dragableArea = findViewById(R.id.dragaableArea);
         recyclerView = findViewById(R.id.list);
+        counter = findViewById(R.id.counter);
         layoutManager = new GridLayoutManager(this, 5);
-        adapter = new CountingListAdapter(this, getRandomNumber());
+        setUpPuzzleImages();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+        addListeners();
     }
 
     private void addListeners(){
@@ -58,12 +65,18 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
 
 
     private int getRandomNumber(){
-        return new Random().nextInt(10);
+
+        int num =0;
+
+        while(num==0){
+            num = new Random().nextInt(10);
+        }
+
+        return num;
     }
 
 
     public void dropItem(View v, DragEvent event) {
-
 
         ClipData.Item item = event.getClipData().getItemAt(0);
         String dragData = item.getText().toString();
@@ -77,6 +90,9 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
         clone.setOnDragListener(this);
 
         vw.setVisibility(View.VISIBLE);
+
+        updateCounter();
+        adapter.removeAt(3);
 
     }
 
@@ -143,14 +159,17 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
                 Log.d("Hi", "onDrag: ACTION_ENDED");
                 v.getBackground().clearColorFilter();
 
+
+
                 v.invalidate();
 
                 if (event.getResult()) {
-                    Log.d(TAG, "onDrag: The drop was handled.");
+                    Log.d("Hi", "onDrag: The drop was handled.");
+
                 }
                 //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
                 else
-                    Log.d(TAG, "onDrag: The drop didn't work.");
+                    Log.d("Hi", "onDrag: The drop didn't work.");
                 //Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
 
                 return true;
@@ -169,9 +188,21 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
         view.setOnLongClickListener(this);
     }
 
+    private void updateCounter(){
+        counter.setText(++counterValue+"");
+    }
+
 
     @Override
     public void setupcallback(View view) {
         addDragAbility(view);
     }
+
+
+    private void setUpPuzzleImages(){
+        ImagePair imagePair = AppUtility.getRandomImagePair();
+        dragableArea.setImageDrawable(AppUtility.getDrawable(imagePair.getTarget()));
+        adapter = new CountingListAdapter(this, getRandomNumber(), imagePair.getThing());
+    }
+
 }
