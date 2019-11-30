@@ -1,5 +1,10 @@
 package com.asu.ser.klapp.models;
 
+/**
+ *  @author          khushboo
+ *  @version         1.0
+ *  date created     11/29/2019
+ */
 public class CompareProblem extends Problem {
 
     private String left;

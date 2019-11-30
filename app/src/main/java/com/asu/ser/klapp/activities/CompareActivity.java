@@ -28,6 +28,11 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ *  @author          khushboo
+ *  @version         1.0
+ *  date created     11/29/2019
+ */
 public class CompareActivity extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener, View.OnClickListener, AssignmentInterface {
 
     private TextView less, greater, equals;
