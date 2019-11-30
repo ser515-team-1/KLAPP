@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.asu.ser.klapp.ExampleDialog;
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.Assignment;
+import com.asu.ser.klapp.models.Student;
+import com.asu.ser.klapp.utilities.AppUtility;
+
+import java.util.List;
 
 /**
  * @author         ashwath
@@ -19,12 +25,22 @@ import com.asu.ser.klapp.R;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RelativeLayout admin, student1, student2;
+    private static final String TAG = "DashboardActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         initView();
+
+        Student student = (Student) getIntent().getSerializableExtra(KidsProfilelListActivity.STUDENT_PROFILE);
+
+        if(student.getUpcomingAssignmentString()!=null){
+            List<Assignment> assignmentList = AppUtility.getAssignmentFromJSON(student.getUpcomingAssignmentString());
+            Log.d("GSON", "onBindViewHolder: "+ assignmentList.size() );
+
+        }
+
     }
 
     private void initView(){
