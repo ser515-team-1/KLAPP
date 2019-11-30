@@ -16,6 +16,7 @@ import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.utilities.AppUtility;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -77,9 +78,16 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         if(assignmentList.size()==0){
             Toast.makeText(this, "No Assignment Due", Toast.LENGTH_SHORT).show();
         }else {
+            Intent intent = new Intent(this, AssignmentListActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("value", (Serializable) assignmentList);
+            intent.putExtras(bundle);
             Toast.makeText(this, assignmentList.size()+" Assignment Due", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
         }
     }
+
+
 
     private void initView(){
 

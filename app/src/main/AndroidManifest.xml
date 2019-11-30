@@ -30,6 +30,7 @@
         <activity android:name=".activities.KidsProfilelListActivity" android:label="Profiles">
         </activity>
         <activity android:name=".activities.KidsProfileActivity" android:label="Kid Profile"/>
+        <activity android:name=".activities.AssignmentListActivity" android:label="Assignments"/>
     </application>
 
 </manifest>
