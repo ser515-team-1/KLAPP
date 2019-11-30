@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.asu.ser.klapp.ExampleDialog;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.Student;
@@ -26,6 +27,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     private RelativeLayout admin, student1, student2;
     private static final String TAG = "DashboardActivity";
+    private Student student;
+    private List<Assignment> assignmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +36,49 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_dashboard);
         initView();
 
-        Student student = (Student) getIntent().getSerializableExtra(KidsProfilelListActivity.STUDENT_PROFILE);
+        student = (Student) getIntent().getSerializableExtra(KidsProfilelListActivity.STUDENT_PROFILE);
 
         if(student.getUpcomingAssignmentString()!=null){
-            List<Assignment> assignmentList = AppUtility.getAssignmentFromJSON(student.getUpcomingAssignmentString());
+            assignmentList = AppUtility.getAssignmentFromJSON(student.getUpcomingAssignmentString());
             Log.d("GSON", "onBindViewHolder: "+ assignmentList.size() );
 
         }
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.dashboard_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        switch (item.getItemId())
+        {
+
+            case R.id.assignment_icon:
+                openAssignmentList();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+    }
+
+    private void openAssignmentList(){
+
+        if(assignmentList.size()==0){
+            Toast.makeText(this, "No Assignment Due", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, assignmentList.size()+" Assignment Due", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initView(){
