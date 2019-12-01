@@ -480,9 +480,38 @@ public class BodmasActivity extends AppCompatActivity{
             }
             //clearStack();
         }
-        public static void inputToStack(char input){
-
+        private static void inputToStack(char input)
+        {
+            if(stack.isEmpty() || input == '(')
+                stack.addLast(input);
+            else
+            {
+                if(input == ')')
+                {
+                    while(!stack.getLast().equals('('))
+                    {
+                        postfix.add(stack.removeLast().toString());
+                    }
+                    stack.removeLast();
+                }
+                else
+                {
+                    if(stack.getLast().equals('('))
+                        stack.addLast(input);
+                    else
+                    {
+                        while(!stack.isEmpty() && !stack.getLast().equals('(') &&
+                                getPrecedence(input) <= getPrecedence(stack.getLast()))
+                        {
+                            postfix.add(stack.removeLast().toString());
+                        }
+                        stack.addLast(input);
+                    }
+                }
+            }
+        }
+        private static int getPrecedence(char op) {
+            return 0;
         }
     }
-
-    }
+}
