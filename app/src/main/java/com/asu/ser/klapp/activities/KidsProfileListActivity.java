@@ -183,7 +183,7 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
 
     }
 
-   
+
 
 
     private void initRV(){
@@ -206,7 +206,48 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
 
 
 
+    public void testGSON(){
 
+        Assignment assignment = new Assignment();
+        CompareProblem compareProblem = new CompareProblem();
+        compareProblem.setLeft("5");
+        compareProblem.setRight("7");
+        compareProblem.setAnswer(">");
+        assignment.addProbleam(compareProblem);
+        CompareProblem compareProblem1 = new CompareProblem();
+        compareProblem1.setLeft("7");
+        compareProblem1.setRight("7");
+        compareProblem1.setAnswer("=");
+        assignment.addProbleam(compareProblem1);
+
+        Assignment assignment2 = new Assignment();
+        CompareProblem compareProblem2 = new CompareProblem();
+        compareProblem2.setLeft("5");
+        compareProblem2.setRight("7");
+        compareProblem2.setAnswer(">");
+        assignment2.addProbleam(compareProblem2);
+        CompareProblem compareProblem12 = new CompareProblem();
+        compareProblem12.setLeft("7");
+        compareProblem12.setRight("7");
+        compareProblem12.setAnswer("=");
+        assignment2.addProbleam(compareProblem12);
+
+        List<Assignment> upcoming = new ArrayList<>();
+        upcoming.add(assignment);
+        upcoming.add(assignment2);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(upcoming);
+
+        Type listType = new TypeToken<ArrayList<Assignment>>(){}.getType();
+        List<Assignment> yourClassList = new Gson().fromJson(json, listType);
+
+
+
+        Log.d("TESTGSON", "testGSON: "+json);
+
+
+    }
 
     private void opendialog() {
         ExampleDialog exampleDialog=new ExampleDialog(this);
