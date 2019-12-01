@@ -75,17 +75,23 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     private void openAssignmentList(){
 
-        Log.d(TAG, "openAssignmentList: "+(assignmentList.size()==0));
+        Log.d(TAG, "openAssignmentList: Inside");
+//        Log.d(TAG, "openAssignmentList: "+(assignmentList.size()==0));
 
-        if(assignmentList.size()==0){
+        if(assignmentList!=null) {
+
+            if (assignmentList.size() == 0) {
+                Toast.makeText(this, "No Assignment Due", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, AssignmentListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("value", (Serializable) assignmentList);
+                intent.putExtras(bundle);
+                Toast.makeText(this, assignmentList.size() + " Assignment Due", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        }else{
             Toast.makeText(this, "No Assignment Due", Toast.LENGTH_SHORT).show();
-        }else {
-            Intent intent = new Intent(this, AssignmentListActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("value", (Serializable) assignmentList);
-            intent.putExtras(bundle);
-            Toast.makeText(this, assignmentList.size()+" Assignment Due", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
         }
     }
 
