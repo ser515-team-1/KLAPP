@@ -42,22 +42,23 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.AnswerVi
 
     @Override
     public void onBindViewHolder(@NonNull AnswerViewHolder holder, int position) {
-//        String answer = submittedAnswer.get(position);
-//        CompareNumber question = questions.get(position);
-//
-//        int left = question.getNum1();
-//        int right = question.getNum2();
-//
-//        String submittedString = left+"  "+answer+"  "+right;
-//
-//        Log.d(TAG, "onBindViewHolder: "+submittedString);
-//
-//        holder.question.setText(submittedString);
-//        holder.answer.setText(getCorrectAnswer(left,right));
 
-//        if(!isAnswerCorrect(left,right, answer)){
-//            holder.question.setBackgroundColor(Color.parseColor("#D21F3C"));
-//        }
+        String answer = submittedAnswer.get(position);
+        CompareNumber question = questions.get(position);
+
+        int left = question.getNum1();
+        int right = question.getNum2();
+
+        String submittedString = left+"  "+answer+"  "+right;
+
+        Log.d(TAG, "onBindViewHolder: "+submittedString);
+
+        holder.question.setText(submittedString);
+        holder.answer.setText(getCorrectAnswer(left,right));
+
+        if(!isAnswerCorrect(left,right, answer)){
+            holder.question.setBackgroundColor(Color.parseColor("#D21F3C"));
+        }
 
     }
 
@@ -107,8 +108,8 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.AnswerVi
 
         public AnswerViewHolder(@NonNull View itemView) {
             super(itemView);
-//            answer = itemView.findViewById(R.id.answer_id);
-//            question = itemView.findViewById(R.id.question_id);
+            answer = itemView.findViewById(R.id.answer_id);
+            question = itemView.findViewById(R.id.question_id);
         }
     }
 }
