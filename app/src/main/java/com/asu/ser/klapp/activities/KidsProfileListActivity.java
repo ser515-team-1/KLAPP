@@ -184,7 +184,20 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
     }
 
 
+    @Override
+    public void onClick(View v) {
 
+        switch (v.getId()){
+
+            case R.id.add_profile:
+                addNewProfile();
+                break;
+
+            default:
+                break;
+
+        }
+    }
 
     private void initRV(){
         llm = new LinearLayoutManager(this);
