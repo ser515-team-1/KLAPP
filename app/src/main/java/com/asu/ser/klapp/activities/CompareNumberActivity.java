@@ -351,7 +351,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
 
     private void loadEndAssignmentScreen(){
         overlay.setVisibility(View.VISIBLE);
-        overlayText.setText("Assignment Completed Successfully"+submittedAnswers.toString());
+        overlayText.setText("Assignment Completed Successfully");
         overlayButton.setText("SEE ANSWERS");
         isAssignmentCompleted = true;
     }

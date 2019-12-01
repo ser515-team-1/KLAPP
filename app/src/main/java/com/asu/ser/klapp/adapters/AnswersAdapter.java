@@ -51,7 +51,7 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.AnswerVi
 
         String submittedString = left+"  "+answer+"  "+right;
 
-        Log.d(TAG, "onBindViewHolder: "+submittedString);
+        Log.d(TAG, "onBindViewHolder: "+submittedString +" "+submittedAnswer.size());
 
         holder.question.setText(submittedString);
         holder.answer.setText(getCorrectAnswer(left,right));

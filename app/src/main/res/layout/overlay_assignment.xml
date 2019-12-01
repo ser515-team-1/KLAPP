@@ -23,5 +23,6 @@
         android:background="@color/green_klapp"
         android:text="Start"
         android:textColor="#ffffff"
+        android:padding="8dp"
         />
 </LinearLayout>
