@@ -35,6 +35,14 @@ public class BodmasActivity extends AppCompatActivity{
     private TextView output;
     private static final String TAG = "BodmasActivity";
     static int siz_array = 0;
+    //Varialbles used for postfix evaluation
+    private static String infix; // The infix expression to be converted
+    private static Deque<Character> stack = new ArrayDeque<Character>();
+    private static List<String> postfix = new ArrayList<String>(); // To hold the postfix expression
+    private static List<String> expression = new ArrayList<String>();
+    private static Deque<Double> stack_new = new ArrayDeque<Double>();
+    static ArrayList<String> key_value_vector = new ArrayList<String>();
+    static String holder = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -67,12 +75,18 @@ public class BodmasActivity extends AppCompatActivity{
     private void submit(String input) {
 
         BodmasUtility bodmasUtility = new BodmasUtility();
+        List<String> postfix_store = new ArrayList<String>();
         String exprs = input;
         String[] hold_expr = exprs.split("");
-        String[] operator_array = formOperator_arr(hold_expr);
-        ArrayList<String> solution_pair = solutionPair(operator_array, hold_expr, siz_array * 2);
-        showOutput(formatOutput(solution_pair));
-
+        //initiation the postfix constructor with string
+        postConverter(exprs);
+        //String[] operator_array = formOperator_arr(hold_expr);
+        //Hold the return in list format
+        postfix_store = getPostfixAsList();
+        //showOutput(formatOutput(solution_pair));
+        //call the postfix calculator function
+        PostFixCalculator(postfix_store);
+        showOutput(formatOutput(result()));
     }
 
     private void showOutput(String expr){
@@ -107,12 +121,181 @@ public class BodmasActivity extends AppCompatActivity{
 
 
     }
+    public static void postConverter(String expression)
+    {
+        infix = expression;
+        convertExpression();
+    }
+
+    /* The approach is basically, if it's a number, push it to postfix list
+     * else if it's an operator, push it to stack
+     */
+    private static void convertExpression()
+    {
+        // Temporary string to hold the number
+        StringBuilder temp = new StringBuilder();
+
+        for(int i = 0; i != infix.length(); ++i)
+        {
+            if(Character.isDigit(infix.charAt(i)))
+            {
+                /* If we encounter a digit, read all digit next to it and append to temp
+                 * until we encounter an operator.
+                 */
+                temp.append(infix.charAt(i));
+
+                while((i+1) != infix.length() && (Character.isDigit(infix.charAt(i+1))
+                        || infix.charAt(i+1) == '.'))
+                {
+                    temp.append(infix.charAt(++i));
+                }
+
+
+                /* If the loop ends it means the next token is an operator or end of expression
+                 * so we put temp into the postfix list and clear temp for next use
+                 */
+                postfix.add(temp.toString());
+                temp.delete(0, temp.length());
+            }
+            // Getting here means the token is an operator
+            else
+                inputToStack(infix.charAt(i));
+        }
+        clearStack();
+    }
+
+    //updated
+    private static void inputToStack(char input)
+    {
+        if(stack.isEmpty() || input == '(')
+            stack.addLast(input);
+        else
+        {
+            if(input == ')')
+            {
+                while(!stack.getLast().equals('('))
+                {
+                    postfix.add(stack.removeLast().toString());
+                }
+                stack.removeLast();
+            }
+            else
+            {
+                if(stack.getLast().equals('('))
+                    stack.addLast(input);
+                else
+                {
+                    while(!stack.isEmpty() && !stack.getLast().equals('(') &&
+                            getPrecedence(input) <= getPrecedence(stack.getLast()))
+                    {
+                        postfix.add(stack.removeLast().toString());
+                    }
+                    stack.addLast(input);
+                }
+            }
+        }
+    }
+
+
+    private static int getPrecedence(char op)
+    {
+        if (op == '+' || op == '-')
+            return 1;
+        else if (op == '*' || op == '/')
+            return 2;
+        else if (op == '^')
+            return 3;
+        else return 0;
+    }
+
+
+    private static void clearStack()
+    {
+        while(!stack.isEmpty())
+        {
+            postfix.add(stack.removeLast().toString());
+        }
+    }
+
+
+    public static void printExpression()
+    {
+        for(String str : postfix)
+        {
+            System.out.print(str + ' ');
+        }
+    }
+
+
+    public static List<String> getPostfixAsList()
+    {
+        return postfix;
+    }
+
+
+    public static void PostFixCalculator(List<String> postfix) {
+        expression = postfix;
+    }
+
+
+    public static ArrayList<String> result()
+    {
+        for(int i = 0; i != expression.size(); ++i)
+        {
+            // Determine if current element is digit or not
+            if(Character.isDigit(expression.get(i).charAt(0)))
+            {
+                stack_new.addLast(Double.parseDouble(expression.get(i)));
+            }
+            else
+            {
+                double tempResult = 0;
+                double temp1;
+                double temp2;
+
+                switch(expression.get(i))
+                {
+                    case "+": temp1 = stack_new.removeLast();
+                        temp2 = stack_new.removeLast();
+                        holder = temp2+ " " + "+"+ " " + temp1+ " " + "=";
+                        tempResult = temp2 + temp1;
+                        holder += tempResult;
+                        break;
+
+                    case "-": temp1 = stack_new.removeLast();
+                        temp2 = stack_new.removeLast();
+                        holder = temp2+ " " + "-" + " " + temp1+ " " + "=";
+                        tempResult = temp2 - temp1;
+                        holder += tempResult;
+                        break;
+
+                    case "*": temp1 = stack_new.removeLast();
+                        temp2 = stack_new.removeLast();
+                        holder = temp2+ " " + "*" + " " + temp1+ " " + "=";
+                        tempResult = temp2 * temp1;
+                        holder += tempResult;
+                        break;
+
+                    case "/": temp1 = stack_new.removeLast();
+                        temp2 = stack_new.removeLast();
+                        holder = temp2+ " " + "/" + " " + temp1+ " " + "=";
+                        tempResult = temp2 / temp1;
+                        holder += tempResult;
+                        break;
+                }
+                stack_new.addLast(tempResult);
+                key_value_vector.add(holder);
+                holder = "";
+            }
+        }
+        return key_value_vector;
+    }
 
     /*
      * This Class converts an infix expression given by user into a postfix expression.
      *@author: Suryadeep
      */
-
+/*
     public static String[] formOperator_arr(String[] hold) {
         int idx = 0;
         String[] op_arr = new String[20];
@@ -164,7 +347,7 @@ public class BodmasActivity extends AppCompatActivity{
         siz_array = counter;
         return op_arr;
     }
-
+*/
     /*
      * This function returns a vector with all stored steps and the result for each
      * step.
@@ -173,6 +356,7 @@ public class BodmasActivity extends AppCompatActivity{
      * after or before operators.- yet to be implemented. 3. Multiple non nested
      * brackets- yet to be implemented.
      */
+    /*
     public static ArrayList<String> solutionPair(String[] hold, String[] master_hold, int sze) {
         String[] pair_arr = new String[20];
         int ev = 0;
@@ -297,10 +481,13 @@ public class BodmasActivity extends AppCompatActivity{
         // pair_arr = equation.split("");
         return key_value_vector;
     }
+
+   */
     /*
      * This Class converts an infix expression given by user into a postfix expression.
      *@author: Suryadeep
      */
+    /*
     public class InfixtoPostfix {
         // A utility function to return precedence of a given operator
         // Higher returned value means higher precedence
@@ -434,6 +621,9 @@ public class BodmasActivity extends AppCompatActivity{
         }
 
     }
+
+     */
+    /*
     public static class PostFixConverter {
         private static String infix; // The infix expression to be converted
         private static Deque<Character> stack = new ArrayDeque<Character>();
@@ -448,18 +638,13 @@ public class BodmasActivity extends AppCompatActivity{
             convertExpression();
         }
 
-        /* The approach is basically, if it's a number, push it to postfix list
-         * else if it's an operator, push it to stack
-         */
+
         private static void convertExpression() {
             // Temporary string to hold the number
             StringBuilder temp = new StringBuilder();
 
             for (int i = 0; i != infix.length(); ++i) {
                 if (Character.isDigit(infix.charAt(i))) {
-                    /* If we encounter a digit, read all digit next to it and append to temp
-                     * until we encounter an operator.
-                     */
                     temp.append(infix.charAt(i));
 
                     while ((i + 1) != infix.length() && (Character.isDigit(infix.charAt(i + 1))
@@ -467,10 +652,6 @@ public class BodmasActivity extends AppCompatActivity{
                         temp.append(infix.charAt(++i));
                     }
 
-
-                    /* If the loop ends it means the next token is an operator or end of expression
-                     * so we put temp into the postfix list and clear temp for next use
-                     */
                     postfix.add(temp.toString());
                     temp.delete(0, temp.length());
                 }
@@ -606,4 +787,6 @@ public class BodmasActivity extends AppCompatActivity{
         }
 
     }
+
+     */
 }
