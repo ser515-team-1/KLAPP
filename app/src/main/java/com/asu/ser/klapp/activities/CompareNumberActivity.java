@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.asu.ser.klapp.R;
@@ -57,8 +58,11 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
 
     private static final String TAG = "DragDropTest";
     private boolean isAssignmentMode = false;
+    private boolean isAssignmentCompleted = false;
 
     private Assignment assignmentMetadata;
+
+    private ArrayList<String> submittedAnswers = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -225,7 +229,10 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.overlayButton){
-            overlay.setVisibility(View.GONE);
+            if(!isAssignmentCompleted)
+                overlay.setVisibility(View.GONE);
+            else
+                Toast.makeText(CompareNumberActivity.this, "See Answers", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -234,7 +241,8 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         ClipData.Item item = event.getClipData().getItemAt(0);
         String dragData = item.getText().toString();
 
-        Log.d(TAG, "dropItem: Dragged data is " + dragData);
+        Log.d("OPTIONSELECT", "dropItem: Dragged data is " + dragData);
+        submittedAnswers.add(dragData);
         v.getBackground().clearColorFilter();
         v.invalidate();
 
@@ -339,14 +347,11 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         }
     }
 
-    private void loadStartAssignmentScreen(){
-
-    }
-
     private void loadEndAssignmentScreen(){
         overlay.setVisibility(View.VISIBLE);
-        overlayText.setText("Assignment Completed Successfully");
-        overlayButton.setVisibility(View.GONE);
+        overlayText.setText("Assignment Completed Successfully"+submittedAnswers.toString());
+        overlayButton.setText("SEE ANSWERS");
+        isAssignmentCompleted = true;
     }
 
 }
