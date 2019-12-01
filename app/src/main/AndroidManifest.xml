@@ -21,9 +21,6 @@
         <activity android:name=".activities.CompareNumberActivity"/>
         <activity android:name=".activities.BodmasActivity" android:label="BODMAS"/>
         <activity android:name=".activities.CountingActivity" android:label="Counting"/>
-        <activity android:name=".activities.CompareActivity" android:label="Compare">
-
-        </activity>
         <activity android:name=".activities.CreateAssignmentActivity" android:label="Create Assignment">
 
         </activity>
@@ -31,6 +28,7 @@
         </activity>
         <activity android:name=".activities.KidsProfileActivity" android:label="Kid Profile"/>
         <activity android:name=".activities.AssignmentListActivity" android:label="Assignments"/>
+        <activity android:name=".activities.SeeAnswerActivity" android:label="Answers"></activity>
     </application>
 
 </manifest>

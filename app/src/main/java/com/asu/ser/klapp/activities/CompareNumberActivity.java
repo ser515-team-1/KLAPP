@@ -3,6 +3,7 @@ package com.asu.ser.klapp.activities;
 import android.animation.Animator;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.asu.ser.klapp.models.CompareNumber;
 import com.asu.ser.klapp.models.CompareProblem;
 import com.asu.ser.klapp.models.Problem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -232,7 +234,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
             if(!isAssignmentCompleted)
                 overlay.setVisibility(View.GONE);
             else
-                Toast.makeText(CompareNumberActivity.this, "See Answers", Toast.LENGTH_SHORT).show();
+                openAnswerList();
         }
     }
 
@@ -352,6 +354,17 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         overlayText.setText("Assignment Completed Successfully"+submittedAnswers.toString());
         overlayButton.setText("SEE ANSWERS");
         isAssignmentCompleted = true;
+    }
+
+    private void openAnswerList(){
+
+        Intent intent = new Intent(this, SeeAnswerActivity.class);
+        intent.putExtra("ANSWERS", submittedAnswers);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("NUMBERS", (Serializable) assignment);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
     }
 
 }

@@ -32,7 +32,6 @@ public class AssignmentListActivity extends AppCompatActivity implements ItemCli
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-
         List<Assignment> assignmentList= (List<Assignment>)bundle.getSerializable("value");
 
         Log.d(TAG, "onCreate: "+assignmentList.size());
