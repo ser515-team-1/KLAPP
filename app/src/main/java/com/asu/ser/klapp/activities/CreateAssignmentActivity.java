@@ -145,20 +145,26 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
     }
 
     private void addMore(){
-        updateCounter();
-        cleanEntries();
+
+        if(validateExpression()) {
+            updateCounter();
+            cleanEntries();
+        }
     }
 
     private void finishAssignment(){
 
 
 
-        addMetaData();
-        Intent intent = new Intent(this,CompareActivity.class);
-        intent.putExtra(AppUtility.ASSIGNMENT_MODE,AppUtility.ATTEMPT_MODE);
-        intent.putExtra(KidsProfileActivity.KIDS_ASSIGNMENT ,assignment);
-        setResult(Activity.RESULT_OK, intent);
-        finish();
+        if(valiadate()) {
+
+            addMetaData();
+            Intent intent = new Intent(this, CompareActivity.class);
+            intent.putExtra(AppUtility.ASSIGNMENT_MODE, AppUtility.ATTEMPT_MODE);
+            intent.putExtra(KidsProfileActivity.KIDS_ASSIGNMENT, assignment);
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        }
 
 //        if(valiadate()){
 //            addMetaData();
@@ -221,29 +227,57 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
     }
 
 
-//    private boolean valiadate(){
-//
-//        String pName = name.getText()+"".trim();
-//        String pDueDate = dueDate.getText()+"".trim();
-//
-//        boolean validationPassed = true;
-//
-//        if(TextUtils.isEmpty(pName)){
-//            name.setError("Name is empty");
-//            validationPassed = false;
-//        }
-//
-//        if(TextUtils.isEmpty(pName)){
-//            name.setError("Price is empty");
-//            validationPassed = false;
-//        }
-//
-//        if(TextUtils.isEmpty(pDueDate)){
-//            dueDate.setError("Price is empty");
-//            validationPassed = false;
-//        }
-//
-//        return validationPassed;
-//    }
+    private boolean valiadate(){
+
+        String pName = name1.getText()+"".trim();
+        String pDueDate = dueDate1.getText()+"".trim();
+        String pLeft = left.getText()+"".trim();
+        String pRight = right.getText()+"".trim();
+
+        boolean validationPassed = true;
+
+        if(TextUtils.isEmpty(pName)){
+            name1.setError("Name is empty");
+            validationPassed = false;
+        }
+
+        if(TextUtils.isEmpty(pDueDate)){
+            dueDate1.setError("Due date is empty");
+            validationPassed = false;
+        }
+
+        if(TextUtils.isEmpty(pRight)){
+            right.setError("Left Expression is empty");
+            validationPassed = false;
+        }
+
+        if(TextUtils.isEmpty(pLeft)){
+            left.setError("Right expression is empty");
+            validationPassed = false;
+        }
+
+
+        return validationPassed;
+    }
+
+    public boolean validateExpression(){
+
+        String pLeft = left.getText()+"".trim();
+        String pRight = right.getText()+"".trim();
+
+        boolean validationPassed = true;
+
+        if(TextUtils.isEmpty(pRight)){
+            right.setError("Left Expression is empty");
+            validationPassed = false;
+        }
+
+        if(TextUtils.isEmpty(pLeft)){
+            left.setError("Right expression is empty");
+            validationPassed = false;
+        }
+
+        return validationPassed;
+    }
 
 }
