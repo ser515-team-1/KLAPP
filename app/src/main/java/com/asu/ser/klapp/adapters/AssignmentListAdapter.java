@@ -43,7 +43,7 @@ public class AssignmentListAdapter extends RecyclerView.Adapter<AssignmentListAd
     public void onBindViewHolder(@NonNull AssignmentViewHolder holder, int position) {
 
         final Assignment assignment = assignmentList.get(position);
-        holder.details.setText(assignment.getName()+" "+assignment.getDue_date()+" ");
+        holder.details.setText(assignment.getName()+"\n"+assignment.getDue_date()+" ");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
