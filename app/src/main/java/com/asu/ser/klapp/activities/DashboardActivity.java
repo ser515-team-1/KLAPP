@@ -1,6 +1,7 @@
 package com.asu.ser.klapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,9 +36,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        initView();
 
         student = (Student) getIntent().getSerializableExtra(KidsProfilelListActivity.STUDENT_PROFILE);
+        initView();
 
         if(student.getUpcomingAssignmentString()!=null){
             assignmentList = AppUtility.getAssignmentFromJSON(student.getUpcomingAssignmentString());
@@ -106,6 +107,14 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         admin.setOnClickListener(this);
         student1.setOnClickListener(this);
         student2.setOnClickListener(this);
+
+        if(student.getAge()==0){
+            CardView adminBox = findViewById(R.id.adminBox);
+            adminBox.setVisibility(View.GONE);
+            getSupportActionBar().setTitle("Upto 4th Grade");
+        }else {
+            getSupportActionBar().setTitle("Upto 8th Grade");
+        }
 
     }
 
