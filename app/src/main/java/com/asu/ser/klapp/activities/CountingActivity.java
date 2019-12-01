@@ -5,7 +5,10 @@ import android.content.ClipDescription;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
@@ -30,6 +33,12 @@ import androidx.recyclerview.widget.RecyclerView;
  * @version     1.0
  * date created 10/23/2019
  */
+/**
+ * @author      dpolinen
+ * @version     2.0
+ * date created 11/30/2019
+ */
+
 public class CountingActivity extends AppCompatActivity implements View.OnDragListener, View.OnLongClickListener, CountingListItemListener {
 
     private RecyclerView recyclerView;
@@ -40,10 +49,11 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private static final String TAG = "CountingActivity";
     private static final String TAG1 = "Events";
     private int counterValue =0;
-
+    Vibrator vibrator;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);
         setContentView(R.layout.activity_counting);
         initView();
     }
@@ -90,7 +100,13 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
         clone.setOnDragListener(this);
 
         vw.setVisibility(View.VISIBLE);
-
+        if(Build.VERSION.SDK_INT>=26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
+        else
+        {
+            vibrator.vibrate(200);
+        }
         updateCounter();
         adapter.removeAt(3);
 
