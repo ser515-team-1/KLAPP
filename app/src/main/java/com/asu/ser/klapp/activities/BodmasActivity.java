@@ -510,8 +510,44 @@ public class BodmasActivity extends AppCompatActivity{
                 }
             }
         }
-        private static int getPrecedence(char op) {
-            return 0;
+        private static int getPrecedence(char op)
+        {
+            if (op == '+' || op == '-')
+                return 1;
+            else if (op == '*' || op == '/')
+                return 2;
+            else if (op == '^')
+                return 3;
+            else return 0;
+        }
+
+
+        private static void clearStack()
+        {
+            while(!stack.isEmpty())
+            {
+                postfix.add(stack.removeLast().toString());
+            }
+        }
+
+
+        public static void printExpression()
+        {
+            for(String str : postfix)
+            {
+                System.out.print(str + ' ');
+            }
+        }
+
+
+        public static List<String> getPostfixAsList()
+        {
+            return postfix;
+        }
+
+
+        public static void PostFixCalculator(List<String> postfix) {
+            expression = postfix;
         }
     }
 }
