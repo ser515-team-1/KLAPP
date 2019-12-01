@@ -549,5 +549,61 @@ public class BodmasActivity extends AppCompatActivity{
         public static void PostFixCalculator(List<String> postfix) {
             expression = postfix;
         }
+
+        public static BigDecimal result()
+        {
+            for(int i = 0; i != expression.size(); ++i)
+            {
+                // Determine if current element is digit or not
+                if(Character.isDigit(expression.get(i).charAt(0)))
+                {
+                    stack_new.addLast(Double.parseDouble(expression.get(i)));
+                }
+                else
+                {
+                    double tempResult = 0;
+                    double temp1;
+                    double temp2;
+
+                    switch(expression.get(i))
+                    {
+                        case "+": temp1 = stack_new.removeLast();
+                            temp2 = stack_new.removeLast();
+                            holder = temp2+ " " + "+"+ " " + temp1+ " " + "=";
+                            tempResult = temp2 + temp1;
+                            holder += tempResult;
+                            break;
+
+                        case "-": temp1 = stack_new.removeLast();
+                            temp2 = stack_new.removeLast();
+                            holder = temp2+ " " + "-" + " " + temp1+ " " + "=";
+                            tempResult = temp2 - temp1;
+                            holder += tempResult;
+                            break;
+
+                        case "*": temp1 = stack_new.removeLast();
+                            temp2 = stack_new.removeLast();
+                            holder = temp2+ " " + "*" + " " + temp1+ " " + "=";
+                            tempResult = temp2 * temp1;
+                            holder += tempResult;
+                            break;
+
+                        case "/": temp1 = stack_new.removeLast();
+                            temp2 = stack_new.removeLast();
+                            holder = temp2+ " " + "/" + " " + temp1+ " " + "=";
+                            tempResult = temp2 / temp1;
+                            holder += tempResult;
+                            break;
+                    }
+                    stack_new.addLast(tempResult);
+                    key_value_vector.add(holder);
+                    holder = "";
+                }
+            }
+            System.out.println(key_value_vector);
+            return new BigDecimal(stack_new.removeLast());
+
+        }
+
     }
 }
