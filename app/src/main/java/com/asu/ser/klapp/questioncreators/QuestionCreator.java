@@ -11,7 +11,7 @@ public abstract class QuestionCreator {
     public Assignment getAssignment(){
 
         Assignment assignment = new Assignment();
-        assignment.setProblemList(getProblemList());
+//        assignment.setProblemList(getProblemList());
         return assignment;
     }
 

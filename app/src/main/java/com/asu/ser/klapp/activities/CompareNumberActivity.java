@@ -63,7 +63,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         setContentView(R.layout.activity_compare);
 
         if(ifAssignmentMode()){
-            getQuizAssignment();
+            assignment = getQuizAssignment();
         }else {
             assignment = getPracticeAssignment();
         }
@@ -287,18 +287,22 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     private List<CompareNumber> getQuizAssignment(){
 
         List<CompareNumber> compareNumbersList = new ArrayList<>();
-//        Assignment assignment = (Assignment) getIntent().getSerializableExtra("ASSIGNMENT");
-//        List<Problem> problemList = assignment.getProblemList();
-//
-//        for(int i=0;i<problemList.size();i++){
-//            Problem compareProblem =  problemList.get(i);
-//
-//            int left = Integer.parseInt(compareProblem.getLeft());
-//            int right = Integer.parseInt(compareProblem.getRight());
-//
-//            CompareNumber compareNumber = new CompareNumber(left,right);
-//            compareNumbersList.add(compareNumber);
-//        }
+        Assignment assignment = (Assignment) getIntent().getSerializableExtra("ASSIGNMENT");
+        List<CompareProblem> problemList = assignment.getProblemList();
+
+        for(int i=0;i<problemList.size();i++){
+            CompareProblem compareProblem =  problemList.get(i);
+
+            String x = compareProblem.getLeft().trim();
+
+            Log.d("NUMBERS", "getQuizAssignment: "+x);
+
+            int left = Integer.parseInt(compareProblem.getLeft().trim());
+            int right = Integer.parseInt(compareProblem.getRight().trim());
+
+            CompareNumber compareNumber = new CompareNumber(left,right);
+            compareNumbersList.add(compareNumber);
+        }
 
         return compareNumbersList;
 

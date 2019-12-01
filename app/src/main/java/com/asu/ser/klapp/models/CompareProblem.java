@@ -21,4 +21,9 @@ public class CompareProblem extends Problem {
         this.right = right;
     }
 
+    @Override
+    public String toString() {
+        return left+" "+right;
+    }
+
 }

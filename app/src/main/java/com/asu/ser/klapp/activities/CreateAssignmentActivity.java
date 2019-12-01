@@ -40,7 +40,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
     private EditText dueDate1, name1;
 
     private Assignment assignment;
-    private List<Problem> problemList;
+    private List<CompareProblem> problemList;
     private int counter=0;
     private Menu cartMenu;
     private MenuItem menuItemCount;
@@ -112,11 +112,12 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
 
 
-    private Problem createProblem(){
+    private CompareProblem createProblem(){
         CompareProblem problem = new CompareProblem();
         problem.setLeft(left.getText().toString());
         problem.setRight(right.getText().toString());
         problem.setAnswer(">");
+        Log.d("NUMBERS", "createProblem: "+problem.toString());
         return problem;
     }
 
@@ -130,7 +131,6 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         switch (v.getId()){
 
             case R.id.submit:
-                submit();
                 finishAssignment();
                 break;
 
@@ -147,6 +147,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
     private void addMore(){
 
         if(validateExpression()) {
+            addProblem();
             updateCounter();
             cleanEntries();
         }
@@ -159,7 +160,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         if(valiadate()) {
 
             addMetaData();
-            Intent intent = new Intent(this, CompareActivity.class);
+            Intent intent = new Intent(this, CompareNumberActivity.class);
             intent.putExtra(AppUtility.ASSIGNMENT_MODE, AppUtility.ATTEMPT_MODE);
             intent.putExtra(KidsProfileActivity.KIDS_ASSIGNMENT, assignment);
             setResult(Activity.RESULT_OK, intent);
@@ -185,18 +186,10 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         assignment.setDue_date(dueDate1.getText().toString());
     }
 
-    private void submit(){
-        addProblem();
-        updateAssignmentDetail();
-    }
 
     private void cleanEntries(){
         left.setText("");
         right.setText("");
-    }
-
-    private void updateAssignmentDetail(){
-//        assignmentDetail.setText("Problems: "+problemList.size());
     }
 
 
