@@ -49,13 +49,15 @@ public class AssignmentListActivity extends AppCompatActivity implements ItemCli
     @Override
     public void itemClicked(Object object) {
 
-        openAssignment();
+        openAssignment((Assignment) object);
 
     }
 
-    public void openAssignment(){
+    public void openAssignment(Assignment assignment){
 
         Intent intent = new Intent(this, CompareNumberActivity.class);
+        intent.setAction("QUIZ_MODE");
+        intent.putExtra("ASSIGNMENT", assignment);
         startActivity(intent);
 
     }

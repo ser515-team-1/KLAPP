@@ -81,6 +81,7 @@
                     android:background="@color/green_klapp"
                     style="@style/InputBoxStyle"
                     android:layout_margin="6dp"
+                    android:inputType="number"
                     />
                 <EditText
                     android:id="@+id/right"
@@ -90,6 +91,7 @@
                     android:background="@color/green_klapp"
                     style="@style/InputBoxStyle"
                     android:layout_margin="6dp"
+                    android:inputType="number"
                     />
             </LinearLayout>
             <LinearLayout

@@ -231,8 +231,8 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
         String pName = name1.getText()+"".trim();
         String pDueDate = dueDate1.getText()+"".trim();
-        String pLeft = left.getText()+"".trim();
-        String pRight = right.getText()+"".trim();
+//        String pLeft = left.getText()+"".trim();
+//        String pRight = right.getText()+"".trim();
 
         boolean validationPassed = true;
 
@@ -246,15 +246,15 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
             validationPassed = false;
         }
 
-        if(TextUtils.isEmpty(pRight)){
-            right.setError("Left Expression is empty");
-            validationPassed = false;
-        }
-
-        if(TextUtils.isEmpty(pLeft)){
-            left.setError("Right expression is empty");
-            validationPassed = false;
-        }
+//        if(TextUtils.isEmpty(pRight)){
+//            right.setError("Left Expression is empty");
+//            validationPassed = false;
+//        }
+//
+//        if(TextUtils.isEmpty(pLeft)){
+//            left.setError("Right expression is empty");
+//            validationPassed = false;
+//        }
 
 
         return validationPassed;

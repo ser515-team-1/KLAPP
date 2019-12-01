@@ -16,7 +16,10 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareNumber;
+import com.asu.ser.klapp.models.CompareProblem;
+import com.asu.ser.klapp.models.Problem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,13 +62,31 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare);
 
-        assignment = getPracticeAssignment();
+        if(ifAssignmentMode()){
+            getQuizAssignment();
+        }else {
+            assignment = getPracticeAssignment();
+        }
 
         initView();
         addListeners();
         addTags();
 
         createQuestions(currentQuestionNum);
+
+    }
+
+    private boolean ifAssignmentMode(){
+
+        String action = getIntent().getAction();
+
+        if(action==null){
+            return false;
+        }else if(action.equals("QUIZ_MODE")){
+            return true;
+        }else {
+            return false;
+        }
 
     }
 
@@ -261,6 +282,26 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         assignment.add(getNumbers());
         assignment.add(getNumbers());
         return assignment;
+    }
+
+    private List<CompareNumber> getQuizAssignment(){
+
+        List<CompareNumber> compareNumbersList = new ArrayList<>();
+//        Assignment assignment = (Assignment) getIntent().getSerializableExtra("ASSIGNMENT");
+//        List<Problem> problemList = assignment.getProblemList();
+//
+//        for(int i=0;i<problemList.size();i++){
+//            Problem compareProblem =  problemList.get(i);
+//
+//            int left = Integer.parseInt(compareProblem.getLeft());
+//            int right = Integer.parseInt(compareProblem.getRight());
+//
+//            CompareNumber compareNumber = new CompareNumber(left,right);
+//            compareNumbersList.add(compareNumber);
+//        }
+
+        return compareNumbersList;
+
     }
 
     private CompareNumber getNumbers(){
