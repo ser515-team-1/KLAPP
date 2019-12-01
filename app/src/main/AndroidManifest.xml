@@ -9,18 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SplashActivity" android:label="KLAPP">
+        <activity android:name=".activities.KidsProfileActivity"></activity>
+        <activity
+            android:name=".activities.SplashActivity"
+            android:label="KLAPP">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SignupActivity" android:label="Sign Up"/>
-        <activity android:name=".activities.LoginActivity" android:label="Login"/>
-        <activity android:name=".activities.DashboardActivity" android:label="Dashboard"></activity>
-        <activity android:name=".activities.CompareNumberActivity"/>
-        <activity android:name=".activities.BodmasActivity"/>
-        <activity android:name=".activities.CountingActivity"/>
+        <activity
+            android:name=".activities.SignupActivity"
+            android:label="Sign Up" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="Login" />
+        <activity
+            android:name=".activities.DashboardActivity"
+            android:label="Dashboard" />
+        <activity android:name=".activities.CompareNumberActivity" />
+        <activity android:name=".activities.BodmasActivity" />
+        <activity android:name=".activities.CountingActivity" />
     </application>
 
 </manifest>
