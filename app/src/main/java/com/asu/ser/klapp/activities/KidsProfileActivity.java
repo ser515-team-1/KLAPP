@@ -153,4 +153,84 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
         finish();
     }
 
-   
+    public Student createStudentFromForm(){
+
+        Student student = new Student();
+        student.setAge(Integer.parseInt(age.getText().toString()));
+        student.setName(name.getText().toString());
+        return student;
+    }
+
+    public void populateFormFromInput(Student student){
+
+        name.setText(student.getName());
+        age.setText(student.getAge()+"");
+
+    }
+
+    public void save(){
+        if(profilemode== KidsProfilelListActivity.ADD_MODE){
+            saveToDatabase();
+        }else if(profilemode == KidsProfilelListActivity.EDIT_MODE){
+            updateToDatabase();
+        }
+    }
+
+    public void delete(){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                kidsProfileDao.delete(kidprofile);
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        }).start();
+
+    }
+
+    public void createAssignment(){
+        Intent intent = new Intent(this, CreateAssignmentActivity.class);
+        startActivityForResult(intent, KIDS_ASSIGNMENT_REQ_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int req, int res, Intent intent){
+        if(req==KIDS_ASSIGNMENT_REQ_CODE){
+
+            if(res == Activity.RESULT_OK){
+                Assignment assignment = (Assignment) intent.getSerializableExtra(KIDS_ASSIGNMENT);
+                addAssignment(assignment);
+            }
+
+        }
+    }
+
+    private void addAssignment(Assignment assignment){
+
+        // Handl this at Model level or utility level
+        if(kidprofile.getUpcomingAssignmentString()!=null){
+            List<Assignment> upcoming = AppUtility.getAssignmentFromJSON(kidprofile.getUpcomingAssignmentString());
+            kidprofile.setUpcoming(upcoming);
+        }
+
+        kidprofile.addAssignment(assignment);
+        String upcomingAssignmentGSONString = AppUtility.gsonStringFromAssignment(kidprofile.getUpcoming());
+
+        Log.d("GSON", "addAssignment: "+upcomingAssignmentGSONString);
+
+        kidprofile.setUpcomingAssignmentString(upcomingAssignmentGSONString);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                kidsProfileDao.update(kidprofile);
+
+                List<Assignment> ass = AppUtility.getAssignmentFromJSON(kidprofile.getUpcomingAssignmentString());
+
+                Log.d("GSON", "run: "+ass.size());
+            }
+        }).start();
+    }
+
+}
