@@ -22,7 +22,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import java.math.BigDecimal;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 
 public class BodmasActivity extends AppCompatActivity{
 
@@ -63,7 +67,6 @@ public class BodmasActivity extends AppCompatActivity{
     private void submit(String input) {
 
         BodmasUtility bodmasUtility = new BodmasUtility();
-//        String exprs = "(2+3)*4+9-4";
         String exprs = input;
         String[] hold_expr = exprs.split("");
         String[] operator_array = formOperator_arr(hold_expr);
@@ -105,6 +108,10 @@ public class BodmasActivity extends AppCompatActivity{
 
     }
 
+    /*
+     * This Class converts an infix expression given by user into a postfix expression.
+     *@author: Suryadeep
+     */
 
     public static String[] formOperator_arr(String[] hold) {
         int idx = 0;
@@ -373,6 +380,8 @@ public class BodmasActivity extends AppCompatActivity{
             Stack<Integer> stack=new Stack<>();
             //add the eval string
             String eval = "";
+            // Store the output in an array list
+            ArrayList<String> key_value_vector = new ArrayList<String>();
 
             // Scan all characters one by one
             for(int i=0;i<exp.length();i++)
@@ -384,7 +393,7 @@ public class BodmasActivity extends AppCompatActivity{
                 if(Character.isDigit(c))
                     stack.push(c - '0');
 
-                    //  If the scanned character is an operator, pop two
+                //  If the scanned character is an operator, pop two
                     // elements from stack apply the operator
                 else
                 {
@@ -393,7 +402,6 @@ public class BodmasActivity extends AppCompatActivity{
                     eval += val2;
                     eval += c;
                     eval += val1;
-//                System.out.println(eval);
                     eval += "=";
 
                     switch(c)
@@ -419,12 +427,62 @@ public class BodmasActivity extends AppCompatActivity{
                             break;
                     }
                 }
-                System.out.println(eval);
+                key_value_vector.add(eval);
                 eval = "";
             }
             return stack.pop();
         }
 
     }
+    public static class PostFixConverter {
+        private static String infix; // The infix expression to be converted
+        private static Deque<Character> stack = new ArrayDeque<Character>();
+        private static List<String> postfix = new ArrayList<String>(); // To hold the postfix expression
+        private static List<String> expression = new ArrayList<String>();
+        private static Deque<Double> stack_new = new ArrayDeque<Double>();
+        static ArrayList<String> key_value_vector = new ArrayList<String>();
+        static String holder = "";
 
-}
+        public static void postConverter(String expression) {
+            infix = expression;
+            convertExpression();
+        }
+
+        /* The approach is basically, if it's a number, push it to postfix list
+         * else if it's an operator, push it to stack
+         */
+        private static void convertExpression() {
+            // Temporary string to hold the number
+            StringBuilder temp = new StringBuilder();
+
+            for (int i = 0; i != infix.length(); ++i) {
+                if (Character.isDigit(infix.charAt(i))) {
+                    /* If we encounter a digit, read all digit next to it and append to temp
+                     * until we encounter an operator.
+                     */
+                    temp.append(infix.charAt(i));
+
+                    while ((i + 1) != infix.length() && (Character.isDigit(infix.charAt(i + 1))
+                            || infix.charAt(i + 1) == '.')) {
+                        temp.append(infix.charAt(++i));
+                    }
+
+
+                    /* If the loop ends it means the next token is an operator or end of expression
+                     * so we put temp into the postfix list and clear temp for next use
+                     */
+                    postfix.add(temp.toString());
+                    temp.delete(0, temp.length());
+                }
+                // Getting here means the token is an operator
+                else
+                    inputToStack(infix.charAt(i));
+            }
+            //clearStack();
+        }
+        public static void inputToStack(char input){
+
+        }
+    }
+
+    }
