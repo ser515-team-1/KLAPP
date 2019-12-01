@@ -56,13 +56,16 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     private int currentQuestionNum=0;
 
     private static final String TAG = "DragDropTest";
+    private boolean isAssignmentMode = false;
+
+    private Assignment assignmentMetadata;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare);
 
-        if(ifAssignmentMode()){
+        if(isAssignmentMode = ifAssignmentMode()){
             assignment = getQuizAssignment();
         }else {
             assignment = getPracticeAssignment();
@@ -103,6 +106,15 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         overlayText = findViewById(R.id.overlayText);
         overlayButton = findViewById(R.id.overlayButton);
         submitanim = findViewById(R.id.submitanim);
+
+        if(isAssignmentMode){
+            setOverlayText("Assignment: "+assignmentMetadata.getName()+"\n"+"Due Date: "+assignmentMetadata.getDue_date()+"\n"+"Questions: "+assignment.size());
+        }
+
+    }
+
+    private void setOverlayText(String text){
+        overlayText.setText(text);
     }
 
     private void addListeners(){
@@ -287,8 +299,8 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     private List<CompareNumber> getQuizAssignment(){
 
         List<CompareNumber> compareNumbersList = new ArrayList<>();
-        Assignment assignment = (Assignment) getIntent().getSerializableExtra("ASSIGNMENT");
-        List<CompareProblem> problemList = assignment.getProblemList();
+        assignmentMetadata = (Assignment) getIntent().getSerializableExtra("ASSIGNMENT");
+        List<CompareProblem> problemList = assignmentMetadata.getProblemList();
 
         for(int i=0;i<problemList.size();i++){
             CompareProblem compareProblem =  problemList.get(i);
