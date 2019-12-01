@@ -75,6 +75,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     private void openAssignmentList(){
 
+        Log.d(TAG, "openAssignmentList: "+(assignmentList.size()==0));
+
         if(assignmentList.size()==0){
             Toast.makeText(this, "No Assignment Due", Toast.LENGTH_SHORT).show();
         }else {

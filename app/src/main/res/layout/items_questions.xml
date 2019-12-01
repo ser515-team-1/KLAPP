@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="40dp"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="20dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="10dp"
+    android:innerRadius="0dp"
+    android:shape="ring"
+    android:layout_margin="10dp"
+    android:thicknessRatio="1.9">
+<LinearLayout
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:layout_margin="5dp"
     >
     <TextView
         android:id="@+id/question_id"
@@ -30,3 +42,4 @@
         android:background="@color/green_klapp"
         />
 </LinearLayout>
+</androidx.cardview.widget.CardView>
