@@ -3,6 +3,7 @@ package com.asu.ser.klapp.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -169,10 +170,14 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void save(){
-        if(profilemode== KidsProfilelListActivity.ADD_MODE){
-            saveToDatabase();
-        }else if(profilemode == KidsProfilelListActivity.EDIT_MODE){
-            updateToDatabase();
+
+        if(valiadate()) {
+
+            if (profilemode == KidsProfilelListActivity.ADD_MODE) {
+                saveToDatabase();
+            } else if (profilemode == KidsProfilelListActivity.EDIT_MODE) {
+                updateToDatabase();
+            }
         }
     }
 
@@ -231,6 +236,26 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
                 Log.d("GSON", "run: "+ass.size());
             }
         }).start();
+    }
+
+    private boolean valiadate(){
+
+        String pName = name.getText()+"".trim();
+        String pAge = age.getText()+"".trim();
+
+        boolean validationPassed = true;
+
+        if(TextUtils.isEmpty(pName)){
+            name.setError("Name is empty");
+            validationPassed = false;
+        }
+
+        if(TextUtils.isEmpty(pAge)){
+            age.setError("Due date is empty");
+            validationPassed = false;
+        }
+
+        return validationPassed;
     }
 
 }
