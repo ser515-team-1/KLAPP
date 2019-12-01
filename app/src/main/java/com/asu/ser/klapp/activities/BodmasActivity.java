@@ -41,7 +41,7 @@ public class BodmasActivity extends AppCompatActivity{
     private static List<String> postfix = new ArrayList<String>(); // To hold the postfix expression
     private static List<String> expression = new ArrayList<String>();
     private static Deque<Double> stack_new = new ArrayDeque<Double>();
-    static ArrayList<String> key_value_vector = new ArrayList<String>();
+    public static ArrayList<String> key_value_vector = new ArrayList<String>();
     static String holder = "";
 
     @Override
@@ -121,6 +121,14 @@ public class BodmasActivity extends AppCompatActivity{
 
 
     }
+
+    /*
+     * This Class converts an infix expression given by user into a postfix expression.
+     * @author: Suryadeep
+     * @version: 1.0
+     * @author: Suryadeep
+     * @version: 2.0
+     */
     public static void postConverter(String expression)
     {
         infix = expression;
@@ -240,6 +248,8 @@ public class BodmasActivity extends AppCompatActivity{
 
     public static ArrayList<String> result()
     {
+
+        key_value_vector.clear();
         for(int i = 0; i != expression.size(); ++i)
         {
             // Determine if current element is digit or not
@@ -291,10 +301,6 @@ public class BodmasActivity extends AppCompatActivity{
         return key_value_vector;
     }
 
-    /*
-     * This Class converts an infix expression given by user into a postfix expression.
-     *@author: Suryadeep
-     */
 /*
     public static String[] formOperator_arr(String[] hold) {
         int idx = 0;
