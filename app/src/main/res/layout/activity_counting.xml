@@ -5,7 +5,6 @@
     android:gravity="center"
     android:background="@color/green_klapp"
     >
-
     <ImageView
         android:id="@+id/dragaableArea"
         android:layout_width="120dp"
