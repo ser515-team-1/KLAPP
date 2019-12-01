@@ -10,6 +10,25 @@ import java.util.List;
  */
 public class Assignment implements Serializable {
 
+    private String name;
+    private String due_date;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDue_date() {
+        return due_date;
+    }
+
+    public void setDue_date(String due_date) {
+        this.due_date = due_date;
+    }
+
     private List<Problem> problemList;
 
     public Assignment(){

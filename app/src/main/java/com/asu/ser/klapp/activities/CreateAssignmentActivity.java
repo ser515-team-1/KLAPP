@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +37,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 //    private TextView assignmentDetail;
     private Button submit, addMore;
 
-    private EditText dueDate, name;
+    private EditText dueDate1, name1;
 
     private Assignment assignment;
     private List<Problem> problemList;
@@ -59,14 +61,14 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         submit = findViewById(R.id.submit);
         addMore = findViewById(R.id.addMore);
 
-        name = findViewById(R.id.name);
-        dueDate = findViewById(R.id.dueDate);
+        name1 = findViewById(R.id.assignmentName);
+        dueDate1 = findViewById(R.id.dueDate);
 
         final DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this, R.style.DialogTheme, CreateAssignmentActivity.this, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
 
-        dueDate.setOnClickListener(new View.OnClickListener() {
+        dueDate1.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -132,10 +134,6 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
                 finishAssignment();
                 break;
 
-//            case R.id.finish:
-//
-//                break;
-
             case R.id.addMore:
                 addMore();
                 break;
@@ -153,12 +151,32 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
     private void finishAssignment(){
 
+
+
+        addMetaData();
         Intent intent = new Intent(this,CompareActivity.class);
         intent.putExtra(AppUtility.ASSIGNMENT_MODE,AppUtility.ATTEMPT_MODE);
         intent.putExtra(KidsProfileActivity.KIDS_ASSIGNMENT ,assignment);
         setResult(Activity.RESULT_OK, intent);
         finish();
 
+//        if(valiadate()){
+//            addMetaData();
+//
+//        }
+
+    }
+
+    private void addMetaData(){
+
+
+//        String a = name1.getText().toString();
+//        String b = dueDate1.getText().toString();
+
+//        Log.d("EDITTEXT", "addMetaData: "+a);
+
+        assignment.setName(name1.getText().toString());
+        assignment.setDue_date(dueDate1.getText().toString());
     }
 
     private void submit(){
@@ -180,7 +198,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        dueDate.setText(sdf.format(myCalendar.getTime()));
+        dueDate1.setText(sdf.format(myCalendar.getTime()));
     }
 
 
@@ -201,4 +219,31 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         counter++;
         menuItemCount.setTitle(counter+"");
     }
+
+
+//    private boolean valiadate(){
+//
+//        String pName = name.getText()+"".trim();
+//        String pDueDate = dueDate.getText()+"".trim();
+//
+//        boolean validationPassed = true;
+//
+//        if(TextUtils.isEmpty(pName)){
+//            name.setError("Name is empty");
+//            validationPassed = false;
+//        }
+//
+//        if(TextUtils.isEmpty(pName)){
+//            name.setError("Price is empty");
+//            validationPassed = false;
+//        }
+//
+//        if(TextUtils.isEmpty(pDueDate)){
+//            dueDate.setError("Price is empty");
+//            validationPassed = false;
+//        }
+//
+//        return validationPassed;
+//    }
+
 }

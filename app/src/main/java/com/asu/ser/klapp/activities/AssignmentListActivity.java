@@ -6,11 +6,9 @@ import android.util.Log;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.AssignmentListAdapter;
-import com.asu.ser.klapp.adapters.CountingListAdapter;
 import com.asu.ser.klapp.callbacks.ItemClickListener;
 import com.asu.ser.klapp.models.Assignment;
 
-import java.io.Serializable;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +25,7 @@ public class AssignmentListActivity extends AppCompatActivity implements ItemCli
 
     @Override
     public void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_assignment);
         assignmentRV = findViewById(R.id.assignmentRV);
@@ -37,6 +36,8 @@ public class AssignmentListActivity extends AppCompatActivity implements ItemCli
         List<Assignment> assignmentList= (List<Assignment>)bundle.getSerializable("value");
 
         Log.d(TAG, "onCreate: "+assignmentList.size());
+
+        llm = new LinearLayoutManager(this);
 
         assignmentListAdapter = new AssignmentListAdapter(this, assignmentList);
         assignmentRV.setLayoutManager(llm);

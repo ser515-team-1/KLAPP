@@ -40,24 +40,18 @@ public class AssignmentListAdapter extends RecyclerView.Adapter<AssignmentListAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AssignmentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AssignmentViewHolder holder, int position) {
 
-        final Assignment assignment = assignmentList.get(position);
-        holder.details.setText(assignment.toString());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemClickListener.itemClicked(assignment);
-            }
-        });
+        Assignment assignment = assignmentList.get(position);
+        holder.details.setText(assignment.getName()+" "+assignment.getDue_date()+" ");
 
     }
 
     @Override
     public int getItemCount() {
-
         return assignmentList.size();
     }
+
 
     public class AssignmentViewHolder extends RecyclerView.ViewHolder{
 
