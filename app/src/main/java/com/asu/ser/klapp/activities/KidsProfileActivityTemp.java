@@ -21,7 +21,7 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class KidsProfileActivity extends AppCompatActivity implements View.OnClickListener{
+public class KidsProfileActivityTemp extends AppCompatActivity implements View.OnClickListener{
 
 
     private EditText name, age;
