@@ -1,5 +1,5 @@
 package com.asu.ser.klapp.activities;
-
+import java.util.Stack;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,14 +15,13 @@ import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.utilities.BodmasUtility;
 import com.asu.ser.klapp.utilities.StringValidation;
 
-import net.objecthunter.exp4j.Expression;
-import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.List;
 
 public class BodmasActivity extends AppCompatActivity{
 
@@ -31,6 +30,14 @@ public class BodmasActivity extends AppCompatActivity{
     private TextView output;
     private static final String TAG = "BodmasActivity";
     static int siz_array = 0;
+    //Varialbles used for postfix evaluation
+    private static String infix; // The infix expression to be converted
+    private static Deque<Character> stack;
+    private static List<String> postfix; // To hold the postfix expression
+    private static List<String> expression;
+    private static Deque<Double> stack_new;
+    public static ArrayList<String> key_value_vector;
+    static String holder = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -63,13 +70,31 @@ public class BodmasActivity extends AppCompatActivity{
     private void submit(String input) {
 
         BodmasUtility bodmasUtility = new BodmasUtility();
-//        String exprs = "(2+3)*4+9-4";
+        List<String> postfix_store = new ArrayList<String>();
         String exprs = input;
-        String[] hold_expr = exprs.split("");
-        String[] operator_array = formOperator_arr(hold_expr);
-        ArrayList<String> solution_pair = solutionPair(operator_array, hold_expr, siz_array * 2);
-        showOutput(formatOutput(solution_pair));
 
+        stack = new ArrayDeque<Character>();
+        postfix = new ArrayList<String>();
+        expression = new ArrayList<String>();
+        stack_new = new ArrayDeque<Double>();
+        key_value_vector = new ArrayList<String>();
+
+
+//        String[] hold_expr = exprs.split("");
+//
+////        Log.d(TAG, "submit: "+hold_expr.toString());
+//
+
+
+        //initiation the postfix constructor with string
+        postConverter(exprs);
+        //String[] operator_array = formOperator_arr(hold_expr);
+        //Hold the return in list format
+        postfix_store = getPostfixAsList();
+        //showOutput(formatOutput(solution_pair));
+        //call the postfix calculator function
+        PostFixCalculator(postfix_store);
+        showOutput(formatOutput(result()));
     }
 
     private void showOutput(String expr){
@@ -105,192 +130,184 @@ public class BodmasActivity extends AppCompatActivity{
 
     }
 
-
-    public static String[] formOperator_arr(String[] hold) {
-        int idx = 0;
-        String[] op_arr = new String[20];
-        int counter = 0;
-        for (int i = 0; i < hold.length; i++) {
-            if (hold[i].trim().equals("(")) {
-                op_arr[idx] = Integer.toString(i);
-                idx = idx + 1;
-                op_arr[idx] = hold[i];
-                idx = idx + 1;
-                counter += 1;
-            }
-            if (hold[i].trim().equals(")")) {
-                op_arr[idx] = Integer.toString(i);
-                idx = idx + 1;
-                op_arr[idx] = hold[i];
-                idx = idx + 1;
-                counter += 1;
-            }
-            if (hold[i].trim().equals("+")) {
-                op_arr[idx] = Integer.toString(i);
-                idx = idx + 1;
-                op_arr[idx] = hold[i];
-                idx = idx + 1;
-                counter += 1;
-            }
-            if (hold[i].trim().equals("-")) {
-                op_arr[idx] = Integer.toString(i);
-                idx = idx + 1;
-                op_arr[idx] = hold[i];
-                idx = idx + 1;
-                counter += 1;
-            }
-            if (hold[i].trim().equals("*")) {
-                op_arr[idx] = Integer.toString(i);
-                idx = idx + 1;
-                op_arr[idx] = hold[i];
-                idx = idx + 1;
-                counter += 1;
-            }
-            if (hold[i].trim().equals("/")) {
-                op_arr[idx] = Integer.toString(i);
-                idx = idx + 1;
-                op_arr[idx] = hold[i];
-                idx = idx + 1;
-                counter += 1;
-            }
-        }
-        siz_array = counter;
-        return op_arr;
+    /*
+     * This Class converts an infix expression given by user into a postfix expression.
+     * @author: Suryadeep
+     * @version: 1.0
+     * @author: Suryadeep
+     * @version: 2.0
+     */
+    public static void postConverter(String expression)
+    {
+        infix = expression;
+        convertExpression();
     }
 
-    /*
-     * This function returns a vector with all stored steps and the result for each
-     * step.
-     *
-     * Limitation- 1. No nested brackets- yet to implement. 2. No Brackets immediate
-     * after or before operators.- yet to be implemented. 3. Multiple non nested
-     * brackets- yet to be implemented.
+    /* The approach is basically, if it's a number, push it to postfix list
+     * else if it's an operator, push it to stack
      */
-    public static ArrayList<String> solutionPair(String[] hold, String[] master_hold, int sze) {
-        String[] pair_arr = new String[20];
-        int ev = 0;
-        String eval = "";
-        String equation = "";
-        int not_null_ctr = 0;
-        ArrayList<String> key_value_vector = new ArrayList<String>();
-        //String[] hold = new String[20];
-        String full_equation = Arrays.toString(master_hold).replace(",", "").replace(" ", "").trim();
-        int global_ctr = 1;
-        //hold = Arrays.stream(hold).filter(Objects::nonNull).toArray(String[]::new);
-        //out.println(hold.length);
-        for (int x = 0; x < sze; x++) {
-            if (hold[x].trim().equals("(")) {
-                int idx = Integer.parseInt(hold[x - 1]);
-                // int a = x;
-                while (hold[x].trim().equals(")") == false) {
-                    equation += master_hold[idx];
-                    x += 1;
-                    idx += 1;
+    private static void convertExpression()
+    {
+        // Temporary string to hold the number
+        StringBuilder temp = new StringBuilder();
+
+        for(int i = 0; i != infix.length(); ++i)
+        {
+            if(Character.isDigit(infix.charAt(i)))
+            {
+                /* If we encounter a digit, read all digit next to it and append to temp
+                 * until we encounter an operator.
+                 */
+                temp.append(infix.charAt(i));
+
+                while((i+1) != infix.length() && (Character.isDigit(infix.charAt(i+1))
+                        || infix.charAt(i+1) == '.'))
+                {
+                    temp.append(infix.charAt(++i));
                 }
-                equation += ")";
-                // add code to evaluate equation
-                //String eval = "5";
-                Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
-                eval = Integer.toString(ev);
-                full_equation = full_equation.replace(equation, eval);
 
-                //key_value_vector.add(global_ctr);
 
-                key_value_vector.add(full_equation);
-                global_ctr += 1;
-                equation = "";
-                eval = "";
-                //master_hold[idx + 1] = eval;
-                //ev = 5;
+                /* If the loop ends it means the next token is an operator or end of expression
+                 * so we put temp into the postfix list and clear temp for next use
+                 */
+                postfix.add(temp.toString());
+                temp.delete(0, temp.length());
             }
-            if (hold[x].trim().equals("*")) {
-                int idx = Integer.parseInt(hold[x - 1]);
-                //out.println(master_hold[idx]);
-                //equation += master_hold[idx - 1];
-                equation += Integer.toString(ev);
-                equation += master_hold[idx];
-                equation += master_hold[idx + 1];
-                // add code to evaluate equation
-                //String eval = "20";
-                Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
-                eval = Integer.toString(ev);
-                full_equation = full_equation.replace(equation, eval);
-                //key_value_vector.add(global_ctr);
-                key_value_vector.add(full_equation);
-                global_ctr += 1;
-                eval = "";
-                equation = "";
-                //ev = 20;
-                //master_hold[idx + 1] = eval;
-            }
-            if (hold[x].trim().equals("/")) {
-                int idx = Integer.parseInt(hold[x - 1]);
-                equation += master_hold[idx - 1];
-                equation += master_hold[idx];
-                equation += master_hold[idx + 1];
-                // add code to evaluate equation
-                //String eval = "20";
-                Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
-                eval = Integer.toString(ev);
-                full_equation = full_equation.replace(equation, eval);
+            // Getting here means the token is an operator
+            else
+                inputToStack(infix.charAt(i));
+        }
+        clearStack();
+    }
 
-                //key_value_vector.add(global_ctr);
-                key_value_vector.add(full_equation);
-                global_ctr += 1;
-                equation = "";
-                eval = "";
-                //master_hold[idx + 1] = eval;
+    //updated
+    private static void inputToStack(char input)
+    {
+        if(stack.isEmpty() || input == '(')
+            stack.addLast(input);
+        else
+        {
+            if(input == ')')
+            {
+                while(!stack.getLast().equals('('))
+                {
+                    postfix.add(stack.removeLast().toString());
+                }
+                stack.removeLast();
             }
-            if (hold[x].trim().equals("+")) {
-                int idx = Integer.parseInt(hold[x - 1]);
-                //equation += master_hold[idx - 1];
-                equation += Integer.toString(ev);
-                equation += master_hold[idx];
-                equation += master_hold[idx + 1];
-                // add code to evaluate equation
-                //String eval = "29";
-                Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
-                eval = Integer.toString(ev);
-                full_equation = full_equation.replace(equation, eval);
-
-                //key_value_vector.add(global_ctr);
-                key_value_vector.add(full_equation);
-                global_ctr += 1;
-                equation = "";
-                //ev = 29;
-                eval = "";
-                //master_hold[idx + 1] = eval;
-            }
-            if (hold[x].trim().equals("-")) {
-                int idx = Integer.parseInt(hold[x - 1]);
-                //equation += master_hold[idx - 1];
-                equation += Integer.toString(ev);
-                equation += master_hold[idx];
-                equation += master_hold[idx + 1];
-                // add code to evaluate equation
-                //String eval = "25";
-                Expression expression = new ExpressionBuilder(equation).build();
-                ev = (int)expression.evaluate();
-                eval = Integer.toString(ev);
-                full_equation = full_equation.replace(equation, eval);
-
-                //key_value_vector.add(global_ctr);
-                key_value_vector.add(full_equation);
-                global_ctr += 1;
-                equation = "";
-                eval = "";
-                //master_hold[idx + 1] = eval;
+            else
+            {
+                if(stack.getLast().equals('('))
+                    stack.addLast(input);
+                else
+                {
+                    while(!stack.isEmpty() && !stack.getLast().equals('(') &&
+                            getPrecedence(input) <= getPrecedence(stack.getLast()))
+                    {
+                        postfix.add(stack.removeLast().toString());
+                    }
+                    stack.addLast(input);
+                }
             }
         }
+    }
 
-        // pair_arr = equation.split("");
+
+    private static int getPrecedence(char op)
+    {
+        if (op == '+' || op == '-')
+            return 1;
+        else if (op == '*' || op == '/')
+            return 2;
+        else if (op == '^')
+            return 3;
+        else return 0;
+    }
+
+
+    private static void clearStack()
+    {
+        while(!stack.isEmpty())
+        {
+            postfix.add(stack.removeLast().toString());
+        }
+    }
+
+
+    public static void printExpression()
+    {
+        for(String str : postfix)
+        {
+            System.out.print(str + ' ');
+        }
+    }
+
+
+    public static List<String> getPostfixAsList()
+    {
+        return postfix;
+    }
+
+
+    public static void PostFixCalculator(List<String> postfix) {
+        expression = postfix;
+    }
+
+
+    public static ArrayList<String> result()
+    {
+
+        key_value_vector.clear();
+        for(int i = 0; i != expression.size(); ++i)
+        {
+            // Determine if current element is digit or not
+            if(Character.isDigit(expression.get(i).charAt(0)))
+            {
+                stack_new.addLast(Double.parseDouble(expression.get(i)));
+            }
+            else
+            {
+                double tempResult = 0;
+                double temp1;
+                double temp2;
+
+                switch(expression.get(i))
+                {
+                    case "+": temp1 = stack_new.removeLast();
+                        temp2 = stack_new.removeLast();
+                        holder = temp2+ " " + "+"+ " " + temp1+ " " + "=";
+                        tempResult = temp2 + temp1;
+                        holder += tempResult;
+                        break;
+
+                    case "-": temp1 = stack_new.removeLast();
+                        temp2 = stack_new.removeLast();
+                        holder = temp2+ " " + "-" + " " + temp1+ " " + "=";
+                        tempResult = temp2 - temp1;
+                        holder += tempResult;
+                        break;
+
+                    case "*": temp1 = stack_new.removeLast();
+                        temp2 = stack_new.removeLast();
+                        holder = temp2+ " " + "*" + " " + temp1+ " " + "=";
+                        tempResult = temp2 * temp1;
+                        holder += tempResult;
+                        break;
+
+                    case "/": temp1 = stack_new.removeLast();
+                        temp2 = stack_new.removeLast();
+                        holder = temp2+ " " + "/" + " " + temp1+ " " + "=";
+                        tempResult = temp2 / temp1;
+                        holder += tempResult;
+                        break;
+                }
+                stack_new.addLast(tempResult);
+                key_value_vector.add(holder);
+                holder = "";
+            }
+        }
         return key_value_vector;
     }
-
 
 
 }
