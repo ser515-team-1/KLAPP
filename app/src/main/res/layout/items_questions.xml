@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="40dp"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="20dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="10dp"
+    android:innerRadius="0dp"
+    android:shape="ring"
+    android:layout_margin="10dp"
+    android:thicknessRatio="1.9">
+<LinearLayout
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="40dp"
+    >
+    <TextView
+        android:id="@+id/question_id"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:background="@color/green_klapp"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        />
+    <View
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        />
+    <TextView
+        android:id="@+id/answer_id"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:background="@color/green_klapp"
+        />
+</LinearLayout>
+</androidx.cardview.widget.CardView>
