@@ -37,11 +37,11 @@ public class BodmasActivity extends AppCompatActivity{
     static int siz_array = 0;
     //Varialbles used for postfix evaluation
     private static String infix; // The infix expression to be converted
-    private static Deque<Character> stack = new ArrayDeque<Character>();
-    private static List<String> postfix = new ArrayList<String>(); // To hold the postfix expression
-    private static List<String> expression = new ArrayList<String>();
-    private static Deque<Double> stack_new = new ArrayDeque<Double>();
-    public static ArrayList<String> key_value_vector = new ArrayList<String>();
+    private static Deque<Character> stack;
+    private static List<String> postfix; // To hold the postfix expression
+    private static List<String> expression;
+    private static Deque<Double> stack_new;
+    public static ArrayList<String> key_value_vector;
     static String holder = "";
 
     @Override
@@ -77,7 +77,20 @@ public class BodmasActivity extends AppCompatActivity{
         BodmasUtility bodmasUtility = new BodmasUtility();
         List<String> postfix_store = new ArrayList<String>();
         String exprs = input;
-        String[] hold_expr = exprs.split("");
+
+        stack = new ArrayDeque<Character>();
+        postfix = new ArrayList<String>();
+        expression = new ArrayList<String>();
+        stack_new = new ArrayDeque<Double>();
+        key_value_vector = new ArrayList<String>();
+
+
+//        String[] hold_expr = exprs.split("");
+//
+////        Log.d(TAG, "submit: "+hold_expr.toString());
+//
+
+
         //initiation the postfix constructor with string
         postConverter(exprs);
         //String[] operator_array = formOperator_arr(hold_expr);
