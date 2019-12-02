@@ -13,6 +13,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+
+/**
+ * @author      rsingh92
+ * @version     1.0
+ * date created 11/10/2019
+ */
 public class KidsProfileViewModel extends ViewModel implements KidsProfileCallBack {
 
     private MutableLiveData<List<Student>> kidsprofilelivedata;

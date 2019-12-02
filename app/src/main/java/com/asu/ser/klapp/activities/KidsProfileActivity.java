@@ -24,6 +24,13 @@ import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+/**
+ *  @author      khusboo
+ *  @version     1.0
+ *  date created 11/04/2019
+ *
+ */
 public class KidsProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
 

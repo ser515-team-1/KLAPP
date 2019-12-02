@@ -1,7 +1,6 @@
 package com.asu.ser.klapp.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,8 +8,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
-import com.airbnb.lottie.LottieAnimationView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.Credential;
 import com.asu.ser.klapp.utilities.AppUtility;

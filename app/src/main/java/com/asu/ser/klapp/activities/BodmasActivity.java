@@ -23,6 +23,11 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
+/**
+ *  @author      Surya
+ *  @version     1.0
+ *  date created 10/21/2019
+ */
 public class BodmasActivity extends AppCompatActivity{
 
     private EditText inputField;
@@ -78,13 +83,6 @@ public class BodmasActivity extends AppCompatActivity{
         expression = new ArrayList<String>();
         stack_new = new ArrayDeque<Double>();
         key_value_vector = new ArrayList<String>();
-
-
-//        String[] hold_expr = exprs.split("");
-//
-////        Log.d(TAG, "submit: "+hold_expr.toString());
-//
-
 
         //initiation the postfix constructor with string
         postConverter(exprs);

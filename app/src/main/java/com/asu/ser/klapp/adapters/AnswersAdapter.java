@@ -16,6 +16,13 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+/**
+ *  @author      rsingh92
+ *  @version     1.0
+ *  date created 12/01/2019
+ *
+ */
 public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.AnswerViewHolder> {
 
     private static final String TAG = "AnswersAdapter";

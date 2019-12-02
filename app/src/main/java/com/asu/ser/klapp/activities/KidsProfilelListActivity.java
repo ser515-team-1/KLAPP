@@ -8,13 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.asu.ser.klapp.ExampleDialog;
-import com.asu.ser.klapp.ProblemIterator;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.KidProfileAdapter;
 import com.asu.ser.klapp.callbacks.ItemClickListener;
@@ -22,11 +18,9 @@ import com.asu.ser.klapp.interfaces.CreateProfileInterface;
 import com.asu.ser.klapp.interfaces.Dialogcallback;
 import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareProblem;
-import com.asu.ser.klapp.models.Problem;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.mvvm.viewmodels.KidsProfileViewModel;
 import com.asu.ser.klapp.sqlite.KidsProfileDao;
-import com.asu.ser.klapp.utilities.AppUtility;
 import com.asu.ser.klapp.utilities.DBUtilty;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -42,6 +36,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ *   @author      rsingh92
+ *   @version     1.0
+ *   date created  11/07/2019
+ */
 public class KidsProfilelListActivity extends AppCompatActivity implements CreateProfileInterface, View.OnClickListener, ItemClickListener, Dialogcallback {
 
 

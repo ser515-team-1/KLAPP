@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.callbacks.ItemClickListener;
 import com.asu.ser.klapp.models.Assignment;
-import com.asu.ser.klapp.models.Problem;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.utilities.AppUtility;
 
@@ -20,6 +19,12 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ *  @author      Divya
+ *  @version     1.0
+ *  date created 30/11/2019
+ *
+ */
 public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.KidViewHolder> {
 
     private static final String TAG = "KidProfileAdapter";

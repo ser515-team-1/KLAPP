@@ -15,6 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+/**
+ *  @author      rsingh92
+ *  @version     1.0
+ *  date created 11/19/2019
+ */
 public class AssignmentListActivity extends AppCompatActivity implements ItemClickListener {
 
     private RecyclerView assignmentRV;
@@ -52,7 +58,7 @@ public class AssignmentListActivity extends AppCompatActivity implements ItemCli
 
     }
 
-    public void openAssignment(Assignment assignment){
+    private void openAssignment(Assignment assignment){
 
         Intent intent = new Intent(this, CompareNumberActivity.class);
         intent.setAction("QUIZ_MODE");

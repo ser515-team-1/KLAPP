@@ -6,17 +6,19 @@ import android.util.Log;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.AnswersAdapter;
-import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareNumber;
-import com.asu.ser.klapp.models.CompareProblem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ *  @author      Surya
+ *  @version     1.0
+ *  date created 11/28/2019
+ */
 public class SeeAnswerActivity extends AppCompatActivity {
 
     private LinearLayoutManager llm;

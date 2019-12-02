@@ -6,6 +6,12 @@ import com.asu.ser.klapp.utilities.DBUtilty;
 
 import java.util.List;
 
+/**
+ *     @author Divya
+ *     @version     1.0
+ *     date created 11/10/2019
+ *
+ */
 public class KidsProfileRepository {
 
     private static KidsProfileRepository instance;
