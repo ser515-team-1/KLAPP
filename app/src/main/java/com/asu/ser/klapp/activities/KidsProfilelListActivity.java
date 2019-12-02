@@ -1,5 +1,6 @@
 package com.asu.ser.klapp.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -210,7 +211,7 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
 
         Student student = (Student)object;
         if(!isTeacherModeOn){
-            openDashBoard();
+            openDashBoard(student);
         }else{
             editProfile(student);
         }
@@ -277,20 +278,24 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
     }
 
 
+    @SuppressLint("RestrictedApi")
     private void enableTeacherScreen(){
         isTeacherModeOn = true;
         Toast.makeText(this, "Enabled Teacher", Toast.LENGTH_LONG).show();
         addProfile.setVisibility(View.VISIBLE);
     }
 
+    @SuppressLint("RestrictedApi")
     private void disableTeacherScreen(){
         isTeacherModeOn = false;
         Toast.makeText(this, "Disabled Teacher", Toast.LENGTH_LONG).show();
         addProfile.setVisibility(View.GONE);
     }
 
-    private void openDashBoard(){
+    private void openDashBoard(Student student){
         Intent intent = new Intent(this, DashboardActivity.class);
+        intent.putExtra(STUDENT_PROFILE, student);
+        Log.d(TAG, "DashboardActivity: "+student.toString());
         startActivity(intent);
     }
 

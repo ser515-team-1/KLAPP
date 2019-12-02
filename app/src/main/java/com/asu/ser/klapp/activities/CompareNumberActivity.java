@@ -3,6 +3,7 @@ package com.asu.ser.klapp.activities;
 import android.animation.Animator;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -13,11 +14,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareNumber;
+import com.asu.ser.klapp.models.CompareProblem;
+import com.asu.ser.klapp.models.Problem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -53,19 +59,43 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     private int currentQuestionNum=0;
 
     private static final String TAG = "DragDropTest";
+    private boolean isAssignmentMode = false;
+    private boolean isAssignmentCompleted = false;
+
+    private Assignment assignmentMetadata;
+
+    private ArrayList<String> submittedAnswers = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare);
 
-        assignment = getPracticeAssignment();
+        if(isAssignmentMode = ifAssignmentMode()){
+            assignment = getQuizAssignment();
+        }else {
+            assignment = getPracticeAssignment();
+        }
 
         initView();
         addListeners();
         addTags();
 
         createQuestions(currentQuestionNum);
+
+    }
+
+    private boolean ifAssignmentMode(){
+
+        String action = getIntent().getAction();
+
+        if(action==null){
+            return false;
+        }else if(action.equals("QUIZ_MODE")){
+            return true;
+        }else {
+            return false;
+        }
 
     }
 
@@ -82,6 +112,15 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         overlayText = findViewById(R.id.overlayText);
         overlayButton = findViewById(R.id.overlayButton);
         submitanim = findViewById(R.id.submitanim);
+
+        if(isAssignmentMode){
+            setOverlayText("Assignment: "+assignmentMetadata.getName()+"\n"+"Due Date: "+assignmentMetadata.getDue_date()+"\n"+"Questions: "+assignment.size());
+        }
+
+    }
+
+    private void setOverlayText(String text){
+        overlayText.setText(text);
     }
 
     private void addListeners(){
@@ -192,7 +231,10 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.overlayButton){
-            overlay.setVisibility(View.GONE);
+            if(!isAssignmentCompleted)
+                overlay.setVisibility(View.GONE);
+            else
+                openAnswerList();
         }
     }
 
@@ -201,7 +243,8 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         ClipData.Item item = event.getClipData().getItemAt(0);
         String dragData = item.getText().toString();
 
-        Log.d(TAG, "dropItem: Dragged data is " + dragData);
+        Log.d("OPTIONSELECT", "dropItem: Dragged data is " + dragData);
+        submittedAnswers.add(dragData);
         v.getBackground().clearColorFilter();
         v.invalidate();
 
@@ -263,6 +306,30 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         return assignment;
     }
 
+    private List<CompareNumber> getQuizAssignment(){
+
+        List<CompareNumber> compareNumbersList = new ArrayList<>();
+        assignmentMetadata = (Assignment) getIntent().getSerializableExtra("ASSIGNMENT");
+        List<CompareProblem> problemList = assignmentMetadata.getProblemList();
+
+        for(int i=0;i<problemList.size();i++){
+            CompareProblem compareProblem =  problemList.get(i);
+
+            String x = compareProblem.getLeft().trim();
+
+            Log.d("NUMBERS", "getQuizAssignment: "+x);
+
+            int left = Integer.parseInt(compareProblem.getLeft().trim());
+            int right = Integer.parseInt(compareProblem.getRight().trim());
+
+            CompareNumber compareNumber = new CompareNumber(left,right);
+            compareNumbersList.add(compareNumber);
+        }
+
+        return compareNumbersList;
+
+    }
+
     private CompareNumber getNumbers(){
         int num1 = new Random().nextInt(20);
         int num2 = new Random().nextInt(20);
@@ -282,14 +349,22 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         }
     }
 
-    private void loadStartAssignmentScreen(){
-
-    }
-
     private void loadEndAssignmentScreen(){
         overlay.setVisibility(View.VISIBLE);
         overlayText.setText("Assignment Completed Successfully");
-        overlayButton.setVisibility(View.GONE);
+        overlayButton.setText("SEE ANSWERS");
+        isAssignmentCompleted = true;
+    }
+
+    private void openAnswerList(){
+
+        Intent intent = new Intent(this, SeeAnswerActivity.class);
+        intent.putExtra("ANSWERS", submittedAnswers);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("NUMBERS", (Serializable) assignment);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
     }
 
 }

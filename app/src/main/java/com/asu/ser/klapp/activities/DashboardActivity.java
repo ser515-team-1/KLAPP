@@ -1,15 +1,24 @@
 package com.asu.ser.klapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.asu.ser.klapp.ExampleDialog;
 import com.asu.ser.klapp.R;
+import com.asu.ser.klapp.models.Assignment;
+import com.asu.ser.klapp.models.Student;
+import com.asu.ser.klapp.utilities.AppUtility;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author         ashwath
@@ -19,13 +28,75 @@ import com.asu.ser.klapp.R;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RelativeLayout admin, student1, student2;
+    private static final String TAG = "DashboardActivity";
+    private Student student;
+    private List<Assignment> assignmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        student = (Student) getIntent().getSerializableExtra(KidsProfilelListActivity.STUDENT_PROFILE);
         initView();
+
+        if(student.getUpcomingAssignmentString()!=null){
+            assignmentList = AppUtility.getAssignmentFromJSON(student.getUpcomingAssignmentString());
+            Log.d("GSON", "onBindViewHolder: "+ assignmentList.size() );
+
+        }
+
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.dashboard_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        switch (item.getItemId())
+        {
+
+            case R.id.assignment_icon:
+                openAssignmentList();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+    }
+
+    private void openAssignmentList(){
+
+        Log.d(TAG, "openAssignmentList: Inside");
+//        Log.d(TAG, "openAssignmentList: "+(assignmentList.size()==0));
+
+        if(assignmentList!=null) {
+
+            if (assignmentList.size() == 0) {
+                Toast.makeText(this, "No Assignment Due", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, AssignmentListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("value", (Serializable) assignmentList);
+                intent.putExtras(bundle);
+                Toast.makeText(this, assignmentList.size() + " Assignment Due", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        }else{
+            Toast.makeText(this, "No Assignment Due", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
     private void initView(){
 
@@ -36,6 +107,14 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         admin.setOnClickListener(this);
         student1.setOnClickListener(this);
         student2.setOnClickListener(this);
+
+        if(student.getAge()==0){
+            CardView adminBox = findViewById(R.id.adminBox);
+            adminBox.setVisibility(View.GONE);
+            getSupportActionBar().setTitle("Upto 4th Grade");
+        }else {
+            getSupportActionBar().setTitle("Upto 8th Grade");
+        }
 
     }
 

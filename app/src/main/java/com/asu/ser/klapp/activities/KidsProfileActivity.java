@@ -3,12 +3,15 @@ package com.asu.ser.klapp.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.Assignment;
@@ -24,7 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class KidsProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
 
-    private EditText name, age;
+    private EditText name;
     private Button  save;
     private KidsProfileDao kidsProfileDao;
     private int profilemode;
@@ -35,13 +38,33 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
     private static final int KIDS_ASSIGNMENT_REQ_CODE = 8475;
     public static final String KIDS_ASSIGNMENT = "KidsProfileActivity.KIDS_ASSIGNMENT";
 
+    private RadioGroup ageGroupRadio;
+
+    private int mAgeGroup=0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kid_profile);
         name = findViewById(R.id.name);
-        age = findViewById(R.id.age);
+
+        ageGroupRadio = findViewById(R.id.ageGroup);
+
+        ageGroupRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId){
+                    case R.id.ageGroup1:
+                        mAgeGroup = 0;
+                        break;
+                    case R.id.ageGroup2:
+                        mAgeGroup = 1;
+                        break;
+
+                }
+            }
+        });
 //        cancel = findViewById(R.id.cancel);
         save = findViewById(R.id.save);
 
@@ -133,7 +156,7 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
 
     public void updateToDatabase(){
 
-        kidprofile.setAge(Integer.parseInt(age.getText().toString()));
+        kidprofile.setAge(mAgeGroup);
         kidprofile.setName(name.getText().toString());
 
 
@@ -156,7 +179,7 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
     public Student createStudentFromForm(){
 
         Student student = new Student();
-        student.setAge(Integer.parseInt(age.getText().toString()));
+        student.setAge(mAgeGroup);
         student.setName(name.getText().toString());
         return student;
     }
@@ -164,15 +187,27 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
     public void populateFormFromInput(Student student){
 
         name.setText(student.getName());
-        age.setText(student.getAge()+"");
+
+        if(student.getAge()==0){
+            ageGroupRadio.check(R.id.ageGroup1);
+        }else {
+            ageGroupRadio.check(R.id.ageGroup2);
+        }
+//        age.setText(student.getAge()+"");
 
     }
 
     public void save(){
-        if(profilemode== KidsProfilelListActivity.ADD_MODE){
-            saveToDatabase();
-        }else if(profilemode == KidsProfilelListActivity.EDIT_MODE){
-            updateToDatabase();
+
+        if(valiadate()) {
+
+            Toast.makeText(this, mAgeGroup+"", Toast.LENGTH_SHORT).show();
+
+            if (profilemode == KidsProfilelListActivity.ADD_MODE) {
+                saveToDatabase();
+            } else if (profilemode == KidsProfilelListActivity.EDIT_MODE) {
+                updateToDatabase();
+            }
         }
     }
 
@@ -231,6 +266,26 @@ public class KidsProfileActivity extends AppCompatActivity implements View.OnCli
                 Log.d("GSON", "run: "+ass.size());
             }
         }).start();
+    }
+
+    private boolean valiadate(){
+
+        String pName = name.getText()+"".trim();
+//        String pAge = age.getText()+"".trim();
+
+        boolean validationPassed = true;
+
+        if(TextUtils.isEmpty(pName)){
+            name.setError("Name is empty");
+            validationPassed = false;
+        }
+
+//        if(TextUtils.isEmpty(pAge)){
+//            age.setError("Due date is empty");
+//            validationPassed = false;
+//        }
+
+        return validationPassed;
     }
 
 }

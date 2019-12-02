@@ -10,25 +10,44 @@ import java.util.List;
  */
 public class Assignment implements Serializable {
 
-    private List<Problem> problemList;
+    private String name;
+    private String due_date;
+    private List<CompareProblem> problemList;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDue_date() {
+        return due_date;
+    }
+
+    public void setDue_date(String due_date) {
+        this.due_date = due_date;
+    }
+
 
     public Assignment(){
         problemList = new ArrayList<>();
     }
 
-    public Assignment(List<Problem> problemList){
+    public Assignment(List<CompareProblem> problemList){
         this.problemList = problemList;
     }
 
-    public void addProbleam(Problem problem){
+    public void addProbleam(CompareProblem problem){
         problemList.add(problem);
     }
 
-    public List<Problem> getProblemList(){
+    public List<CompareProblem> getProblemList(){
         return problemList;
     }
 
-    public void setProblemList(List<Problem> problemList){
+    public void setProblemList(List<CompareProblem> problemList){
         this.problemList = problemList;
     }
 
