@@ -42,6 +42,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ *   @author      rsingh92
+ *   @version     1.0
+ *   date created  11/07/2019
+ */
 public class KidsProfilelListActivity extends AppCompatActivity implements CreateProfileInterface, View.OnClickListener, ItemClickListener, Dialogcallback {
 
 

@@ -7,6 +7,13 @@ import com.asu.ser.klapp.sqlite.KidsProfileDao;
 
 import androidx.room.Room;
 
+/**
+ *
+ *  @author      rsingh92
+ *  @version     1.0
+ *  date created 11/27/2019
+ *
+ */
 public class DBUtilty {
 
     public static Context context;

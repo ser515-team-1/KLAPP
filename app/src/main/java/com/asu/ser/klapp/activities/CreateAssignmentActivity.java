@@ -31,6 +31,12 @@ import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+/**
+ *  @author     Ashwath
+ *  @version     1.0
+ *  date created 09/19/2019
+ */
 public class CreateAssignmentActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private EditText left,right;

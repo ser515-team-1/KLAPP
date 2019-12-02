@@ -10,6 +10,13 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+/**
+ *
+ *  @author      rsingh92
+ *  @version     1.0
+ *  date created 11/19/2019
+ *
+ */
 @Dao
 public interface KidsProfileDao {
 

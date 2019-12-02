@@ -1,5 +1,11 @@
 package com.asu.ser.klapp.models;
 
+/**
+ *  @author      Divya
+ *  @version     1.0
+ *  date created 11/10/2019
+ *
+ */
 public class ImagePair {
 
     private int thing;

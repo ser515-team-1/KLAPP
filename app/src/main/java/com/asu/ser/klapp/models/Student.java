@@ -11,6 +11,13 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+/**
+ *
+ *  @author      khusboo
+ *  @version     1.0
+ *  date created 25/11/2019
+ *
+ */
 @Entity(tableName = "kids_profile_table")
 public class Student implements Serializable {
 

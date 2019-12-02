@@ -16,6 +16,13 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ *
+ *  @author      Ashwath
+ *  @version     1.0
+ *  date created 09/19/2019
+ *
+ */
 public class AssignmentListAdapter extends RecyclerView.Adapter<AssignmentListAdapter.AssignmentViewHolder> {
 
 

@@ -20,6 +20,12 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ *  @author      Divya
+ *  @version     1.0
+ *  date created 30/11/2019
+ *
+ */
 public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.KidViewHolder> {
 
     private static final String TAG = "KidProfileAdapter";
