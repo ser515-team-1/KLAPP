@@ -14,14 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareNumber;
 import com.asu.ser.klapp.models.CompareProblem;
-import com.asu.ser.klapp.models.Problem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -98,7 +96,6 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         }
 
     }
-
 
     private void initView(){
         dragArea = findViewById(R.id.dragaableArea);

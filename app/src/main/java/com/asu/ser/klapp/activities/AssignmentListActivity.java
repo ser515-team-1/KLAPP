@@ -58,7 +58,7 @@ public class AssignmentListActivity extends AppCompatActivity implements ItemCli
 
     }
 
-    public void openAssignment(Assignment assignment){
+    private void openAssignment(Assignment assignment){
 
         Intent intent = new Intent(this, CompareNumberActivity.class);
         intent.setAction("QUIZ_MODE");

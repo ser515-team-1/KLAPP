@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -13,14 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.asu.ser.klapp.R;
-import com.asu.ser.klapp.callbacks.ItemClickListener;
 import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareProblem;
-import com.asu.ser.klapp.models.Problem;
-import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.utilities.AppUtility;
 
 

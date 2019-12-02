@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.callbacks.ItemClickListener;
 import com.asu.ser.klapp.models.Assignment;
-import com.asu.ser.klapp.models.Problem;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.utilities.AppUtility;
 

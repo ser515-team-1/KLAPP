@@ -84,13 +84,6 @@ public class BodmasActivity extends AppCompatActivity{
         stack_new = new ArrayDeque<Double>();
         key_value_vector = new ArrayList<String>();
 
-
-//        String[] hold_expr = exprs.split("");
-//
-////        Log.d(TAG, "submit: "+hold_expr.toString());
-//
-
-
         //initiation the postfix constructor with string
         postConverter(exprs);
         //String[] operator_array = formOperator_arr(hold_expr);

@@ -6,11 +6,8 @@ import android.util.Log;
 
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.AnswersAdapter;
-import com.asu.ser.klapp.models.Assignment;
 import com.asu.ser.klapp.models.CompareNumber;
-import com.asu.ser.klapp.models.CompareProblem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
