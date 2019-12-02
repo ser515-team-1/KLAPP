@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
         Log.d(TAG, "openActivity: "+isStayLoggedIn());
 
         if(isStayLoggedIn()){
-            openDashBoard();
+            openKidsProfile();
         }else {
             openLoginPage();
         }
@@ -50,8 +50,8 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
-    private void openDashBoard(){
-        startActivity(new Intent(this, DashboardActivity.class));
+    private void openKidsProfile(){
+        startActivity(new Intent(this, KidsProfilelListActivity.class));
     }
 
     private boolean isStayLoggedIn(){

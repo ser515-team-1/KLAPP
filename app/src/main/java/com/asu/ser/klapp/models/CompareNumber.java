@@ -1,11 +1,13 @@
 package com.asu.ser.klapp.models;
 
+import java.io.Serializable;
+
 /**
  * @author          rsingh92
  * @version         1.0
  * date created     10/24/2019
  */
-public class CompareNumber {
+public class CompareNumber implements Serializable {
 
     private int num1, num2;
 
@@ -24,5 +26,10 @@ public class CompareNumber {
 
     public int getNum2(){
         return num2;
+    }
+
+    @Override
+    public String toString(){
+        return num1+" "+num2;
     }
 }
