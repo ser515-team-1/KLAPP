@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+\<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.asu.ser.klapp">
 
@@ -18,9 +18,17 @@
         <activity android:name=".activities.SignupActivity" android:label="Sign Up"/>
         <activity android:name=".activities.LoginActivity" android:label="Login"/>
         <activity android:name=".activities.DashboardActivity" android:label="Dashboard"></activity>
-        <activity android:name=".activities.CompareNumberActivity"/>
-        <activity android:name=".activities.BodmasActivity"/>
-        <activity android:name=".activities.CountingActivity"/>
+        <activity android:name=".activities.CompareNumberActivity" android:label="Compare"/>
+        <activity android:name=".activities.BodmasActivity" android:label="BODMAS"/>
+        <activity android:name=".activities.CountingActivity" android:label="Counting"/>
+        <activity android:name=".activities.CreateAssignmentActivity" android:label="Create Assignment">
+
+        </activity>
+        <activity android:name=".activities.KidsProfilelListActivity" android:label="Profiles">
+        </activity>
+        <activity android:name=".activities.KidsProfileActivity" android:label="Kid Profile"/>
+        <activity android:name=".activities.AssignmentListActivity" android:label="Assignments"/>
+        <activity android:name=".activities.SeeAnswerActivity" android:label="Answers"></activity>
     </application>
 
 </manifest>
