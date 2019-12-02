@@ -9,28 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.KidsProfileListActivity"></activity>
-        <activity
-            android:name=".activities.SplashActivity"
-            android:label="KLAPP">
+        <activity android:name=".activities.SplashActivity" android:label="KLAPP">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.SignupActivity"
-            android:label="Sign Up" />
-        <activity
-            android:name=".activities.LoginActivity"
-            android:label="Login" />
-        <activity
-            android:name=".activities.DashboardActivity"
-            android:label="Dashboard" />
-        <activity android:name=".activities.CompareNumberActivity" />
-        <activity android:name=".activities.BodmasActivity" />
-        <activity android:name=".activities.CountingActivity" />
+        <activity android:name=".activities.SignupActivity" android:label="Sign Up"/>
+        <activity android:name=".activities.LoginActivity" android:label="Login"/>
+        <activity android:name=".activities.DashboardActivity" android:label="Dashboard"></activity>
+        <activity android:name=".activities.CompareNumberActivity" android:label="Compare"/>
+        <activity android:name=".activities.BodmasActivity" android:label="BODMAS"/>
+        <activity android:name=".activities.CountingActivity" android:label="Counting"/>
+        <activity android:name=".activities.CreateAssignmentActivity" android:label="Create Assignment">
+
+        </activity>
+        <activity android:name=".activities.KidsProfilelListActivity" android:label="Profiles">
+        </activity>
+        <activity android:name=".activities.KidsProfileActivity" android:label="Kid Profile"/>
+        <activity android:name=".activities.AssignmentListActivity" android:label="Assignments"/>
+        <activity android:name=".activities.SeeAnswerActivity" android:label="Answers"></activity>
     </application>
 
 </manifest>
