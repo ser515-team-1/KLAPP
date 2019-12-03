@@ -12,7 +12,7 @@ An interactive UI with drag and drop features.</h3>
  ### [Download the App][1]
 
 
-  [1]: https://drive.google.com/drive/u/1/folders/1Sg16fWGOHnJwWOww6tua58tcOMwbTiGN
+  [1]: https://drive.google.com/open?id=1VlSRPszAJoWfHnVqipPeR0VPn2YW0U6-
   
 ---  
 
