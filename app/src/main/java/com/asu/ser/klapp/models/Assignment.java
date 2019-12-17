@@ -30,7 +30,6 @@ public class Assignment implements Serializable {
         this.due_date = due_date;
     }
 
-
     public Assignment(){
         problemList = new ArrayList<>();
     }
