@@ -75,6 +75,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     
     @Override
     public void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare);
         checkAssignmentMode();
@@ -82,6 +83,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         addListeners();
         addTags();
         createQuestions(currentQuestionNum);
+
     }
 
     
@@ -273,11 +275,11 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     }
 
     private CompareNumber getNumbers(){
-        
+
         int num1 = new Random().nextInt(20);
         int num2 = new Random().nextInt(20);
         return new CompareNumber(num1, num2);
-        
+
     }
 
     private void createQuestions(int index){
