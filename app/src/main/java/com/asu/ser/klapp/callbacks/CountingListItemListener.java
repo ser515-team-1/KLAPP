@@ -10,4 +10,5 @@ import android.view.View;
 public interface CountingListItemListener {
 
     public void setupcallback(View view);
+
 }

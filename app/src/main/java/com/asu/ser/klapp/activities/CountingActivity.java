@@ -40,60 +40,25 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private static final String TAG1 = "Events";
     private int counterValue =0;
 
+
+    /***********************************************************************************************
+     *                     Activity Life cycle methods                                             *
+     *                                                                                             *
+     /*********************************************************************************************/
+
     @Override
     public void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counting);
         initView();
-    }
-
-    private void initView(){
-        dragableArea = findViewById(R.id.dragaableArea);
-        recyclerView = findViewById(R.id.list);
-        counter = findViewById(R.id.counter);
-        layoutManager = new GridLayoutManager(this, 5);
-        setUpPuzzleImages();
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
-        addListeners();
-    }
-
-    private void addListeners(){
-        dragableArea.setOnDragListener(this);
-    }
-
-
-    private int getRandomNumber(){
-
-        int num =0;
-
-        while(num==0){
-            num = new Random().nextInt(10);
-        }
-
-        return num;
-    }
-
-
-    public void dropItem(View v, DragEvent event) {
-
-        ClipData.Item item = event.getClipData().getItemAt(0);
-        String dragData = item.getText().toString();
-        v.getBackground().clearColorFilter();
-        v.invalidate();
-
-        View vw = (View) event.getLocalState();
-        ViewGroup owner = (ViewGroup) vw.getParent();
-
-        TextView clone = new TextView(this);
-        clone.setOnDragListener(this);
-
-        vw.setVisibility(View.VISIBLE);
-
-        updateCounter();
-        adapter.removeAt(3);
 
     }
+
+    /***********************************************************************************************
+     *                                  Interface methods                                          *
+     *                                                                                             *
+     **********************************************************************************************/
 
     @Override
     public boolean onLongClick(View v) {
@@ -148,40 +113,87 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
 
             case DragEvent.ACTION_DROP:
 
-                Log.d("Hi", "onDrag: ACTION_DROP");
                 dropItem(v, event);
-
                 return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
 
-                Log.d("Hi", "onDrag: ACTION_ENDED");
                 v.getBackground().clearColorFilter();
-
-
-
                 v.invalidate();
 
                 if (event.getResult()) {
                     Log.d("Hi", "onDrag: The drop was handled.");
 
                 }
-                //Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-                else
-                    Log.d("Hi", "onDrag: The drop didn't work.");
-                //Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
 
                 return true;
 
             default:
-                Log.e("DragDrop Example", "Unknown action type received by OnDragListener.");
                 break;
         }
         return false;
     }
 
+    @Override
+    public void setupcallback(View view) {
+        addDragAbility(view);
+    }
 
-    public void addDragAbility(View view){
+
+    /************************************************************************************************
+     *                                   Private Helper Methods                                     *
+     *                                                                                              *
+     ***********************************************************************************************/
+    private void initView(){
+
+        dragableArea = findViewById(R.id.dragaableArea);
+        recyclerView = findViewById(R.id.list);
+        counter = findViewById(R.id.counter);
+        layoutManager = new GridLayoutManager(this, 5);
+        setUpPuzzleImages();
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+        addListeners();
+
+    }
+
+    private void addListeners(){
+        dragableArea.setOnDragListener(this);
+    }
+
+
+    private int getRandomNumber(){
+
+        int num =0;
+
+        while(num==0){
+            num = new Random().nextInt(10);
+        }
+
+        return num;
+    }
+
+    private void dropItem(View v, DragEvent event) {
+
+        ClipData.Item item = event.getClipData().getItemAt(0);
+        String dragData = item.getText().toString();
+        v.getBackground().clearColorFilter();
+        v.invalidate();
+
+        View vw = (View) event.getLocalState();
+        ViewGroup owner = (ViewGroup) vw.getParent();
+
+        TextView clone = new TextView(this);
+        clone.setOnDragListener(this);
+
+        vw.setVisibility(View.VISIBLE);
+
+        updateCounter();
+        adapter.removeAt(3);
+
+    }
+
+    private void addDragAbility(View view){
         view.setOnDragListener(this);
         view.setTag("Value");
         view.setOnLongClickListener(this);
@@ -190,13 +202,6 @@ public class CountingActivity extends AppCompatActivity implements View.OnDragLi
     private void updateCounter(){
         counter.setText(++counterValue+"");
     }
-
-
-    @Override
-    public void setupcallback(View view) {
-        addDragAbility(view);
-    }
-
 
     private void setUpPuzzleImages(){
         ImagePair imagePair = AppUtility.getRandomImagePair();
