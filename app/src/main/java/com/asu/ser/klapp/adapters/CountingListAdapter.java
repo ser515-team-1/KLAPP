@@ -20,13 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class CountingListAdapter extends RecyclerView.Adapter<CountingListAdapter.CountingItemViewHolder> {
 
-
     private Context context;
     private int itemNum;
     private CountingListItemListener listItemListener;
     private int drawableId;
-
-
 
     public CountingListAdapter(Context context, int itemNum, int drawableId){
         this.context = context;
