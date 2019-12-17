@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class AssignmentListAdapter extends RecyclerView.Adapter<AssignmentListAdapter.AssignmentViewHolder> {
 
-
     private Context context;
     private List<Assignment> assignmentList;
     private ItemClickListener itemClickListener;
@@ -34,8 +33,6 @@ public class AssignmentListAdapter extends RecyclerView.Adapter<AssignmentListAd
         this.context = context;
         this.assignmentList = assignmentList;
         itemClickListener = (ItemClickListener)context;
-        Log.d("AssignmentListActivity", "Return: "+assignmentList.size());
-
     }
 
     @NonNull

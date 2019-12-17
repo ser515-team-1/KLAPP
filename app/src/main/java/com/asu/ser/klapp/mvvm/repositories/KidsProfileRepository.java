@@ -32,7 +32,6 @@ public class KidsProfileRepository {
         this.callBack = callBack;
     }
 
-
     public void getAllKidsProfileFromDataBase(){
 
         Thread loadDb = new Thread(new Runnable() {

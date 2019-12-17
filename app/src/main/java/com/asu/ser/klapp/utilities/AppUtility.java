@@ -82,15 +82,7 @@ public class AppUtility {
 
         imagePairList = new ArrayList<ImagePair>();
         imagePairList.add(new ImagePair(R.drawable.pair1_basket,R.drawable.pair1_goal_post));
-//        imagePairList.add(new ImagePair(R.drawable.pair2_pokeball,R.drawable.pair2_pikachu));
         imagePairList.add(new ImagePair(R.drawable.pair3_shirt,R.drawable.pair3_drawer));
-//        imagePairList.add(new ImagePair(R.drawable.pair5_pen,R.drawable.pair5_purse));
-//        imagePairList.add(new ImagePair(R.drawable.pair4_pen,R.drawable.pair4_purse));
-
-//        imagePairList.add(new ImagePair(R.drawable.pair1_basket,R.drawable.pair1_goal_post));
-//        imagePairList.add(new ImagePair(R.drawable.pair1_basket,R.drawable.pair1_goal_post));
-//        imagePairList.add(new ImagePair(R.drawable.pair1_basket,R.drawable.pair1_goal_post));
-        Log.d("init", "init_image_pairs: ");
     }
 
     public static ImagePair getRandomImagePair(){
@@ -117,6 +109,5 @@ public class AppUtility {
         return assignmentList;
 
     }
-
 
 }

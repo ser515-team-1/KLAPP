@@ -14,20 +14,12 @@ import com.asu.ser.klapp.ExampleDialog;
 import com.asu.ser.klapp.R;
 import com.asu.ser.klapp.adapters.KidProfileAdapter;
 import com.asu.ser.klapp.callbacks.ItemClickListener;
-import com.asu.ser.klapp.interfaces.CreateProfileInterface;
 import com.asu.ser.klapp.interfaces.Dialogcallback;
-import com.asu.ser.klapp.models.Assignment;
-import com.asu.ser.klapp.models.CompareProblem;
 import com.asu.ser.klapp.models.Student;
 import com.asu.ser.klapp.mvvm.viewmodels.KidsProfileViewModel;
 import com.asu.ser.klapp.sqlite.KidsProfileDao;
 import com.asu.ser.klapp.utilities.DBUtilty;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,63 +33,64 @@ import androidx.recyclerview.widget.RecyclerView;
  *   @version     1.0
  *   date created  11/07/2019
  */
-public class KidsProfilelListActivity extends AppCompatActivity implements CreateProfileInterface, View.OnClickListener, ItemClickListener, Dialogcallback {
+public class KidsProfilelListActivity extends AppCompatActivity implements View.OnClickListener, ItemClickListener, Dialogcallback {
 
-
+    private FloatingActionButton addProfile;
     private RecyclerView kidsRecyclerView;
+
     private KidProfileAdapter adapter;
     private LinearLayoutManager llm;
-
-    private List<Student> studentProfileList;
 
     private KidsProfileDao kidsProfileDao;
 
     private KidsProfileViewModel kidsProfileViewModel;
 
-    private FloatingActionButton addProfile;
+    private List<Student> studentProfileList;
 
     private final int ADD_PROFILE_REQ_CODE = 12354;
-
-    private static final String TAG = "CreateKidProfileActivit";
     public static final String KIDS_PROFLE_MODE = "CreateKidProfileActivity.KIDS_PROFLE_MODE";
     public static final int ADD_MODE = 1221;
     public static final int EDIT_MODE = 1432;
     public static final String STUDENT_PROFILE = "reateKidProfileActivity.STUDENT_PROFILE";
     private boolean isTeacherModeOn = false;
 
+    private static final String TAG = "CreateKidProfileActivit";
 
+    /***********************************************************************************************
+     *                     Activity Life cycle methods                                             *
+     *                                                                                             *
+     /*********************************************************************************************/
     @Override
     public void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createprofile);
-        kidsProfileDao = DBUtilty.getKidsProfileDao();
-
-        addProfile = findViewById(R.id.add_profile);
-        addProfile.setOnClickListener(this);
-
-        kidsRecyclerView = findViewById(R.id.profileRecyclerView);
-
-        kidsProfileViewModel = ViewModelProviders.of(this).get(KidsProfileViewModel.class);
-        kidsProfileViewModel.init();
-
-
+        initKidProfileDB();
+        initViews();
+        addListeners();
+        initViewModel();
         initRV();
-
-        kidsProfileViewModel.getAllKidsProfileLiveData().observe(this, new Observer<List<Student>>() {
-            @Override
-            public void onChanged(List<Student> studentList) {
-                adapter.updateDataSet(studentList);
-            }
-        });
-        kidsProfileViewModel.refreshList();
-
-
-//        kidsRecyclerView.setAdapter(adapter);
-
+        loadInitialDataToViewModel();
 
     }
 
+    @Override
+    public void onActivityResult(int reqCode, int resCode, Intent data){
 
+        if(reqCode == ADD_PROFILE_REQ_CODE){
+            if(resCode== Activity.RESULT_OK){
+                kidsProfileViewModel.refreshList();
+            }
+        }else {
+            Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    /************************************************************************************************
+     *                                   Menu Related Methods                                       *
+     *                                                                                              *
+     ***********************************************************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -109,8 +102,7 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
     public boolean onOptionsItemSelected(MenuItem item)
     {
 
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
 
             case R.id.techer:
                 opendialog();
@@ -120,69 +112,12 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
                 return super.onOptionsItemSelected(item);
 
         }
-
     }
 
-
-    @Override
-    public List<Student> loadallprofile() {
-        return null;
-    }
-
-    @Override
-    public void addProfile() {
-//        final Student student = new Student();
-////        student.setAge(Integer.getInteger(age.getText().toString()));
-//        student.setName(name.getText().toString());
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                kidsProfileDao.insert(student);
-//                kidsProfileViewModel.refreshList();
-//            }
-//        }).start();
-
-
-    }
-
-    @Override
-    public void updateProfile(Student student) {
-
-    }
-
-    @Override
-    public void deleteProfile(Student student) {
-
-    }
-
-    private void addNewProfile(){
-        Intent intent = new Intent(this, KidsProfileActivity.class);
-        intent.putExtra(KIDS_PROFLE_MODE, ADD_MODE);
-        startActivityForResult(intent,ADD_PROFILE_REQ_CODE);
-    }
-
-    private void editProfile(Student student){
-        Intent intent = new Intent(this, KidsProfileActivity.class);
-        intent.putExtra(KIDS_PROFLE_MODE, EDIT_MODE);
-        intent.putExtra(STUDENT_PROFILE,student);
-        startActivityForResult(intent,ADD_PROFILE_REQ_CODE);
-    }
-
-    @Override
-    public void onActivityResult(int reqCode, int resCode, Intent data){
-
-        if(reqCode == ADD_PROFILE_REQ_CODE){
-            if(resCode== Activity.RESULT_OK){
-                Log.d("COUNTER", "onActivityResult: ");
-                kidsProfileViewModel.refreshList();
-            }
-        }else {
-            Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
+    /***********************************************************************************************
+     *                                  Interface methods                                          *
+     *                                                                                             *
+     **********************************************************************************************/
     @Override
     public void onClick(View v) {
 
@@ -198,13 +133,6 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
         }
     }
 
-    private void initRV(){
-        llm = new LinearLayoutManager(this);
-        adapter = new KidProfileAdapter(this, kidsProfileViewModel.getAllKidsProfileLiveData().getValue());
-        kidsRecyclerView.setLayoutManager(llm);
-        kidsRecyclerView.setAdapter(adapter);
-    }
-
     @Override
     public void itemClicked(Object object) {
 
@@ -214,56 +142,6 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
         }else{
             editProfile(student);
         }
-    }
-
-
-
-    public void testGSON(){
-
-        Assignment assignment = new Assignment();
-        CompareProblem compareProblem = new CompareProblem();
-        compareProblem.setLeft("5");
-        compareProblem.setRight("7");
-        compareProblem.setAnswer(">");
-        assignment.addProbleam(compareProblem);
-        CompareProblem compareProblem1 = new CompareProblem();
-        compareProblem1.setLeft("7");
-        compareProblem1.setRight("7");
-        compareProblem1.setAnswer("=");
-        assignment.addProbleam(compareProblem1);
-
-        Assignment assignment2 = new Assignment();
-        CompareProblem compareProblem2 = new CompareProblem();
-        compareProblem2.setLeft("5");
-        compareProblem2.setRight("7");
-        compareProblem2.setAnswer(">");
-        assignment2.addProbleam(compareProblem2);
-        CompareProblem compareProblem12 = new CompareProblem();
-        compareProblem12.setLeft("7");
-        compareProblem12.setRight("7");
-        compareProblem12.setAnswer("=");
-        assignment2.addProbleam(compareProblem12);
-
-        List<Assignment> upcoming = new ArrayList<>();
-        upcoming.add(assignment);
-        upcoming.add(assignment2);
-
-        Gson gson = new Gson();
-        String json = gson.toJson(upcoming);
-
-        Type listType = new TypeToken<ArrayList<Assignment>>(){}.getType();
-        List<Assignment> yourClassList = new Gson().fromJson(json, listType);
-
-
-
-        Log.d("TESTGSON", "testGSON: "+json);
-
-
-    }
-
-    private void opendialog() {
-        ExampleDialog exampleDialog=new ExampleDialog(this);
-        exampleDialog.show(getSupportFragmentManager(),"example dialog");
     }
 
 
@@ -277,27 +155,91 @@ public class KidsProfilelListActivity extends AppCompatActivity implements Creat
     }
 
 
+    /************************************************************************************************
+     *                                   Private Helper Methods                                     *
+     *                                                                                              *
+     ***********************************************************************************************/
     @SuppressLint("RestrictedApi")
     private void enableTeacherScreen(){
+
         isTeacherModeOn = true;
         Toast.makeText(this, "Enabled Teacher", Toast.LENGTH_LONG).show();
         addProfile.setVisibility(View.VISIBLE);
+
     }
 
     @SuppressLint("RestrictedApi")
     private void disableTeacherScreen(){
+
         isTeacherModeOn = false;
         Toast.makeText(this, "Disabled Teacher", Toast.LENGTH_LONG).show();
         addProfile.setVisibility(View.GONE);
+
     }
 
     private void openDashBoard(Student student){
+
         Intent intent = new Intent(this, DashboardActivity.class);
         intent.putExtra(STUDENT_PROFILE, student);
         Log.d(TAG, "DashboardActivity: "+student.toString());
         startActivity(intent);
+
     }
 
+    private void opendialog() {
 
+        ExampleDialog exampleDialog=new ExampleDialog(this);
+        exampleDialog.show(getSupportFragmentManager(),"example dialog");
+
+    }
+
+    private void initRV(){
+        llm = new LinearLayoutManager(this);
+        adapter = new KidProfileAdapter(this, kidsProfileViewModel.getAllKidsProfileLiveData().getValue());
+        kidsRecyclerView.setLayoutManager(llm);
+        kidsRecyclerView.setAdapter(adapter);
+    }
+
+    private void addNewProfile(){
+        Intent intent = new Intent(this, KidsProfileActivity.class);
+        intent.putExtra(KIDS_PROFLE_MODE, ADD_MODE);
+        startActivityForResult(intent,ADD_PROFILE_REQ_CODE);
+    }
+
+    private void editProfile(Student student){
+        Intent intent = new Intent(this, KidsProfileActivity.class);
+        intent.putExtra(KIDS_PROFLE_MODE, EDIT_MODE);
+        intent.putExtra(STUDENT_PROFILE,student);
+        startActivityForResult(intent,ADD_PROFILE_REQ_CODE);
+    }
+
+    private void initKidProfileDB(){
+        kidsProfileDao = DBUtilty.getKidsProfileDao();
+    }
+
+    private void initViews(){
+        addProfile = findViewById(R.id.add_profile);
+        kidsRecyclerView = findViewById(R.id.profileRecyclerView);
+    }
+
+    private void addListeners(){
+        addProfile.setOnClickListener(this);
+    }
+
+    private void initViewModel(){
+        kidsProfileViewModel = ViewModelProviders.of(this).get(KidsProfileViewModel.class);
+        kidsProfileViewModel.init();
+    }
+
+    private void loadInitialDataToViewModel(){
+        kidsProfileViewModel.getAllKidsProfileLiveData().observe(this, new Observer<List<Student>>() {
+            @Override
+            public void onChanged(List<Student> studentList) {
+                adapter.updateDataSet(studentList);
+            }
+        });
+
+        kidsProfileViewModel.refreshList();
+    }
 
 }

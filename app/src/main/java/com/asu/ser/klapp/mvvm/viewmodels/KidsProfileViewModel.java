@@ -36,17 +36,11 @@ public class KidsProfileViewModel extends ViewModel implements KidsProfileCallBa
     }
 
     public void refreshList(){
-
-        Log.d("COUNTER", "refreshList: ");
-
         repository.getAllKidsProfileFromDataBase();
     }
 
     @Override
     public void kidsProfilesLoadedFromDB(List<Student> kidsProfiles) {
-
-        Log.d("COUNTER", "kidsProfilesLoadedFromDB: "+kidsProfiles.size());
-
         kidsprofilelivedata.postValue(kidsProfiles);
     }
 }

@@ -21,35 +21,43 @@ import androidx.recyclerview.widget.RecyclerView;
  *  @version     1.0
  *  date created 11/19/2019
  */
+
+/***************************************************************************************************
+ *                                          TODO
+ *    Change key value a static field. Now its "value" in getIntentFromActivity
+ *
+ **************************************************************************************************/
 public class AssignmentListActivity extends AppCompatActivity implements ItemClickListener {
 
     private RecyclerView assignmentRV;
+
     private LinearLayoutManager llm;
     private AssignmentListAdapter assignmentListAdapter;
+    List<Assignment> assignmentList;
 
     private static final String TAG = "AssignmentListActivity";
+
+
+    /***********************************************************************************************
+     *                     Activity Life cycle methods                                             *
+     *                                                                                             *
+     /*********************************************************************************************/
 
     @Override
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_assignment);
-        assignmentRV = findViewById(R.id.assignmentRV);
-
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        List<Assignment> assignmentList= (List<Assignment>)bundle.getSerializable("value");
-
-        Log.d(TAG, "onCreate: "+assignmentList.size());
-
-        llm = new LinearLayoutManager(this);
-
-        assignmentListAdapter = new AssignmentListAdapter(this, assignmentList);
-        assignmentRV.setLayoutManager(llm);
-        assignmentRV.setAdapter(assignmentListAdapter);
-
+        initViews();
+        getIntentFromActivity();
+        setUpAdapter();
 
     }
+
+    /***********************************************************************************************
+     *                                  Interface methods                                          *
+     *                                                                                             *
+     **********************************************************************************************/
 
     @Override
     public void itemClicked(Object object) {
@@ -58,6 +66,10 @@ public class AssignmentListActivity extends AppCompatActivity implements ItemCli
 
     }
 
+    /************************************************************************************************
+     *                                   Private Helper Methods                                     *
+     *                                                                                              *
+     ***********************************************************************************************/
     private void openAssignment(Assignment assignment){
 
         Intent intent = new Intent(this, CompareNumberActivity.class);
@@ -65,5 +77,26 @@ public class AssignmentListActivity extends AppCompatActivity implements ItemCli
         intent.putExtra("ASSIGNMENT", assignment);
         startActivity(intent);
 
+    }
+
+    private void initViews(){
+
+        assignmentRV = findViewById(R.id.assignmentRV);
+    }
+
+    private void getIntentFromActivity(){
+
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        assignmentList= (List<Assignment>)bundle.getSerializable("value");
+
+    }
+
+    private void setUpAdapter(){
+
+        llm = new LinearLayoutManager(this);
+        assignmentListAdapter = new AssignmentListAdapter(this, assignmentList);
+        assignmentRV.setLayoutManager(llm);
+        assignmentRV.setAdapter(assignmentListAdapter);
     }
 }

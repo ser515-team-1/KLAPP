@@ -22,21 +22,47 @@ import androidx.appcompat.app.AppCompatActivity;
  * @author         rsingh92
  * @version        2.0
  */
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText username, password, retypePass;
     private Button submit;
     private CheckBox staySignedIn;
+
     private String errpr_message;
 
+    /***********************************************************************************************
+     *                     Activity Life cycle methods                                             *
+     *                                                                                             *
+     /*********************************************************************************************/
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         initView();
-
+        addListeners();
     }
 
+    /***********************************************************************************************
+     *                                  Interface methods                                          *
+     *                                                                                             *
+     **********************************************************************************************/
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+
+            case R.id.submit:
+                signup();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    /************************************************************************************************
+     *                                   Private Helper Methods                                     *
+     *                                                                                              *
+     ***********************************************************************************************/
     private void initView(){
 
         username = findViewById(R.id.username);
@@ -44,21 +70,6 @@ public class SignupActivity extends AppCompatActivity {
         retypePass = findViewById(R.id.retypePassword);
         staySignedIn = findViewById(R.id.stayLoggedIn);
         submit = findViewById(R.id.submit);
-
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(validate()) {
-                    saveCredential();
-                    finishSignup();
-                }else {
-                    showErrorMessage();
-                }
-
-            }
-        });
     }
 
     private void saveCredential(){
@@ -99,7 +110,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void finishSignup(){
-        //startActivity(new Intent(this, DashboardActivity.class));
+
         setResult(Activity.RESULT_OK);
         finish();
     }
@@ -108,5 +119,16 @@ public class SignupActivity extends AppCompatActivity {
         Toast.makeText(this, errpr_message, Toast.LENGTH_SHORT).show();
     }
 
+    private void signup(){
+        if(validate()) {
+            saveCredential();
+            finishSignup();
+        }else {
+            showErrorMessage();
+        }
+    }
 
+    private void addListeners(){
+        submit.setOnClickListener(this);
+    }
 }

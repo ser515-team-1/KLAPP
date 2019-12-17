@@ -34,63 +34,85 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class CreateAssignmentActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
-    private EditText left,right;
-//    private TextView assignmentDetail;
+    private EditText left, right, dueDate1, name1;
     private Button submit, addMore;
+    private Menu cartMenu;
+    private MenuItem menuItemCount;
 
-    private EditText dueDate1, name1;
+    final Calendar myCalendar = Calendar.getInstance();
 
     private Assignment assignment;
     private List<CompareProblem> problemList;
     private int counter=0;
-    private Menu cartMenu;
-    private MenuItem menuItemCount;
 
+    private DatePickerDialog datePickerDialog;
 
-    final Calendar myCalendar = Calendar.getInstance();
-
+    /***********************************************************************************************
+     *                     Activity Life cycle methods                                             *
+     *                                                                                             *
+     /*********************************************************************************************/
     @Override
     public void onCreate(Bundle savedInstaceState){
+
         super.onCreate(savedInstaceState);
         setContentView(R.layout.activity_create_assignment);
+        initAssignment();
+        initViews();
+        initDialog();
+        addListeners();
+        
+    }
 
-        assignment = new Assignment();
-        problemList = assignment.getProblemList();
 
-        left = findViewById(R.id.left);
-        right = findViewById(R.id.right);
-        submit = findViewById(R.id.submit);
-        addMore = findViewById(R.id.addMore);
+    /***********************************************************************************************
+     *                                  Interface methods                                          *
+     *                                                                                             *
+     **********************************************************************************************/
+    @Override
+    public void onClick(View v){
 
-        name1 = findViewById(R.id.assignmentName);
-        dueDate1 = findViewById(R.id.dueDate);
+        switch (v.getId()){
 
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this, R.style.DialogTheme, CreateAssignmentActivity.this, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+            case R.id.submit:
+                finishAssignment();
+                break;
 
-        dueDate1.setOnClickListener(new View.OnClickListener() {
+            case R.id.addMore:
+                addMore();
+                break;
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
+            case R.id.dueDate:
                 datePickerDialog.show();
-            }
-        });
+                break;
 
-
-
-        addMore.setOnClickListener(this);
-        submit.setOnClickListener(this);
+            default:
+                break;
+        }
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+        myCalendar.set(Calendar.YEAR, year);
+        myCalendar.set(Calendar.MONTH, month);
+        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        updateLabel();
+
+    }
+
+    /************************************************************************************************
+     *                                   Menu Related Methods                                       *
+     *                                                                                              *
+     ***********************************************************************************************/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.assignment_menu,menu);
         initMenu(menu);
         return true;
+
     }
 
     @Override
@@ -111,39 +133,10 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
     }
 
-
-
-    private CompareProblem createProblem(){
-        CompareProblem problem = new CompareProblem();
-        problem.setLeft(left.getText().toString());
-        problem.setRight(right.getText().toString());
-        problem.setAnswer(">");
-        Log.d("NUMBERS", "createProblem: "+problem.toString());
-        return problem;
-    }
-
-    private void addProblem(){
-        assignment.addProbleam(createProblem());
-    }
-
-    @Override
-    public void onClick(View v){
-
-        switch (v.getId()){
-
-            case R.id.submit:
-                finishAssignment();
-                break;
-
-            case R.id.addMore:
-                addMore();
-                break;
-
-            default:
-                break;
-        }
-
-    }
+    /************************************************************************************************
+     *                                   Private Helper Methods                                     *
+     *                                                                                              *
+     ***********************************************************************************************/
 
     private void addMore(){
 
@@ -156,10 +149,7 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
 
     private void finishAssignment(){
 
-
-
         if(valiadate()) {
-
             addMetaData();
             Intent intent = new Intent(this, CompareNumberActivity.class);
             intent.putExtra(AppUtility.ASSIGNMENT_MODE, AppUtility.ATTEMPT_MODE);
@@ -168,65 +158,51 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
             finish();
         }
 
-//        if(valiadate()){
-//            addMetaData();
-//
-//        }
-
     }
 
     private void addMetaData(){
 
-
-//        String a = name1.getText().toString();
-//        String b = dueDate1.getText().toString();
-
-//        Log.d("EDITTEXT", "addMetaData: "+a);
-
         assignment.setName(name1.getText().toString());
         assignment.setDue_date(dueDate1.getText().toString());
+
     }
 
 
     private void cleanEntries(){
+
         left.setText("");
         right.setText("");
+
     }
 
 
     private void updateLabel() {
+
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
         dueDate1.setText(sdf.format(myCalendar.getTime()));
+
     }
 
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        myCalendar.set(Calendar.YEAR, year);
-        myCalendar.set(Calendar.MONTH, month);
-        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        updateLabel();
-    }
 
     private void initMenu(Menu menu){
+
         cartMenu = menu;
         menuItemCount = cartMenu.findItem(R.id.counter);
+
     }
 
-    public void updateCounter(){
+    private void updateCounter(){
+
         counter++;
         menuItemCount.setTitle(counter+"");
-    }
 
+    }
 
     private boolean valiadate(){
 
         String pName = name1.getText()+"".trim();
         String pDueDate = dueDate1.getText()+"".trim();
-//        String pLeft = left.getText()+"".trim();
-//        String pRight = right.getText()+"".trim();
 
         boolean validationPassed = true;
 
@@ -239,17 +215,6 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
             dueDate1.setError("Due date is empty");
             validationPassed = false;
         }
-
-//        if(TextUtils.isEmpty(pRight)){
-//            right.setError("Left Expression is empty");
-//            validationPassed = false;
-//        }
-//
-//        if(TextUtils.isEmpty(pLeft)){
-//            left.setError("Right expression is empty");
-//            validationPassed = false;
-//        }
-
 
         return validationPassed;
     }
@@ -272,6 +237,54 @@ public class CreateAssignmentActivity extends AppCompatActivity implements View.
         }
 
         return validationPassed;
+    }
+
+    private void initViews(){
+
+        left = findViewById(R.id.left);
+        right = findViewById(R.id.right);
+        submit = findViewById(R.id.submit);
+        addMore = findViewById(R.id.addMore);
+        name1 = findViewById(R.id.assignmentName);
+        dueDate1 = findViewById(R.id.dueDate);
+
+    }
+
+    private void initAssignment(){
+
+        assignment = new Assignment();
+        problemList = assignment.getProblemList();
+
+    }
+
+    private void initDialog(){
+
+         datePickerDialog = new DatePickerDialog(
+                this, R.style.DialogTheme, CreateAssignmentActivity.this, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+
+    }
+
+    private void addListeners(){
+
+        dueDate1.setOnClickListener(this);
+        addMore.setOnClickListener(this);
+        submit.setOnClickListener(this);
+
+    }
+
+    private CompareProblem createProblem(){
+
+        CompareProblem problem = new CompareProblem();
+        problem.setLeft(left.getText().toString());
+        problem.setRight(right.getText().toString());
+        problem.setAnswer(">");
+        return problem;
+
+    }
+
+    private void addProblem(){
+        assignment.addProbleam(createProblem());
     }
 
 }

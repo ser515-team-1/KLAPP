@@ -19,7 +19,7 @@ public class StringValidation {
     double res = expression.evaluate();
 
     String StringValidation(String s, Context context) {
-        //s is the string which is coming from the EditText
+
         if (s.length() > 8) {
             Toast toast = Toast.makeText(context, "Please enter an expression less than 6 digits", Toast.LENGTH_SHORT);
             toast.show();

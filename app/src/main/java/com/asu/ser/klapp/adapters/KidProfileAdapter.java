@@ -1,7 +1,6 @@
 package com.asu.ser.klapp.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.KidViewHolder> {
 
-    private static final String TAG = "KidProfileAdapter";
     private Context context;
     private List<Student> kidsProfileList;
     private ItemClickListener itemClickListener;
@@ -40,14 +38,10 @@ public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.Ki
 
     public void updateDataSet(List<Student> newProducts){
 
-        Log.d(TAG, "updateDataSet: "+newProducts.size());
-
         if ((kidsProfileList == null ? kidsProfileList = new ArrayList<Student>() : kidsProfileList) != null){
-            Log.d("hello", "data Set Updated");
             kidsProfileList = newProducts;
-        }else {
-            Log.d("hello", "data set not updated");
         }
+
         notifyDataSetChanged();
     }
 
@@ -61,17 +55,14 @@ public class KidProfileAdapter extends RecyclerView.Adapter<KidProfileAdapter.Ki
 
     @Override
     public void onBindViewHolder(@NonNull KidViewHolder holder, int position) {
-        final Student student = kidsProfileList.get(position);
 
-        Log.d("GSON", "onBindViewHolder: "+ student.getName()+" "+(student.getUpcomingAssignmentString()) );
+        final Student student = kidsProfileList.get(position);
 
         if(student.getUpcomingAssignmentString()!=null){
             List<Assignment> assignmentList = AppUtility.getAssignmentFromJSON(student.getUpcomingAssignmentString());
             holder.numAssignment.setVisibility(View.VISIBLE);
-            Log.d("GSON", "onBindViewHolder: "+ assignmentList.size() );
             holder.numAssignment.setText(assignmentList.size()+"");
         }
-
 
         holder.name.setText(student.getName()+" ("+student.getAge()+")");
         holder.itemView.setOnClickListener(new View.OnClickListener() {

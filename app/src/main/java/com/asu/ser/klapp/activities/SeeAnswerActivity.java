@@ -29,24 +29,30 @@ public class SeeAnswerActivity extends AppCompatActivity {
 
     private static final String TAG = "SeeAnswerActivity";
 
+    /***********************************************************************************************
+     *                     Activity Life cycle methods                                             *
+     *                                                                                             *
+     /*********************************************************************************************/
     @Override
     public void onCreate(Bundle savedBundleState){
+
         super.onCreate(savedBundleState);
         setContentView(R.layout.activity_list_assignment);
-        ansRV = findViewById(R.id.assignmentRV);
-        llm = new LinearLayoutManager(this);
-        getData();
-        adapter = new AnswersAdapter(this, answers, questions);
-        ansRV.setLayoutManager(llm);
-        ansRV.setAdapter(adapter);
+        initViews();
+        getDataFromIntent();
+        initRV();
+
     }
 
-    private void getData(){
+    /************************************************************************************************
+     *                                   Private Helper Methods                                     *
+     *                                                                                              *
+     ***********************************************************************************************/
+    private void getDataFromIntent(){
         answers = getIntent().getStringArrayListExtra("ANSWERS");
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         questions= (List<CompareNumber>)bundle.getSerializable("NUMBERS");
-
 
         String out="";
 
@@ -54,8 +60,16 @@ public class SeeAnswerActivity extends AppCompatActivity {
             out = out+compareNumber.toString();
         }
 
-        Log.d(TAG, "getData: "+answers.size()+" "+questions.size()+answers.toString()+out);
+    }
 
+    private void initViews(){
+        ansRV = findViewById(R.id.assignmentRV);
+        llm = new LinearLayoutManager(this);
+    }
 
+    private void initRV(){
+        adapter = new AnswersAdapter(this, answers, questions);
+        ansRV.setLayoutManager(llm);
+        ansRV.setAdapter(adapter);
     }
 }

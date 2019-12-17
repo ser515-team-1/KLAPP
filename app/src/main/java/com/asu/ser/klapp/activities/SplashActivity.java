@@ -19,9 +19,13 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class SplashActivity extends AppCompatActivity {
 
-    private static final String TAG = "SplashActivity";
     private LottieAnimationView splashanim;
+    private static final String TAG = "SplashActivity";
 
+    /***********************************************************************************************
+     *                     Activity Life cycle methods                                             *
+     *                                                                                             *
+     /*********************************************************************************************/
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -31,10 +35,11 @@ public class SplashActivity extends AppCompatActivity {
         transition();
     }
 
+    /************************************************************************************************
+     *                                   Private Helper Methods                                     *
+     *                                                                                              *
+     ***********************************************************************************************/
     private void openActivity(){
-
-
-        Log.d(TAG, "openActivity: "+isStayLoggedIn());
 
         if(isStayLoggedIn()){
             openKidsProfile();

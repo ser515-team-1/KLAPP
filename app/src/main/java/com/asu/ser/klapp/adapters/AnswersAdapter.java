@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.AnswerViewHolder> {
 
-    private static final String TAG = "AnswersAdapter";
     private Context context;
     private List<String> submittedAnswer;
     private List<CompareNumber> questions;
@@ -40,9 +39,6 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.AnswerVi
     @Override
     public AnswerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (context == null){
-            Log.d("hello", "contex is null");
-        }
         View view = LayoutInflater.from(context).inflate(R.layout.items_questions, parent, false);
         return new AnswerViewHolder(view);
     }
@@ -57,8 +53,6 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.AnswerVi
         int right = question.getNum2();
 
         String submittedString = left+"  "+answer+"  "+right;
-
-        Log.d(TAG, "onBindViewHolder: "+submittedString +" "+submittedAnswer.size());
 
         holder.question.setText(submittedString);
         holder.answer.setText(getCorrectAnswer(left,right));
