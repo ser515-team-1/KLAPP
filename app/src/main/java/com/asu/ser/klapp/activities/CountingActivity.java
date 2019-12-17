@@ -31,11 +31,13 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class CountingActivity extends AppCompatActivity implements View.OnDragListener, View.OnLongClickListener, CountingListItemListener {
 
-    private RecyclerView recyclerView;
-    private CountingListAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     private ImageView dragableArea;
     private TextView counter;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+
+    private CountingListAdapter adapter;
+
     private static final String TAG = "CountingActivity";
     private static final String TAG1 = "Events";
     private int counterValue =0;

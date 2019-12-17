@@ -44,41 +44,35 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /***************************************************************************************************
  *                                          TODO
- *    Change key value a static field.
+ *    Change key value a static field. 
  *    1) Now its "ASSIGNMENT" in getQuizAssignment()
  *    2) openAnswerList()
- *    3) ifAssignmentMode() "QUIZ MODE"
- *
+ *    3) ifAssignmentMode() ""
+ *    
  *
  **************************************************************************************************/
 public class CompareNumberActivity extends AppCompatActivity implements View.OnLongClickListener, View.OnDragListener, View.OnClickListener {
 
-    private TextView less, greater, equals;
-    private TextView dragArea, leftNum, rightnum;
-    private TextView questionNum;
-
-    private LinearLayout overlay;
-    private TextView overlayText;
+    private TextView less, greater, equals, dragArea, leftNum, rightNum, overlayText, questionNum;
     private Button overlayButton;
-    private LottieAnimationView submitanim;
-
-    private List<CompareNumber> assignment;
-
+    private LinearLayout overlay;
+    private LottieAnimationView submitAnim;
+    
     private int currentQuestionNum=0;
-
-    private static final String TAG = "DragDropTest";
     private boolean isAssignmentMode = false;
     private boolean isAssignmentCompleted = false;
 
     private Assignment assignmentMetadata;
-
     private ArrayList<String> submittedAnswers = new ArrayList<>();
+    private List<CompareNumber> assignment;
+
+    private static final String TAG = "DragDropTest";
 
     /***********************************************************************************************
      *                     Activity Life cycle methods                                             *
      *                                                                                             *
      /*********************************************************************************************/
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -90,12 +84,12 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         createQuestions(currentQuestionNum);
     }
 
-
+    
     private void setOverlayText(String text){
         overlayText.setText(text);
     }
 
-
+    
     /***********************************************************************************************
      *                                  Interface methods                                          *
      *                                                                                             *
@@ -131,13 +125,13 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
                 return true;
 
             case DragEvent.ACTION_DROP:
-
+                
                 dropItem(v, event);
 
                 return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
-
+                
                 v.getBackground().clearColorFilter();
 
                 v.invalidate();
@@ -145,7 +139,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
                 if (event.getResult()) {
                     Log.d(TAG, "onDrag: The drop was handled.");
                 }
-
+                
                 return true;
 
             default:
@@ -193,7 +187,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
 
         ClipData.Item item = event.getClipData().getItemAt(0);
         String dragData = item.getText().toString();
-
+        
         submittedAnswers.add(dragData);
         v.getBackground().clearColorFilter();
         v.invalidate();
@@ -209,11 +203,11 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         if(v.getId()==R.id.dragaableArea) {
             dragArea.setText(dragData);
 
-            submitanim.setVisibility(View.VISIBLE);
-            submitanim.setProgress((float) 0.2);
-            submitanim.playAnimation();
+            submitAnim.setVisibility(View.VISIBLE);
+            submitAnim.setProgress((float) 0.2);
+            submitAnim.playAnimation();
 
-            submitanim.addAnimatorListener(new Animator.AnimatorListener() {
+            submitAnim.addAnimatorListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
 
@@ -223,7 +217,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
                 public void onAnimationEnd(Animator animation) {
                     createQuestions(currentQuestionNum);
                     //submitanim.setProgress(0);
-                    submitanim.setVisibility(View.GONE);
+                    submitAnim.setVisibility(View.GONE);
                 }
 
                 @Override
@@ -263,11 +257,11 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         List<CompareProblem> problemList = assignmentMetadata.getProblemList();
 
         for(int i=0;i<problemList.size();i++){
-
+            
             CompareProblem compareProblem =  problemList.get(i);
 
             String x = compareProblem.getLeft().trim();
-
+            
             int left = Integer.parseInt(compareProblem.getLeft().trim());
             int right = Integer.parseInt(compareProblem.getRight().trim());
 
@@ -279,35 +273,35 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     }
 
     private CompareNumber getNumbers(){
-
+        
         int num1 = new Random().nextInt(20);
         int num2 = new Random().nextInt(20);
         return new CompareNumber(num1, num2);
-
+        
     }
 
     private void createQuestions(int index){
-
+        
         if(index<assignment.size()){
             CompareNumber compareNumber = assignment.get(index);
             leftNum.setText(compareNumber.getNum1()+"");
-            rightnum.setText(compareNumber.getNum2()+"");
+            rightNum.setText(compareNumber.getNum2()+"");
             dragArea.setText("?");
             questionNum.setText("Question "+(index+1)+"/"+assignment.size());
         }
         else {
             loadEndAssignmentScreen();
         }
-
+        
     }
 
     private void loadEndAssignmentScreen(){
-
+        
         overlay.setVisibility(View.VISIBLE);
         overlayText.setText("Assignment Completed Successfully");
         overlayButton.setText("SEE ANSWERS");
         isAssignmentCompleted = true;
-
+        
     }
 
     private void openAnswerList(){
@@ -320,9 +314,9 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         startActivity(intent);
 
     }
-
+    
     private void checkAssignmentMode(){
-
+        
         if(isAssignmentMode = ifAssignmentMode()){
             assignment = getQuizAssignment();
         }else {
@@ -345,10 +339,10 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     }
 
     private void initView(){
-
+        
         dragArea = findViewById(R.id.dragaableArea);
         leftNum = findViewById(R.id.leftNum);
-        rightnum = findViewById(R.id.rightNum);
+        rightNum = findViewById(R.id.rightNum);
         questionNum = findViewById(R.id.questionNum);
         less = findViewById(R.id.lesser);
         greater = findViewById(R.id.greater);
@@ -356,7 +350,7 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
         overlay = findViewById(R.id.overlay);
         overlayText = findViewById(R.id.overlayText);
         overlayButton = findViewById(R.id.overlayButton);
-        submitanim = findViewById(R.id.submitanim);
+        submitAnim = findViewById(R.id.submitanim);
 
         if(isAssignmentMode){
             setOverlayText("Assignment: "+assignmentMetadata.getName()+"\n"+"Due Date: "+assignmentMetadata.getDue_date()+"\n"+"Questions: "+assignment.size());
@@ -382,11 +376,11 @@ public class CompareNumberActivity extends AppCompatActivity implements View.OnL
     }
 
     private void addTags(){
-
+        
         less.setTag( "<");
         greater.setTag(">");
         equals.setTag("=");
-
+        
     }
-
+    
 }

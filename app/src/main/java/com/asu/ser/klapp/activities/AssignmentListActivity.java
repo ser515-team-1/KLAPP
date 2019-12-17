@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class AssignmentListActivity extends AppCompatActivity implements ItemClickListener {
 
     private RecyclerView assignmentRV;
+
     private LinearLayoutManager llm;
     private AssignmentListAdapter assignmentListAdapter;
     List<Assignment> assignmentList;
@@ -47,7 +48,6 @@ public class AssignmentListActivity extends AppCompatActivity implements ItemCli
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_assignment);
-
         initViews();
         getIntentFromActivity();
         setUpAdapter();
