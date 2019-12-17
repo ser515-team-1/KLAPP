@@ -15,7 +15,8 @@ An interactive UI with drag and drop features.</h3>
   [1]: https://drive.google.com/open?id=1VlSRPszAJoWfHnVqipPeR0VPn2YW0U6-
   
 ---  
-
+## App Walkthrough
+[See this page](https://github.com/ser515-team-1/KLAPP/blob/master/App%20Walkthrough.md)
 
 ## Running the app in Android Studio
 
