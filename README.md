@@ -16,7 +16,13 @@ An interactive UI with drag and drop features.</h3>
   
 ---  
 ## App Walkthrough
-[See this page](https://github.com/ser515-team-1/KLAPP/blob/master/App%20Walkthrough.md)
+<p align="center">
+   <img src="https://user-images.githubusercontent.com/11274840/71043104-d8cd7100-20ea-11ea-93db-06d0dafc7749.png">
+   <img src="https://user-images.githubusercontent.com/11274840/71043408-c43da880-20eb-11ea-82e3-979437ce4a11.png">
+   <img src="https://user-images.githubusercontent.com/11274840/71043476-f4854700-20eb-11ea-9aa5-6d57f04dc2db.png">
+   <img src="https://user-images.githubusercontent.com/11274840/71043531-226a8b80-20ec-11ea-932b-ea0b8edec8bb.png">
+</p>
+
 
 ## Running the app in Android Studio
 
@@ -41,18 +47,3 @@ An interactive UI with drag and drop features.</h3>
 It will take a few minutes to build the Gradle if you are running it for the first time. Once the build script run sucessfully the emulator will start with the app.
   
 ---
-
-## Sceenshots     
-<p align="center">
-   <img src="https://user-images.githubusercontent.com/11274840/68197155-fef1e400-ff76-11e9-9498-8823d6eeaea7.png">
-   <img src="https://user-images.githubusercontent.com/11274840/68197136-f1d4f500-ff76-11e9-82c7-9ff439268a93.png">
-   <img src="https://user-images.githubusercontent.com/11274840/68197162-01543e00-ff77-11e9-8bd7-cdd373cb51b8.png">
-   <img src="https://user-images.githubusercontent.com/11274840/68197168-031e0180-ff77-11e9-9d87-6a5a8dd8afa3.png">
-   <img src="https://user-images.githubusercontent.com/11274840/68197173-04e7c500-ff77-11e9-8c96-4629b1501439.png">
-   <img src="https://user-images.githubusercontent.com/11274840/68197180-074a1f00-ff77-11e9-9325-bf1399a89fa3.png">
-   <img src="https://user-images.githubusercontent.com/11274840/68197180-074a1f00-ff77-11e9-9325-bf1399a89fa3.png">
-</p>
-
-
-
-
