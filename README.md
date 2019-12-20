@@ -27,6 +27,7 @@ An interactive UI with drag and drop features.</h3>
    <img src="https://user-images.githubusercontent.com/11274840/71043531-226a8b80-20ec-11ea-932b-ea0b8edec8bb.png">
 </p>
 
+---
 
 ## Running the app in Android Studio
 
