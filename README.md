@@ -1,4 +1,8 @@
-<h1 align="center">KLAPP (Kids' Learning App)</h1> 
+<p align="center">
+<img width="100" height="100" src="https://user-images.githubusercontent.com/11274840/71250092-088f9b00-22dc-11ea-8d28-af79959c6084.png">
+</p> 
+<h1 align="center">
+ KLAPP (Kids' Learning App)</h1> 
  <h3 align="center">An e-learning Android application which makes learning fun for kids.
 An interactive UI with drag and drop features.</h3>
 
