@@ -19,6 +19,14 @@ An interactive UI with drag and drop features.</h3>
   [1]: https://drive.google.com/open?id=1VlSRPszAJoWfHnVqipPeR0VPn2YW0U6-
   
 ---  
+## App Preview
+<p align="center">
+   <img src="https://user-images.githubusercontent.com/11274840/74808379-fca66200-52a7-11ea-9564-7899e501e985.gif">
+   <img src="https://user-images.githubusercontent.com/11274840/74808454-1c3d8a80-52a8-11ea-911a-45874216a1e1.gif">
+   <img src="https://user-images.githubusercontent.com/11274840/74808488-2f505a80-52a8-11ea-9cba-be742a6d4bff.gif">
+</p>
+
+---  
 ## App Walkthrough
 <p align="center">
    <img src="https://user-images.githubusercontent.com/11274840/71043104-d8cd7100-20ea-11ea-93db-06d0dafc7749.png">
